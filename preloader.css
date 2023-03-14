@@ -1,0 +1,92 @@
+#preloader{
+  background: #ffffff url(images/lrec.gif) no-repeat center center;
+  background-color: white;
+  background-size: 30%;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 100999;
+}
+
+
+  /* @keyframes newAniamtion {
+    0%{
+      z-index: 999999;
+    }
+    100%{
+      z-index: -1;
+    }
+  }
+  #bg-video {
+    background-color: white;
+    border: 2px solid red;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    animation: newAniamtion 55s ease;
+  } */
+
+  /* video {
+    display: block;
+    margin: 0 auto;
+  } */
+  /* #preloader.active {
+    animation: none; 
+  } */
+
+
+
+  /* <script>
+                var loader = document.getElementById("preloader");
+                
+                var dismissLoadingScreen = function(){
+                    loader.style.display = "none";
+                }
+                var wait5Seconds = function(){
+                    var result = setTimeout(dismissLoadingScreen, 33000);
+                }
+                window.addEventListener("load", wait5Seconds);
+
+
+                //my code
+
+                // window.addEventListener('DOMContentLoaded', function() {
+                //     console.log('Donee');
+                // // var background = document.getElementById('preloader');
+                // // var result = setTimeout(dismissLoadingScreen, 33000);   
+                // // background.style.background-color= 'red';
+                // loader.classList.add('active'); // add active class to disable animation
+                // });
+            </script>
+
+
+            <!-- Ganesh changes -->
+            <!-- <script type="text/javascript">
+                window.addEventListener('DOMContentLoaded', function() {
+                    console.log('Donee');
+                var background = document.getElementById('background');
+                background.style.background-color= 'red';
+                background.classList.add('active'); // add active class to disable animation
+                });
+
+            </script> -->
+
+            <!-- <script>
+                var loader = document.getElementById('loader');
+
+                // var dismissLoadingScreen = function(){
+                //     preloader.style.display = "none";
+                // }
+                // var wait5Seconds = function(){
+                //     var result = setTimeout(dismissLoadingScreen, 33000);
+                // }
+                // window.addEventListener("load", wait5Seconds);
+
+                function myFunction(){
+                    loader.style.display='none';
+                }
+            </script> --> */
