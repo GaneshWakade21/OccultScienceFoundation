@@ -37,7 +37,7 @@
                         <span class="details">Date of Birth</span>
                         <!-- <input id="dob" onchange="ageCalculator()" name="dob" type="date"
                             min="<?php echo date('Y-m-d', strtotime('-1 day')); ?>"> -->
-                        <input  id="dob" onchange="ageCalculator()" name="dob" type="date">
+                        <input id="dob" onchange="ageCalculator()" name="dob" type="date">
                     </div>
                     <div class="input-box" #agebox>
                         <!-- <div class="input-boxage"> -->
@@ -108,7 +108,7 @@
                             <span class="details">Time From</span>
 
                             <div class="timesel">
-                                <input type="time" id="time" name="time" min="09:00" max="23:30">
+                                <input type="time" id="timefrom" name="timefrom" min="09:00" max="23:30" step="1800">
 
                                 <!-- <select id="hr" name="hour" placeholder="Hour">
                                     <option name="hrfrom" value="1:00">1</option>
@@ -140,7 +140,9 @@
                             <span class="details">Time To</span>
 
                             <div class="timesel">
-                                <input type='time' id='time' name='time' step='1800'min="09:30" max="24:00">
+                                <input type='time' id='timeto' name='timeto' step='1800' min="09:30" max="24:00"
+                                    onchange="displayalert()">
+
                                 <!-- <select id="hr" name="hrto" placeholder="Hour">
                                     <option name="hrto" value="1:00">1</option>
                                     <option name="hrto" value="2:00">2</option>
@@ -205,25 +207,65 @@
 
 
 
-
-
                 <div class="query" name="query">
-                    <input type="radio" name="business" id="dot-1">
-                    <input type="radio" name="investment" id="dot-2">
-                    <input type="radio" name="relationship" id="dot-3">
-                    <input type="radio" name="health" id="dot-4">
-                    <input type="radio" name="career" id="dot-5">
-                    <input type="radio" name="job" id="dot-6">
-                    <input type="radio" name="premarriage" id="dot-7">
-                    <input type="radio" name="postmarriage" id="dot-8">
-                    <input type="radio" name="pregnancy" id="dot-9">
-                    <input type="radio" name="litigation" id="dot-10">
-                    <input type="radio" name="foreigntravel" id="dot-11">
-                    <input type="radio" name="other" id="dot-12">
+                    <span class="querytitle">Your Queries</span>
+                    <div class="check">
+                        <div class="option">
+                            <label for="dot-1">Buisness</label>
+                            <input type="checkbox" name="querytype[]" value="business" id="dot-1">
+                        </div>
 
-                    <span class="query-title">Your Queries</span>
+                        <div class="option">
+                            <label for="dot-2">Investment</label>
+                            <input type="checkbox" name="querytype[]" value="investment" id="dot-2">
+                        </div>
+                        <div class="option">
+                            <label for="dot-3">Relationship</label>
+                            <input type="checkbox" name="querytype[]" value="relationship" id="dot-3">
+                        </div>
+                        <div class="option">
+                             <label for="dot-4">Health</label>
+                            <input type="checkbox" name="querytype[]" value="health" id="dot-4">
+                        </div>
+                        <div class="option"> 
+                            <label for="dot-5">Career</label>
+                            <input type="checkbox" name="querytype[]" value="career" id="dot-5">
+                        </div>
+                        <div class="option"> 
+                            <label for="dot-6">Job</label>
+                            <input type="checkbox" name="querytype[]" value="job" id="dot-6">
+                        </div>
+                        <div class="option">
+                            <label for="dot-7">Marriage</label>
+                            <input type="checkbox" name="querytype[]" value="marriage" id="dot-7">
+                        </div>
+                        <div class="option"> 
+                            <label for="dot-8">Transfer</label>
+                            <input type="checkbox" name="querytype[]" value="transfer" id="dot-8">
+                        </div>
+                        <div class="option">
+                            <label for="dot-9">Pregnancy</label>
+                            <input type="checkbox" name="querytype[]" value="pregnancy" id="dot-9">
+                        </div>
+                        <div class="option">
+                            <label for="dot-10">Litigation</label>
+                            <input type="checkbox" name="querytype[]" value="litigation" id="dot-10">
+                        </div>
+                        <div class="option">
 
-                    <div class="category">
+                            <label for="dot-11">Foreign-Travel</label>
+                            <input type="checkbox" name="querytype[]" value="foreigntravel" id="dot-11">
+                        </div>
+                        <div class="option">
+                            <label for="dot-12">Promotion</label>
+                            <input type="checkbox" name="querytype[]" value="promotion" id="dot-12">
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- <div class="category">
                         <label for="dot-1">
                             <span class="dot one"></span>
                             <span class="q">Business</span>
@@ -272,7 +314,7 @@
                             <span class="dot twelve"></span>
                             <span class="q">Promotion</span>
                         </label>
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -322,7 +364,7 @@
                 </div>
 
                 <!-- Make the button size small  -->
-                
+
                 <div class="button">
                     <div class="btn">
                         <input type="submit" value="Register">
@@ -375,10 +417,19 @@
     </script>
 
 
-<!-- Select time after 2hours of current time  -->
-    
-<!-- <input type=“time” id=“time” name=“time”> <script> var now = new Date(); var twoHoursLater = new Date(now.getTime() + 2 * 60 * 60 * 1000); var maxTime = twoHoursLater.toISOString().split(‘T’)1.slice(0,5); document.getElementById(“time”).setAttribute(‘max’, maxTime); </script> -->
+    <!-- Select time after 2hours of current time  -->
 
+    <!-- <input type=“time” id=“time” name=“time”> <script> var now = new Date(); var twoHoursLater = new Date(now.getTime() + 2 * 60 * 60 * 1000); var maxTime = twoHoursLater.toISOString().split(‘T’)1.slice(0,5); document.getElementById(“time”).setAttribute(‘max’, maxTime); </script> -->
+
+    <!-- <script>
+        var timefrom = getElementById(timefrom); // get current date and time
+        timefrom.setMinutes(timefrom.getMinutes() + 30); // add 30 minutes
+        var inputTime = document.querySelector('input[type="time"]'); // get input element
+        inputTime.value = timefrom.toISOString().substr(11, 5);
+    </script> -->
+
+
+    <!-- <scripvalue -->
 </body>
 
 </html>

@@ -19,7 +19,6 @@ $doappoint = $_POST['doappoint'];
 // $hrfrom = $_POST['hrfrom'];
 
 // Retrieve selected options from the form
-$hour = $_POST['hour'];
 
 // Convert array of selected options into a string
 // $hour = implode(',', $hour);
@@ -28,17 +27,25 @@ $hour = $_POST['hour'];
 // $sql = "INSERT INTO queries (query_types) VALUES ('$queryTypes')";
 
 
+$timefrom = $_POST['timefrom'];
+$timeto = $_POST['timeto'];
 
-$minfrom = $_POST['minfrom'];
-$ampmfrom = $_POST['ampmfrom'];
-$hrto = $_POST['hrto'];
-$minto = $_POST['minto'];
-$ampmto = $_POST['ampmto'];
+// $hour = $_POST['hour'];
+// $minfrom = $_POST['minfrom'];
+// $ampmfrom = $_POST['ampmfrom'];
+// $hrto = $_POST['hrto'];
+// $minto = $_POST['minto'];
+// $ampmto = $_POST['ampmto'];
+
+
 $totaldur = $_POST['totaldur'];
 $fee = $_POST['fee'];
 
 // query 
-$query = $_POST['business'];
+$query = $_POST['querytype'];
+$querystring = implode(',', $query);
+
+
 // $query = $_POST['investment'];
 // $query = $_POST['relationship'];
 // $query = $_POST['health'];
@@ -73,11 +80,18 @@ $mysqli = new mysqli("localhost", "root", "", "astrology");
 if ($mysqli->connect_error) {
   die("Connection failed: " . $mysqli->connect_error);
 }
-$stmt = $mysqli->prepare("INSERT INTO appointment (firstname, middlename, lastname, fathername, dob, age, tob, gender, birthplace, birthstate, email, phone, doappoint, hour, minfrom, ampmfrom, hrto, minto, ampmto, totaldur, fee, query, upi, upino, amount, translip, remark) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt = $mysqli->prepare("INSERT INTO appointment (firstname, middlename, lastname, fathername, dob, age, tob, gender, birthplace, birthstate, email, phone, doappoint, 
+-- hour, minfrom, ampmfrom, hrto, minto, ampmto,
+timefrom,timeto, 
+totaldur, fee, query, upi, upino, amount, translip, remark) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 if ($stmt === false) {
   die("Prepare failed: " . $mysqli->error);
 }
-$stmt->bind_param("sssssisssssisssssssssssssbs", $firstname, $middlename, $lastname, $fathername, $dob, $age, $tob, $gender, $birthpalce, $birthstate, $email, $phone, $doappoint, $hour, $minfrom, $ampmfrom, $hrto, $minto, $ampmto, $totaldur, $fee, $query, $upi, $upino, $amount, $translip, $remark);
+$stmt->bind_param("sssssisssssisssssssssbs", $firstname, $middlename, $lastname, $fathername, $dob, $age, $tob, $gender, $birthpalce, $birthstate, $email, $phone, $doappoint, 
+// $hour, $minfrom, $ampmfrom, $hrto, $minto, $ampmto, 
+$timefrom,$timeto,
+$totaldur, $fee, $querystring, $upi, $upino, $amount, $translip, $remark);
+
 
 $stmt->execute();
 echo "Regestration Successfully... ";
