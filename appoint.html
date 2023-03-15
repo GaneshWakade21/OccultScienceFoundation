@@ -78,7 +78,7 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Phone Number</span>
-                        <input type="number" name="phone" placeholder="Enter Your Number" required>
+                        <input type="text" name="phone" placeholder="Enter Your Number" required>
                     </div>
 
                     <!-- <div class="input-box">
@@ -413,7 +413,9 @@
 
     <script>
         var today = new Date(Date.now()).toISOString().split('T')[0];
+        var nextweek = new Date(Date.now() + 604800000).toISOString().split('T')[0];
         document.getElementById("doappoint").setAttribute('min', today); 
+        document.getElementById("doappoint").setAttribute('max', nextweek); 
     </script>
 
 
