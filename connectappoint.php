@@ -46,19 +46,6 @@ $query = $_POST['querytype'];
 $querystring = implode(',', $query);
 
 
-// $query = $_POST['investment'];
-// $query = $_POST['relationship'];
-// $query = $_POST['health'];
-// $query = $_POST['career'];
-// $query = $_POST['job'];
-// $query = $_POST['premarriage'];
-// $query = $_POST['postmarriage'];
-// $query = $_POST['pregnancy'];
-// $query = $_POST['litigation'];
-// $query = $_POST['foreigntravel'];
-// $query = $_POST['other'];
-
-// $query = $_POST['query'];
 
 $upi = $_POST['upi'];
 $upino = $_POST['upino'];
@@ -74,23 +61,88 @@ $remark = $_POST['remark'];
 
 
 
+// first name                  -   G 
+// middle name                 -   N 
+// last name                   -   W 
+// data entry time             -   2204        i.e is at 10:04 pm 
+// date of data entry          -   9323        i.e = 9 march 2023
+// minutes bought              -   30          i.e - 30 min 
+// slot timed booked           -   14001430    i.e - 2:00 pm to 2:30 pm 
+// date of slot booked         -   12323       i.e - 12 march 2023
+function id($firstname, $middlename, $lastname, $current_time, $today, $totaldur, $timefrom, $timeto, $doappoint)
+{
+  $fnf = substr($firstname, 0, 1);
+  $mnf = substr($middlename, 0, 1);
+  $snf = substr($lastname, 0, 1);
+
+  $db = date('Y');
+  $dba = date('m');
+  $dbc = date('d');
+
+  $current_time = preg_replace('/[^\p{L}\p{N}\s]/u', '', $current_time);
+
+  $today = date('d-m-y');
+  $today = preg_replace('/[^\p{L}\p{N}\s]/u', '', $today);
+  $timefrom = preg_replace('/[^\p{L}\p{N}\s]/u', '', $timefrom);
+  $timeto = preg_replace('/[^\p{L}\p{N}\s]/u', '', $timeto);
+  $string = str_replace(' ', '', $today);
+  // $doappoint = date('d-m-y');
+  $doappoint = date('d-m-y', strtotime($doappoint));
+  $doappoint = preg_replace('/[^\p{L}\p{N}\s]/u', '', $doappoint);
+
+  $id = $fnf . $mnf . $snf . $current_time . $today . $totaldur . $timefrom . $timeto . $doappoint;
+  return $id;
+}
+date_default_timezone_set('Asia/Kolkata');
+$today = date('d/m/Y');
+$current_time = date('H:i');
+
+$pid = id($firstname, $middlename, $lastname, $current_time, $today, $totaldur, $timefrom, $timeto, $doappoint);
+$id = strtoupper($pid);
+
+
+
 // Database Connection 
 error_reporting(E_ALL);
 $mysqli = new mysqli("localhost", "root", "", "astrology");
 if ($mysqli->connect_error) {
   die("Connection failed: " . $mysqli->connect_error);
 }
-$stmt = $mysqli->prepare("INSERT INTO appointment (firstname, middlename, lastname, fathername, dob, age, tob, gender, birthplace, birthstate, email, phone, doappoint, 
+$stmt = $mysqli->prepare("INSERT INTO appointment (id, firstname, middlename, lastname, fathername, dob, age, tob, gender, birthplace, birthstate, email, phone, doappoint, 
 -- hour, minfrom, ampmfrom, hrto, minto, ampmto,
 timefrom,timeto, 
-totaldur, fee, query, upi, upino, amount, translip, remark) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+totaldur, fee, query, upi, upino, amount, translip, remark) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 if ($stmt === false) {
   die("Prepare failed: " . $mysqli->error);
 }
-$stmt->bind_param("sssssisssssisssssssssbs", $firstname, $middlename, $lastname, $fathername, $dob, $age, $tob, $gender, $birthpalce, $birthstate, $email, $phone, $doappoint, 
-// $hour, $minfrom, $ampmfrom, $hrto, $minto, $ampmto, 
-$timefrom,$timeto,
-$totaldur, $fee, $querystring, $upi, $upino, $amount, $translip, $remark);
+$stmt->bind_param(
+  "ssssssisssssisssssssssbs",
+  $id,
+  $firstname,
+  $middlename,
+  $lastname,
+  $fathername,
+  $dob,
+  $age,
+  $tob,
+  $gender,
+  $birthpalce,
+  $birthstate,
+  $email,
+  $phone,
+  $doappoint,
+  // $hour, $minfrom, $ampmfrom, $hrto, $minto, $ampmto, 
+  $timefrom,
+  $timeto,
+  $totaldur,
+  $fee,
+  $querystring,
+  $upi,
+  $upino,
+  $amount,
+  $translip,
+  $remark
+);
 
 
 $stmt->execute();
@@ -98,56 +150,10 @@ echo "Regestration Successfully... ";
 $stmt->close();
 $mysqli->close();
 
-
-
-
-//     $conn = new mysqli('localhost','root','','astrology');
-//     if($conn->connect_error){
-//         die('Connection Failed : ' .$conn->connect_error);
-//     }else{
-//         $stmt = $conn->prepare("insert into appointment(firstname, middlename, lastname, fathername, dob, age, tob, gender, birthplace, birthstate, email, phone, doappoint, hour, minfrom, ampmfrom, hrto, minto, ampmto, totaldur, fee, query, upi, upino, amount, translip, remark) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-//         // $stmt->bind_param("sssssisssssisssssssssssssbs",$firstname,$middlename,$lastname,$fathername,$dob,$age,$tob,$gender,$birthpalce,$birthstate,$email,$phone,$doappoint,$hour,$minfrom,$ampmfrom,$hrto,$minto,$ampmto,$totaldur,$fee,$query,$upi,$upino,$amount,$translip,$remark);
-
-//         // $stmt->bind_param("ssss", $firstname, $middlename, $lastname, $fathername);
-
-//         $stmt->execute();
-//         echo "Regestration Successfully... ";
-//         $stmt->close();
-//         $conn->close();
-
-//         // i - integer 
-//         // d-double 
-//         // s- string 
-//         // b - blob
-//     }
-
-
-function id($firstname, $middlename, $lastname, $gendera, $dob, $amount, $doa)
-{
-  $fnf = substr($firstname, 0, 1);
-  $mnf = substr($middlename, 0, 1);
-  $snf = substr($lastname, 0, 1);
-  $gen = substr($gendera, 0, 1);
-  $db = date('Y');
-  $dba = date('m');
-  $dbc = date('d');
-  // $pho =  substr($phonenumber,0,4);
-  $date = date('d-m-y h:i:s');
-  $datea = preg_replace('/[^\p{L}\p{N}\s]/u', '', $date);
-  $string = str_replace(' ', '', $datea);
-  $doad = preg_replace('/[^\p{L}\p{N}\s]/u', '', $doa);
-  $id = $fnf . $mnf . $snf . $gen . $db . $dba . $dbc . $amount . $doad . $string;
-  return $id;
-}
-
-$pid = id($firstname,$middlename,$lastname,$gender,$dob,$amount,$doappoint);
-$id = strtoupper($pid);
-
-// echo "id is ";
-// echo $id;
-
-
-
+// i - integer 
+// d-double 
+// s- string 
+// b - blob
 
 
 ?>
