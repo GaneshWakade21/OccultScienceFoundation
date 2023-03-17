@@ -16,8 +16,8 @@ $email = $_POST['email'];
 $phone = $_POST['phone'];
 $doappoint = $_POST['doappoint'];
 
-$doappoint = date('d-m-y', strtotime($doappoint));
-$dob = date('d-m-y', strtotime($dob));
+// $doappoint = date('d-m-y', strtotime($doappoint));
+// $dob = date('d-m-y', strtotime($dob));
 
 // $hrfrom = $_POST['hrfrom'];
 
