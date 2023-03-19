@@ -1,319 +1,329 @@
 <!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
 <html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
     <link rel="stylesheet" href="appoint.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
     <div class="container">
-        <div class="title">APPOINTMENT BOOKING</div>
-
+        <div class="title"><u>Appointment Booking</u></div>
+        <!-- <div class="title">Book Appointment</div> -->
         <div class="content">
-
             <form action="connectappoint.php" method="post">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">First Name</span>
+                        <input type="text" placeholder="First Name" name="firstname" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Middle Name</span>
+                        <input type="text" placeholder="Middle Name" name="middlename" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Last Name</span>
+                        <input type="text" placeholder="Last Name" name="lastname" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Father's Name</span>
+                        <input type="text" placeholder="Father's Name" name="fathername" required>
+                    </div>
+                    <!-- onchange="ageCalculator()" -->
+                    <div class="input-box">
+                        <span class="details">Date of Birth</span>
+                        <!-- <input id="dob" onchange="ageCalculator()" name="dob" type="date"
+                            min="<?php echo date('Y-m-d', strtotime('-1 day')); ?>"> -->
+                        <input id="dob" onchange="ageCalculator()" name="dob" type="date">
+                    </div>
+                    <div class="input-box" #agebox>
+                        <!-- <div class="input-boxage"> -->
+                        <span class="details">Age</span>
+                        <input id="age" type="number" name="age" placeholder="Enter Your Age" required>
+                        <!-- use disabled -->
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Time of Birth</span>
+                        <input type="time" name="tob">
+                        <!-- <input type="text" placeholder="Father's Name" required> -->
+                    </div>
 
-                <div class="personal" id="personal">
-                    <h3>Personal Details</h3>
 
-                    <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Gender</span>
+                        <!-- <input type="text" placeholder="Place of Birth" required> </input> -->
+                        <select name="gender" placeholder="Select Gender">
+                            <option name="gender" value="male">Male</option>
+                            <option name="gender" value="female">Female</option>
 
-                        <div class="input-box">
-                            <span class="details">First Name</span>
-                            <input type="text" placeholder="First Name" name="firstname" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Middle Name</span>
-                            <input type="text" placeholder="Middle Name" name="middlename" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Last Name</span>
-                            <input type="text" placeholder="Last Name" name="lastname" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Father's Name</span>
-                            <input type="text" placeholder="Father's Name" name="fathername" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Mother's Name</span>
-                            <input type="text" placeholder="Mother's Name" name="mothername" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Date of Birth</span>
-                            <input id="dob" onchange="ageCalculator()" name="dob" type="date">
-                        </div>
-                        <div class="input-box" #agebox>
-                            <span class="details">Age</span>
-                            <input id="age" type="number" name="age" placeholder="Enter Age" required>
-                        </div>
+                        </select>
+                    </div>
 
-                        <div class="input-box">
-                            <span class="details">Gender</span>
-                            <select name="gender" placeholder="Select Gender">
-                                <option name="gender" value="male">Male</option>
-                                <option name="gender" value="female">Female</option>
-                            </select>
-                        </div>
+                    <div class="input-box">
+                        <span class="details">Birth Place</span>
+                        <input type="text" name="birthpalce" placeholder="Place of Birth" required>
+                    </div>
 
-                        <div class="input-box">
-                            <span class="details">Time of Birth</span>
-                            <input type="time" name="tob">
-                        </div>
+                    <div class="input-box">
+                        <span class="details">Birth State</span>
+                        <input type="text" name="birthstate" placeholder="Place of Birth" required>
+                    </div>
 
-                        <div class="input-box">
-                            <span class="details">City of Birth</span>
-                            <input type="text" name="birthpalce" placeholder="Place of Birth" required>
-                        </div>
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="text" name="email" placeholder="Enter Your Email" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Phone Number</span>
+                        <input type="text" name="phone" placeholder="Enter Your Number" required>
+                    </div>
 
-                        <div class="input-box">
-                            <span class="details">Birth State</span>
-                            <select name="state" id="state">
-                                <option value="">State</option>
-                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                <option value="Assam">Assam</option>
-                                <option value="Bihar">Bihar</option>
-                                <option value="Chandigarh">Chandigarh</option>
-                                <option value="Chhattisgarh">Chhattisgarh</option>
-                                <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                                <option value="Daman and Diu">Daman and Diu</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Lakshadweep">Lakshadweep</option>
-                                <option value="Puducherry">Puducherry</option>
-                                <option value="Goa">Goa</option>
-                                <option value="Gujarat">Gujarat</option>
-                                <option value="Haryana">Haryana</option>
-                                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                <option value="Jharkhand">Jharkhand</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Manipur">Manipur</option>
-                                <option value="Meghalaya">Meghalaya</option>
-                                <option value="Mizoram">Mizoram</option>
-                                <option value="Nagaland">Nagaland</option>
-                                <option value="Odisha">Odisha</option>
-                                <option value="Punjab">Punjab</option>
-                                <option value="Rajasthan">Rajasthan</option>
-                                <option value="Sikkim">Sikkim</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Telangana">Telangana</option>
-                                <option value="Tripura">Tripura</option>
-                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                <option value="Uttarakhand">Uttarakhand</option>
-                                <option value="West Bengal">West Bengal</option>
-                            </select>
-                        </div>
+                    <!-- <div class="input-box">
+                        <span class="details">Date of Appointment</span>
+                        <input type="date">
+                    </div> -->
 
-                        <!-- <div class="input-box">
-                            <span class="details">Country</span>
-                            <input type="text" name="country" placeholder="Country" required>
-                        </div> -->
-
-                        <div class="input-box">
-                            <span class="details">Email</span>
-                            <input type="text" name="email" placeholder="Enter Your Email" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Phone Number</span>
-                            <input type="number" name="phone" placeholder="Phone No." required>
-                        </div>
-
-                    </div>  
-                </div>
-
-                <div class="nextprevbtn" id="page1">
-                    <button class="none"></button>
-                    <button  class="button-79" role="button" id="personalnext" onclick="changePersonaltoslot()">Next</button>
                 </div>
 
 
-                <div class="slot" id="slot">
+                <!-- clint can book slot after 2hr of time from the current time/clock  -->
 
-                    <h3>Slot Booking</h3>
+                <div class="slot">
+                    <div>
+                        <span class="slotheading">Time Slot Booking</span>
+                    </div>
 
                     <div class="slottime">
-
-                        <div class="timeset">
-
-                            <div class="input-box">
-                                <span class="details">Date</span>
-                                <input type="date" id="doappoint" name="doappoint">
-                            </div>
-
-                            <div class="input-box">
-                                <span class="details">Time From</span>
-
-                                <!-- <input type="time" id="timefrom" name="timefrom" min="09:00" max="23:30" step="1800"> -->
-
-                                <select onchange="durationCal()" id="fromTime" name="fromTime" placeholder="9:00 PM">
-                                    <option value="" disabled selected>Select</option>
-                                    <option value="09:00">9:00 AM</option>
-                                    <option value="09:30">9:30 AM</option>
-                                    <option value="10:00">10:00 AM</option>
-                                    <option value="10:30">10:30 AM</option>
-                                    <option value="11:00">11:00 AM</option>
-                                    <option value="11:30">11:30 AM</option>
-                                    <option value="12:00">12:00 PM</option>
-                                    <option value="12:30">12:30 PM</option>
-                                    <option value="13:00">1:00 PM</option>
-                                    <option value="13:30">1:30 PM</option>
-                                    <option value="14:00">2:00 PM</option>
-                                    <option value="14:30">2:30 PM</option>
-                                    <option value="15:00">3:00 PM</option>
-                                    <option value="15:30">3:30 PM</option>
-                                    <option value="16:00">4:00 PM</option>
-                                    <option value="16:30">4:30 PM</option>
-                                    <option value="17:00">5:00 PM</option>
-                                    <option value="17:30">5:30 PM</option>
-                                    <option value="18:00">6:00 PM</option>
-                                    <option value="18:30">6:30 PM</option>
-                                    <option value="19:00">7:00 PM</option>
-                                    <option value="19:30">7:30 PM</option>
-                                    <option value="20:00">8:00 PM</option>
-                                    <option value="20:30">8:30 PM</option>
-                                    <option value="21:00">9:00 PM</option>
-                                    <option value="21:30">9:30 PM</option>
-                                    <option value="22:00">10:00 PM</option>
-                                    <option value="22:30">10:30 PM</option>
-                                    <option value="23:00">11:00 PM</option>
-                                    <option value="23:30">11:30 PM</option>
-                                    <option value="24:00">12:00 PM</option>
-                                </select>
-                            </div>
-
-                            <div class="input-box">
-                                <span class="details">Time To</span>
-
-                                <!-- <input type='time' id='timeto' name='timeto' value="09:30" step='600' min="09:30"
-                                            max="24:00" onchange="displayalert()"> -->
-
-                                <select onchange="durationCal()" id="toTime" name="toTime">
-                                    <option value="" disabled selected>Select</option>
-                                    <option value="09:00">9:00 AM</option>
-                                    <option value="09:30">9:30 AM</option>
-                                    <option value="10:00">10:00 AM</option>
-                                    <option value="10:30">10:30 AM</option>
-                                    <option value="11:00">11:00 AM</option>
-                                    <option value="11:30">11:30 AM</option>
-                                    <option value="12:00">12:00 PM</option>
-                                    <option value="12:30">12:30 PM</option>
-                                    <option value="13:00">1:00 PM</option>
-                                    <option value="13:30">1:30 PM</option>
-                                    <option value="14:00">2:00 PM</option>
-                                    <option value="14:30">2:30 PM</option>
-                                    <option value="15:00">3:00 PM</option>
-                                    <option value="15:30">3:30 PM</option>
-                                    <option value="16:00">4:00 PM</option>
-                                    <option value="16:30">4:30 PM</option>
-                                    <option value="17:00">5:00 PM</option>
-                                    <option value="17:30">5:30 PM</option>
-                                    <option value="18:00">6:00 PM</option>
-                                    <option value="18:30">6:30 PM</option>
-                                    <option value="19:00">7:00 PM</option>
-                                    <option value="19:30">7:30 PM</option>
-                                    <option value="20:00">8:00 PM</option>
-                                    <option value="20:30">8:30 PM</option>
-                                    <option value="21:00">9:00 PM</option>
-                                    <option value="21:30">9:30 PM</option>
-                                    <option value="22:00">10:00 PM</option>
-                                    <option value="22:30">10:30 PM</option>
-                                    <option value="23:00">11:00 PM</option>
-                                    <option value="23:30">11:30 PM</option>
-                                    <option value="24:00">12:00 PM</option>
-                                </select>
-                            </div>
-
-                            <div class="input-box">
-                                <span class="details">Total Duration</span>
-                                <!-- Total Duration in Minutes -->
-                                <input onchange="durationCal()" id="duration" type="text" name="totaldur"
-                                    placeholder="Total Duration" required>
-                            </div>
-
-                            <div class="input-box">
-                                <span class="details">Fee</span>
-                                <!-- Rs.500 per 30min -->
-                                <input onchange="durationCal()" id="fee" type="text" name="fee" placeholder="Rs.500"
-                                    required>
-                            </div>
+                        <div class="input-box">
+                            <span class="details">Date of Appointment</span>
+                            <input type="date" id="doappoint" name="doappoint">
                         </div>
+
+
+
+                        <div class="input-box1">
+                            <span class="details">Time From</span>
+
+                            <div class="timesel">
+                                <input type="time" id="timefrom" name="timefrom" min="09:00" max="23:30" step="1800">
+
+                                <!-- <select id="hr" name="hour" placeholder="Hour">
+                                    <option name="hrfrom" value="1:00">1</option>
+                                    <option name="hrfrom" value="2:00">2</option>
+                                    <option name="hrfrom" value="3:00">3</option>
+                                    <option name="hrfrom" value="4:00">4</option>
+                                    <option name="hrfrom" value="5:00">5</option>
+                                    <option name="hrfrom" value="6:00">6</option>
+                                    <option name="hrfrom" value="7:00">7</option>
+                                    <option name="hrfrom" value="8:00">8</option>
+                                    <option name="hrfrom" value="9:00">9</option>
+                                    <option name="hrfrom" value="10:00">10</option>
+                                    <option name="hrfrom" value="11:00">11</option>
+                                    <option name="hrfrom" value="12:00">12</option>
+                                </select>
+                                <select id="hr" name="minfrom" placeholder="Minutes">
+                                    <option name="minfrom" value="00min">00</option>
+                                    <option name="minfrom" value="30min">30</option>
+                                </select>
+                                <select id="hr" name="ampmfrom" placeholder="AM/PM">
+                                    <option name="ampmfrom" value="am">AM</option>
+                                    <option name="ampmfrom" value="pm">PM</option>
+                                </select> -->
+
+                            </div>
+
+                        </div>
+                        <div class="input-box1">
+                            <span class="details">Time To</span>
+
+                            <div class="timesel">
+                                <input type='time' id='timeto' name='timeto' step='1800' min="09:30" max="24:00"
+                                    onchange="displayalert()">
+
+                                <!-- <select id="hr" name="hrto" placeholder="Hour">
+                                    <option name="hrto" value="1:00">1</option>
+                                    <option name="hrto" value="2:00">2</option>
+                                    <option name="hrto" value="3:00">3</option>
+                                    <option name="hrto" value="4:00">4</option>
+                                    <option name="hrto" value="5:00">5</option>
+                                    <option name="hrto" value="6:00">6</option>
+                                    <option name="hrto" value="7:00">7</option>
+                                    <option name="hrto" value="8:00">8</option>
+                                    <option name="hrto" value="9:00">9</option>
+                                    <option name="hrto" value="10:00">10</option>
+                                    <option name="hrto" value="11:00">11</option>
+                                    <option name="hrto" value="12:00">12</option>
+                                </select>
+                                <select id="hr" name="minto" placeholder="Minutes">
+                                    <option name="minto" value="00min">00</option>
+                                    <option name="minto" value="30min">30</option>
+                                </select>
+                                <select id="hr" name="ampmto" placeholder="AM/PM">
+                                    <option name="ampmto" value="am">AM</option>
+                                    <option name="ampmto" value="pm">PM</option>
+                                </select> -->
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-boxno">
+                            <span class="details">Total Duration</span>
+                            <!-- Total Duration in Minutes -->
+                            <input type="text" name="totaldur" placeholder="Total Duration" required>
+                        </div>
+
+                        <div class="input-boxno">
+                            <span class="details">Fee</span>
+                            <!-- Rs.500 per 30min -->
+                            <input type="text" name="fee" placeholder="Rs.500" required>
+                        </div>
+
+
                     </div>
 
-                    <h3>Your Queries</h3>
 
-                    <div class="query" name="query" id="query">
 
-                        <div class="check">
-                            <div class="option">
-                                <label for="dot-1">Buisness</label>
-                                <input type="checkbox" name="querytype[]" value="business" id="dot-1">
-                            </div>
+                </div>
 
-                            <div class="option">
-                                <label for="dot-2">Investment</label>
-                                <input type="checkbox" name="querytype[]" value="investment" id="dot-2">
-                            </div>
-                            <div class="option">
-                                <label for="dot-3">Relationship</label>
-                                <input type="checkbox" name="querytype[]" value="relationship" id="dot-3">
-                            </div>
-                            <div class="option">
-                                <label for="dot-4">Health</label>
-                                <input type="checkbox" name="querytype[]" value="health" id="dot-4">
-                            </div>
-                            <div class="option">
-                                <label for="dot-5">Career</label>
-                                <input type="checkbox" name="querytype[]" value="career" id="dot-5">
-                            </div>
-                            <div class="option">
-                                <label for="dot-6">Job</label>
-                                <input type="checkbox" name="querytype[]" value="job" id="dot-6">
-                            </div>
-                            <div class="option">
-                                <label for="dot-7">Marriage</label>
-                                <input type="checkbox" name="querytype[]" value="marriage" id="dot-7">
-                            </div>
-                            <div class="option">
-                                <label for="dot-8">Transfer</label>
-                                <input type="checkbox" name="querytype[]" value="transfer" id="dot-8">
-                            </div>
-                            <div class="option">
-                                <label for="dot-9">Pregnancy</label>
-                                <input type="checkbox" name="querytype[]" value="pregnancy" id="dot-9">
-                            </div>
-                            <div class="option">
-                                <label for="dot-10">Litigation</label>
-                                <input type="checkbox" name="querytype[]" value="litigation" id="dot-10">
-                            </div>
-                            <div class="option">
 
-                                <label for="dot-11">Foreign</label>
-                                <input type="checkbox" name="querytype[]" value="foreigntravel" id="dot-11">
-                            </div>
-                            <div class="option">
-                                <label for="dot-12">Promotion</label>
-                                <input type="checkbox" name="querytype[]" value="promotion" id="dot-12">
-                            </div>
-                        </div>
+                <!-- <div class="query">
+                    <div>
+                        <span class="queryheading">Query Types</span>
                     </div>
+                    <div class="querytype">
+                        <label for="dot-1">
+                            <span class="dot one"></span>
+                            <span class="gender">Business :<input type="radio"></span>
+                        </label>
+                        
+
+                    </div>
+                </div> -->
+
+
+
+                <div class="query" name="query">
+                    <span class="querytitle">Your Queries</span>
+                    <div class="check">
+                        <div class="option">
+                            <label for="dot-1">Buisness</label>
+                            <input type="checkbox" name="querytype[]" value="business" id="dot-1">
+                        </div>
+
+                        <div class="option">
+                            <label for="dot-2">Investment</label>
+                            <input type="checkbox" name="querytype[]" value="investment" id="dot-2">
+                        </div>
+                        <div class="option">
+                            <label for="dot-3">Relationship</label>
+                            <input type="checkbox" name="querytype[]" value="relationship" id="dot-3">
+                        </div>
+                        <div class="option">
+                             <label for="dot-4">Health</label>
+                            <input type="checkbox" name="querytype[]" value="health" id="dot-4">
+                        </div>
+                        <div class="option"> 
+                            <label for="dot-5">Career</label>
+                            <input type="checkbox" name="querytype[]" value="career" id="dot-5">
+                        </div>
+                        <div class="option"> 
+                            <label for="dot-6">Job</label>
+                            <input type="checkbox" name="querytype[]" value="job" id="dot-6">
+                        </div>
+                        <div class="option">
+                            <label for="dot-7">Marriage</label>
+                            <input type="checkbox" name="querytype[]" value="marriage" id="dot-7">
+                        </div>
+                        <div class="option"> 
+                            <label for="dot-8">Transfer</label>
+                            <input type="checkbox" name="querytype[]" value="transfer" id="dot-8">
+                        </div>
+                        <div class="option">
+                            <label for="dot-9">Pregnancy</label>
+                            <input type="checkbox" name="querytype[]" value="pregnancy" id="dot-9">
+                        </div>
+                        <div class="option">
+                            <label for="dot-10">Litigation</label>
+                            <input type="checkbox" name="querytype[]" value="litigation" id="dot-10">
+                        </div>
+                        <div class="option">
+
+                            <label for="dot-11">Foreign-Travel</label>
+                            <input type="checkbox" name="querytype[]" value="foreigntravel" id="dot-11">
+                        </div>
+                        <div class="option">
+                            <label for="dot-12">Promotion</label>
+                            <input type="checkbox" name="querytype[]" value="promotion" id="dot-12">
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- <div class="category">
+                        <label for="dot-1">
+                            <span class="dot one"></span>
+                            <span class="q">Business</span>
+                        </label>
+                        <label for="dot-2">
+                            <span class="dot two"></span>
+                            <span class="q">Investment</span>
+                        </label>
+                        <label for="dot-3">
+                            <span class="dot three"></span>
+                            <span class="q">Relationships</span>
+                        </label>
+                        <label for="dot-4">
+                            <span class="dot four"></span>
+                            <span class="q">Health</span>
+                        </label>
+                        <label for="dot-5">
+                            <span class="dot five"></span>
+                            <span class="q">Career</span>
+                        </label>
+                        <label for="dot-6">
+                            <span class="dot six"></span>
+                            <span class="q">Job</span>
+                        </label>
+                        <label for="dot-7">
+                            <span class="dot seven"></span>
+                            <span class="q">Marriage</span>
+                        </label>
+                        <label for="dot-8">
+                            <span class="dot eight"></span>
+                            <span class="q">Transfer</span>
+                        </label>
+                        <label for="dot-9">
+                            <span class="dot nine"></span>
+                            <span class="q">Pregnancy</span>
+                        </label>
+                        <label for="dot-10">
+                            <span class="dot ten"></span>
+                            <span class="q">Litigation</span>
+                        </label>
+                        <label for="dot-11">
+                            <span class="dot eleven"></span>
+                            <span class="q">Foreign-Travel</span>
+                        </label>
+                        <label for="dot-12">
+                            <span class="dot twelve"></span>
+                            <span class="q">Promotion</span>
+                        </label>
+                    </div> -->
                 </div>
 
-                <div class="nextprevbtn" id="page2">
-                    <button class="button-79" role="button" onclick="changeslottopersonal()">Prev</button>
-                    <button class="button-79" role="button" onclick="changeslottoPayment()">Next</button>
-                </div>
-                
 
-                <div class="paymentRemark" id="paymentRemark">
-                    <h3>Payment Details</h3>
 
-                    <div class="payment">
+                <div class="payments-details">
+                    <div>
+                        <span class="slotheading">Payment Details</span>
+                    </div>
+                    <div class="payments">
                         <div class="input-box">
                             <span class="details">UPI</span>
                             <!-- <input type="text" placeholder="Place of Birth" required> </input> -->
@@ -340,26 +350,42 @@
                             <input class="choose" name="translip" type="file"
                                 accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps">
                         </div>
+
                     </div>
-
-                    <h3>Remarks</h3>
-
-                    <div class="remark">
-                        <textarea name="" id="" cols="30" rows="6"></textarea>
-                    </div>  
                 </div>
 
-                <div class="nextprevbtn" id="page3">
-                    <button  class="button-79" role="button" onclick="changepaymenttoslot()">Prev</button>
-                    <button class="button-79" role="button" type="submit">Submit</button>
+                <div class="remark">
+                    <div>
+                        <span class="slotheading">Remarks</span>
+                    </div>
+                    <div class="input-box">
+                        <input name="remark" type="text" placeholder="Your Message in 100 words..." required>
+                    </div>
                 </div>
 
                 <!-- Make the button size small  -->
 
+                <div class="button">
+                    <div class="btn">
+                        <input type="submit" value="Register">
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 
+
+
+
+
+    <!-- <script>
+        const timeInput = document.getElementById("time");
+        timeInput.addEventListener("change", () => {
+            const timeValue = timeInput.valueAsDate;
+            const hours = timeValue.getHours();
+            console.log(hours);
+        });
+    </script> -->
 
     <script>
         function ageCalculator() {
@@ -381,8 +407,10 @@
         document.getElementById("dob").setAttribute('max', yesterday); 
     </script>
 
-
     <!-- Date of Appoinment CheckPoint -->
+
+    <!-- <input type="date" id="doappoint" name="doappoint"> -->
+
     <script>
         var today = new Date(Date.now()).toISOString().split('T')[0];
         var nextweek = new Date(Date.now() + 604800000).toISOString().split('T')[0];
@@ -391,76 +419,19 @@
     </script>
 
 
-    <script>
-        function changePersonaltoslot() {
-            document.getElementById('personal').style.display = "none";
-            document.getElementById('page1').style.display = "none";
-            document.getElementById('slot').style.display = "block";
-            document.getElementById('query').style.display = "block";
-            document.getElementById('page2').style.display = "flex";
-        }
+    <!-- Select time after 2hours of current time  -->
 
-        function changeslottopersonal() {
-            document.getElementById('slot').style.display = "none";
-            document.getElementById('page2').style.display = "none";
-            document.getElementById('personal').style.display = "block";
-            document.getElementById('page1').style.display = "flex";
-        }
+    <!-- <input type=“time” id=“time” name=“time”> <script> var now = new Date(); var twoHoursLater = new Date(now.getTime() + 2 * 60 * 60 * 1000); var maxTime = twoHoursLater.toISOString().split(‘T’)1.slice(0,5); document.getElementById(“time”).setAttribute(‘max’, maxTime); </script> -->
 
-        function changeslottoPayment() {
-            document.getElementById('page2').style.display = "none";
-            document.getElementById('slot').style.display = "none";
-            document.getElementById('page3').style.display = "flex";
-            document.getElementById('paymentRemark').style.display = "block";
-        }
-
-        function changepaymenttoslot() {
-            document.getElementById('page2').style.display = "flex";
-            document.getElementById('slot').style.display = "block";
-            document.getElementById('paymentRemark').style.display = "none";
-            document.getElementById('page3').style.display = "none";
-
-        }
-    </script>
-
-    <script>
-        var fromTime = document.getElementById("fromTime");
-        var toTime = document.getElementById("toTime");
-
-        fromTime.addEventListener("change", function () {
-            var selectedFromTime = fromTime.value;
-            toTime.innerHTML = "";
-
-            for (var i = 0; i < fromTime.options.length; i++) {
-                var option = fromTime.options[i];
-
-                if (option.value > selectedFromTime) {
-                    toTime.appendChild(option.cloneNode(true));
-                }
-            }
-
-            if (selectedFromTime === "24:00") {
-                toTime.innerHTML = "<option value='' selected>Not allowed</option>";
-            }
-        });
-
-    </script>
+    <!-- <script>
+        var timefrom = getElementById(timefrom); // get current date and time
+        timefrom.setMinutes(timefrom.getMinutes() + 30); // add 30 minutes
+        var inputTime = document.querySelector('input[type="time"]'); // get input element
+        inputTime.value = timefrom.toISOString().substr(11, 5);
+    </script> -->
 
 
-    <script>
-        function durationCal() {
-            const fromTime = document.getElementById("fromTime").value;
-            const toTime = document.getElementById("toTime").value;
-            var fromTimeInMinutes = parseInt(fromTime.split(":")[0]) * 60 + parseInt(fromTime.split(":")[1]);
-            var toTimeInMinutes = parseInt(toTime.split(":")[0]) * 60 + parseInt(toTime.split(":")[1]);
-
-            var timeDifferenceInMinutes = toTimeInMinutes - fromTimeInMinutes;
-            document.getElementById("duration").value = timeDifferenceInMinutes + " min";
-            document.getElementById("fee").value = "Rs. " + timeDifferenceInMinutes * 500 / 30;
-            console.log("Time difference in minutes: " + timeDifferenceInMinutes + "min");
-        }
-    </script>
-
+    <!-- <scripvalue -->
 </body>
 
 </html>
