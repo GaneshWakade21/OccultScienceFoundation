@@ -53,6 +53,8 @@ $querystring = implode(',', $query);
 $upi = $_POST['upi'];
 $upino = $_POST['upino'];
 $amount = $_POST['amount'];
+$transdate = $_POST['transdate'];
+$transtime = $_POST['transtime'];
 $translip = $_POST['translip'];
 $remark = $_POST['remark'];
 
@@ -86,6 +88,9 @@ function id($firstname, $middlename, $lastname, $current_time, $today, $totaldur
 
   $today = date('d-m-y');
   $today = preg_replace('/[^\p{L}\p{N}\s]/u', '', $today);
+
+  $totaldur = preg_replace("/[a-zA-Z\s]+/","", $totaldur);
+
   $timefrom = preg_replace('/[^\p{L}\p{N}\s]/u', '', $timefrom);
   $timeto = preg_replace('/[^\p{L}\p{N}\s]/u', '', $timeto);
   $string = str_replace(' ', '', $today);
@@ -114,12 +119,12 @@ if ($mysqli->connect_error) {
 $stmt = $mysqli->prepare("INSERT INTO appointment (id, firstname, middlename, lastname, fathername, dob, age, tob, gender, birthplace, birthstate, email, phone, doappoint, 
 -- hour, minfrom, ampmfrom, hrto, minto, ampmto,
 timefrom,timeto, 
-totaldur, fee, query, upi, upino, amount, translip, remark) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+totaldur, fee, query, upi, upino, amount,transdate,transtime, translip, remark) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 if ($stmt === false) {
   die("Prepare failed: " . $mysqli->error);
 }
 $stmt->bind_param(
-  "ssssssisssssisssssssssbs",
+  "ssssssisssssisssssssssssbs",
   $id,
   $firstname,
   $middlename,
@@ -143,6 +148,8 @@ $stmt->bind_param(
   $upi,
   $upino,
   $amount,
+  $transdate,
+  $transtime,
   $translip,
   $remark
 );

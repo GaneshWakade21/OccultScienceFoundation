@@ -73,14 +73,14 @@
                     </div>
 
                     <div class="input-box">
-                        <span class="details">Email</span>
-                        <input type="text" name="email" placeholder="Enter Your Email" required>
-                    </div>
-                    <div class="input-box">
                         <span class="details">Phone Number</span>
                         <input type="text" name="phone" placeholder="Enter Your Number" required>
                     </div>
-
+                    
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="text" name="email" placeholder="Enter Your Email">
+                    </div>
                     <!-- <div class="input-box">
                         <span class="details">Date of Appointment</span>
                         <input type="date">
@@ -104,34 +104,11 @@
 
 
 
-                        <div class="input-box1">
+                        <!-- <div class="input-box1">
                             <span class="details">Time From</span>
 
                             <div class="timesel">
                                 <input type="time" id="timefrom" name="timefrom" min="09:00" max="23:30" step="1800">
-
-                                <!-- <select id="hr" name="hour" placeholder="Hour">
-                                    <option name="hrfrom" value="1:00">1</option>
-                                    <option name="hrfrom" value="2:00">2</option>
-                                    <option name="hrfrom" value="3:00">3</option>
-                                    <option name="hrfrom" value="4:00">4</option>
-                                    <option name="hrfrom" value="5:00">5</option>
-                                    <option name="hrfrom" value="6:00">6</option>
-                                    <option name="hrfrom" value="7:00">7</option>
-                                    <option name="hrfrom" value="8:00">8</option>
-                                    <option name="hrfrom" value="9:00">9</option>
-                                    <option name="hrfrom" value="10:00">10</option>
-                                    <option name="hrfrom" value="11:00">11</option>
-                                    <option name="hrfrom" value="12:00">12</option>
-                                </select>
-                                <select id="hr" name="minfrom" placeholder="Minutes">
-                                    <option name="minfrom" value="00min">00</option>
-                                    <option name="minfrom" value="30min">30</option>
-                                </select>
-                                <select id="hr" name="ampmfrom" placeholder="AM/PM">
-                                    <option name="ampmfrom" value="am">AM</option>
-                                    <option name="ampmfrom" value="pm">PM</option>
-                                </select> -->
 
                             </div>
 
@@ -142,46 +119,118 @@
                             <div class="timesel">
                                 <input type='time' id='timeto' name='timeto' step='1800' min="09:30" max="24:00"
                                     onchange="displayalert()">
-
-                                <!-- <select id="hr" name="hrto" placeholder="Hour">
-                                    <option name="hrto" value="1:00">1</option>
-                                    <option name="hrto" value="2:00">2</option>
-                                    <option name="hrto" value="3:00">3</option>
-                                    <option name="hrto" value="4:00">4</option>
-                                    <option name="hrto" value="5:00">5</option>
-                                    <option name="hrto" value="6:00">6</option>
-                                    <option name="hrto" value="7:00">7</option>
-                                    <option name="hrto" value="8:00">8</option>
-                                    <option name="hrto" value="9:00">9</option>
-                                    <option name="hrto" value="10:00">10</option>
-                                    <option name="hrto" value="11:00">11</option>
-                                    <option name="hrto" value="12:00">12</option>
-                                </select>
-                                <select id="hr" name="minto" placeholder="Minutes">
-                                    <option name="minto" value="00min">00</option>
-                                    <option name="minto" value="30min">30</option>
-                                </select>
-                                <select id="hr" name="ampmto" placeholder="AM/PM">
-                                    <option name="ampmto" value="am">AM</option>
-                                    <option name="ampmto" value="pm">PM</option>
-                                </select> -->
-
                             </div>
+                        </div> -->
 
+                        <!-- Time by select  -->
+
+                        <div class="input-box">
+                            <span class="details">Time From</span>
+
+                            <!-- <input type="time" id="timefrom" name="timefrom" min="09:00" max="23:30" step="1800"> -->
+
+                            <select onchange="durationCal()" id="timefrom" name="timefrom" placeholder="9:00 PM">
+                                <option value="" disabled selected>Select</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="09:30">9:30 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="10:30">10:30 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="11:30">11:30 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="12:30">12:30 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="13:30">1:30 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="14:30">2:30 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="15:30">3:30 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="16:30">4:30 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                                <option value="17:30">5:30 PM</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="18:30">6:30 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="19:30">7:30 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                                <option value="20:30">8:30 PM</option>
+                                <option value="21:00">9:00 PM</option>
+                                <option value="21:30">9:30 PM</option>
+                                <option value="22:00">10:00 PM</option>
+                                <option value="22:30">10:30 PM</option>
+                                <option value="23:00">11:00 PM</option>
+                                <option value="23:30">11:30 PM</option>
+                                <option value="24:00">12:00 PM</option>
+                            </select>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Time To</span>
+
+                            <!-- <input type='time' id='timeto' name='timeto' value="09:30" step='600' min="09:30"
+                                        max="24:00" onchange="displayalert()"> -->
+
+                            <select onchange="durationCal()" id="timeto" name="timeto">
+                                <option value="" disabled selected>Select</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="09:30">9:30 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="10:30">10:30 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="11:30">11:30 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="12:30">12:30 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="13:30">1:30 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="14:30">2:30 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="15:30">3:30 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="16:30">4:30 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                                <option value="17:30">5:30 PM</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="18:30">6:30 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="19:30">7:30 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                                <option value="20:30">8:30 PM</option>
+                                <option value="21:00">9:00 PM</option>
+                                <option value="21:30">9:30 PM</option>
+                                <option value="22:00">10:00 PM</option>
+                                <option value="22:30">10:30 PM</option>
+                                <option value="23:00">11:00 PM</option>
+                                <option value="23:30">11:30 PM</option>
+                                <option value="24:00">12:00 PM</option>
+                            </select>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Total Duration</span>
+                            <!-- Total Duration in Minutes -->
+                            <input  value="" onchange="durationCal()" id="duration" type="text" name="totaldur"
+                                placeholder="Total Duration">
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Fee</span>
+                            <!-- Rs.500 per 30min -->
+                            <input onchange="durationCal()" id="fee" type="text" name="fee" placeholder="Rs.500"
+                                required>
                         </div>
 
 
-                        <div class="input-boxno">
+                        <!-- <div class="input-boxno">
                             <span class="details">Total Duration</span>
-                            <!-- Total Duration in Minutes -->
-                            <input type="text" name="totaldur" placeholder="Total Duration" required>
+                            <input  type="text" name="totaldur" placeholder="Total Duration" required>
                         </div>
 
                         <div class="input-boxno">
                             <span class="details">Fee</span>
-                            <!-- Rs.500 per 30min -->
-                            <input type="text" name="fee" placeholder="Rs.500" required>
-                        </div>
+                            <input  type="text" name="fee" placeholder="Rs.500" required>
+                        </div> -->
 
 
                     </div>
@@ -190,20 +239,6 @@
 
                 </div>
 
-
-                <!-- <div class="query">
-                    <div>
-                        <span class="queryheading">Query Types</span>
-                    </div>
-                    <div class="querytype">
-                        <label for="dot-1">
-                            <span class="dot one"></span>
-                            <span class="gender">Business :<input type="radio"></span>
-                        </label>
-                        
-
-                    </div>
-                </div> -->
 
 
 
@@ -264,57 +299,6 @@
 
                     </div>
 
-
-                    <!-- <div class="category">
-                        <label for="dot-1">
-                            <span class="dot one"></span>
-                            <span class="q">Business</span>
-                        </label>
-                        <label for="dot-2">
-                            <span class="dot two"></span>
-                            <span class="q">Investment</span>
-                        </label>
-                        <label for="dot-3">
-                            <span class="dot three"></span>
-                            <span class="q">Relationships</span>
-                        </label>
-                        <label for="dot-4">
-                            <span class="dot four"></span>
-                            <span class="q">Health</span>
-                        </label>
-                        <label for="dot-5">
-                            <span class="dot five"></span>
-                            <span class="q">Career</span>
-                        </label>
-                        <label for="dot-6">
-                            <span class="dot six"></span>
-                            <span class="q">Job</span>
-                        </label>
-                        <label for="dot-7">
-                            <span class="dot seven"></span>
-                            <span class="q">Marriage</span>
-                        </label>
-                        <label for="dot-8">
-                            <span class="dot eight"></span>
-                            <span class="q">Transfer</span>
-                        </label>
-                        <label for="dot-9">
-                            <span class="dot nine"></span>
-                            <span class="q">Pregnancy</span>
-                        </label>
-                        <label for="dot-10">
-                            <span class="dot ten"></span>
-                            <span class="q">Litigation</span>
-                        </label>
-                        <label for="dot-11">
-                            <span class="dot eleven"></span>
-                            <span class="q">Foreign-Travel</span>
-                        </label>
-                        <label for="dot-12">
-                            <span class="dot twelve"></span>
-                            <span class="q">Promotion</span>
-                        </label>
-                    </div> -->
                 </div>
 
 
@@ -326,7 +310,6 @@
                     <div class="payments">
                         <div class="input-box">
                             <span class="details">UPI</span>
-                            <!-- <input type="text" placeholder="Place of Birth" required> </input> -->
                             <select name="upi" placeholder="Select Payment Method">
                                 <option value="upi">UPI</option>
                                 <option value="gpay">GPay</option>
@@ -341,8 +324,16 @@
                         </div>
 
                         <div class="input-box">
-                            <span class="details">Amount</span>
+                            <span class="details">Amount Paid</span>
                             <input type="text" name="amount" placeholder="Enter Amount Paid" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Transction Date</span>
+                            <input type="date" name="transdate" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Transction Time</span>
+                            <input type="time" name="transtime" required>
                         </div>
                         <div class="input-box">
                             <!-- class name is changed from input-box to input-boxt  -->
@@ -358,9 +349,15 @@
                     <div>
                         <span class="slotheading">Remarks</span>
                     </div>
-                    <div class="input-box">
+                    <!-- <div class="input-box">
                         <input name="remark" type="text" placeholder="Your Message in 100 words..." required>
-                    </div>
+                    </div> -->
+
+                    <div class="remark">
+                        <textarea name="remark" id="" cols="130" rows="6" placeholder="Your Message in 100 words..."></textarea>
+                    </div> 
+
+
                 </div>
 
                 <!-- Make the button size small  -->
@@ -432,6 +429,47 @@
 
 
     <!-- <scripvalue -->
+
+
+        <script>
+            var timefrom = document.getElementById("timefrom");
+            var timeto = document.getElementById("timeto");
+    
+            timefrom.addEventListener("change", function () {
+                var selectedFromTime = timefrom.value;
+                timeto.innerHTML = "";
+    
+                for (var i = 0; i < timefrom.options.length; i++) {
+                    var option = timefrom.options[i];
+    
+                    if (option.value > selectedFromTime) {
+                        timeto.appendChild(option.cloneNode(true));
+                    }
+                }
+
+                timeto.innerHTML = "<option value='' disabled selected>Select</option>" + timeto.innerHTML;
+    
+                if (selectedFromTime === "24:00") {
+                    timeto.innerHTML = "<option value='' selected>Not allowed</option>";
+                }
+            });
+    
+        </script>
+    
+    
+        <script>
+            function durationCal() {
+                const timefrom = document.getElementById("timefrom").value;
+                const timeto = document.getElementById("timeto").value;
+                var fromTimeInMinutes = parseInt(timefrom.split(":")[0]) * 60 + parseInt(timefrom.split(":")[1]);
+                var toTimeInMinutes = parseInt(timeto.split(":")[0]) * 60 + parseInt(timeto.split(":")[1]);
+    
+                var timeDifferenceInMinutes = toTimeInMinutes - fromTimeInMinutes;
+                document.getElementById("duration").value = timeDifferenceInMinutes + " min";
+                document.getElementById("fee").value = "Rs. " + timeDifferenceInMinutes * 500 / 30;
+                console.log("Time difference in minutes: " + timeDifferenceInMinutes + "min");
+            }
+        </script>
 </body>
 
 </html>
