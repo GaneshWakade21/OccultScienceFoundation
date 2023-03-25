@@ -69,11 +69,12 @@ $remark = $_POST['remark'];
 // first name                  -   G 
 // middle name                 -   N 
 // last name                   -   W 
-// data entry time             -   2204        i.e is at 10:04 pm 
-// date of data entry          -   9323        i.e = 9 march 2023
+// data entry time             -   2204        i.e is at 10:04 pm   remove
+// date of data entry          -   9323        i.e = 9 march 2023    
 // minutes bought              -   30          i.e - 30 min 
 // slot timed booked           -   14001430    i.e - 2:00 pm to 2:30 pm 
 // date of slot booked         -   12323       i.e - 12 march 2023
+
 function id($firstname, $middlename, $lastname, $current_time, $today, $totaldur, $timefrom, $timeto, $doappoint)
 {
   $fnf = substr($firstname, 0, 1);
@@ -98,7 +99,8 @@ function id($firstname, $middlename, $lastname, $current_time, $today, $totaldur
   $doappoint = date('d-m-y', strtotime($doappoint));
   $doappoint = preg_replace('/[^\p{L}\p{N}\s]/u', '', $doappoint);
 
-  $id = $fnf . $mnf . $snf . $current_time . $today . $totaldur . $timefrom . $timeto . $doappoint;
+  // $id = $fnf . $mnf . $snf . $current_time . $today . $totaldur . $timefrom . $timeto . $doappoint;
+  $id = $fnf . $mnf . $snf . $doappoint . $timefrom ;
   return $id;
 }
 date_default_timezone_set('Asia/Kolkata');

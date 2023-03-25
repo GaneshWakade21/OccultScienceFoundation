@@ -130,8 +130,8 @@ form .input-boxno span.details{
 
 
 .slot{
-  width: 70%;
-  /* width: 100%; */
+  /* width: 70%; */
+  width: 100%;
   padding: 1rem 0;
   /* border: 2px solid yellow; */
 }
