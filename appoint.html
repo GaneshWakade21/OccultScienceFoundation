@@ -15,6 +15,9 @@
         <!-- <div class="title">Book Appointment</div> -->
         <div class="content">
             <form action="connectappoint.php" method="post">
+                <div>
+                    <span class="userheading"><u>User Details</u></span>
+                </div>
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">First Name</span>
@@ -76,7 +79,7 @@
                         <span class="details">Phone Number</span>
                         <input type="text" name="phone" placeholder="Enter Your Number" required>
                     </div>
-                    
+
                     <div class="input-box">
                         <span class="details">Email</span>
                         <input type="text" name="email" placeholder="Enter Your Email">
@@ -93,7 +96,7 @@
 
                 <div class="slot">
                     <div>
-                        <span class="slotheading">Time Slot Booking</span>
+                        <span class="slotheading"><u>Time Slot Booking</u></span>
                     </div>
 
                     <div class="slottime">
@@ -210,7 +213,7 @@
                         <div class="input-box">
                             <span class="details">Total Duration</span>
                             <!-- Total Duration in Minutes -->
-                            <input  value="" onchange="durationCal()" id="duration" type="text" name="totaldur"
+                            <input value="" onchange="durationCal()" id="duration" type="text" name="totaldur"
                                 placeholder="Total Duration">
                         </div>
 
@@ -243,7 +246,7 @@
 
 
                 <div class="query" name="query">
-                    <span class="querytitle">Your Queries</span>
+                    <span class="querytitle"><u>Your Queries</u> </span>
                     <div class="check">
                         <div class="option">
                             <label for="dot-1">Buisness</label>
@@ -259,10 +262,10 @@
                             <input type="checkbox" name="querytype[]" value="relationship" id="dot-3">
                         </div>
                         <div class="option">
-                             <label for="dot-4">Health</label>
+                            <label for="dot-4">Health</label>
                             <input type="checkbox" name="querytype[]" value="health" id="dot-4">
                         </div>
-                        <div class="option"> 
+                        <div class="option">
                             <label for="dot-5">Property</label>
                             <input type="checkbox" name="querytype[]" value="property" id="dot-5">
                         </div>
@@ -270,11 +273,11 @@
                             <label for="dot-7">Marriage</label>
                             <input type="checkbox" name="querytype[]" value="marriage" id="dot-7">
                         </div>
-                        <div class="option"> 
+                        <div class="option">
                             <label for="dot-6">Job</label>
                             <input type="checkbox" name="querytype[]" value="job" id="dot-6">
                         </div>
-                        <div class="option"> 
+                        <div class="option">
                             <label for="dot-8">Transfer</label>
                             <input type="checkbox" name="querytype[]" value="transfer" id="dot-8">
                         </div>
@@ -305,7 +308,7 @@
 
                 <div class="payments-details">
                     <div>
-                        <span class="slotheading">Payment Details</span>
+                        <span class="slotheading"><u>Payment Details</u></span>
                     </div>
                     <div class="payments">
                         <div class="input-box">
@@ -347,15 +350,16 @@
 
                 <div class="remark">
                     <div>
-                        <span class="slotheading">Remarks</span>
+                        <span class="slotheading"><u>Remarks</u></span>
                     </div>
                     <!-- <div class="input-box">
                         <input name="remark" type="text" placeholder="Your Message in 100 words..." required>
                     </div> -->
 
                     <div class="remark">
-                        <textarea name="remark" id="" cols="130" rows="6" placeholder="Your Message in 100 words..."></textarea>
-                    </div> 
+                        <textarea name="remark" id="" cols="172" rows="4"
+                            placeholder="Your Message in 50 words..."></textarea>
+                    </div>
 
 
                 </div>
@@ -411,7 +415,7 @@
     <script>
         var today = new Date(Date.now()).toISOString().split('T')[0];
         var nextweek = new Date(Date.now() + 604800000).toISOString().split('T')[0];
-        document.getElementById("doappoint").setAttribute('min', today); 
+        document.getElementById("doappoint").setAttribute('min', today);
         document.getElementById("doappoint").setAttribute('max', nextweek); 
     </script>
 
@@ -431,45 +435,45 @@
     <!-- <scripvalue -->
 
 
-        <script>
-            var timefrom = document.getElementById("timefrom");
-            var timeto = document.getElementById("timeto");
-    
-            timefrom.addEventListener("change", function () {
-                var selectedFromTime = timefrom.value;
-                timeto.innerHTML = "";
-    
-                for (var i = 0; i < timefrom.options.length; i++) {
-                    var option = timefrom.options[i];
-    
-                    if (option.value > selectedFromTime) {
-                        timeto.appendChild(option.cloneNode(true));
-                    }
-                }
+    <script>
+        var timefrom = document.getElementById("timefrom");
+        var timeto = document.getElementById("timeto");
 
-                timeto.innerHTML = "<option value='' disabled selected>Select</option>" + timeto.innerHTML;
-    
-                if (selectedFromTime === "24:00") {
-                    timeto.innerHTML = "<option value='' selected>Not allowed</option>";
+        timefrom.addEventListener("change", function () {
+            var selectedFromTime = timefrom.value;
+            timeto.innerHTML = "";
+
+            for (var i = 0; i < timefrom.options.length; i++) {
+                var option = timefrom.options[i];
+
+                if (option.value > selectedFromTime) {
+                    timeto.appendChild(option.cloneNode(true));
                 }
-            });
-    
-        </script>
-    
-    
-        <script>
-            function durationCal() {
-                const timefrom = document.getElementById("timefrom").value;
-                const timeto = document.getElementById("timeto").value;
-                var fromTimeInMinutes = parseInt(timefrom.split(":")[0]) * 60 + parseInt(timefrom.split(":")[1]);
-                var toTimeInMinutes = parseInt(timeto.split(":")[0]) * 60 + parseInt(timeto.split(":")[1]);
-    
-                var timeDifferenceInMinutes = toTimeInMinutes - fromTimeInMinutes;
-                document.getElementById("duration").value = timeDifferenceInMinutes + " min";
-                document.getElementById("fee").value = "Rs. " + timeDifferenceInMinutes * 500 / 30;
-                console.log("Time difference in minutes: " + timeDifferenceInMinutes + "min");
             }
-        </script>
+
+            timeto.innerHTML = "<option value='' disabled selected>Select</option>" + timeto.innerHTML;
+
+            if (selectedFromTime === "24:00") {
+                timeto.innerHTML = "<option value='' selected>Not allowed</option>";
+            }
+        });
+
+    </script>
+
+
+    <script>
+        function durationCal() {
+            const timefrom = document.getElementById("timefrom").value;
+            const timeto = document.getElementById("timeto").value;
+            var fromTimeInMinutes = parseInt(timefrom.split(":")[0]) * 60 + parseInt(timefrom.split(":")[1]);
+            var toTimeInMinutes = parseInt(timeto.split(":")[0]) * 60 + parseInt(timeto.split(":")[1]);
+
+            var timeDifferenceInMinutes = toTimeInMinutes - fromTimeInMinutes;
+            document.getElementById("duration").value = timeDifferenceInMinutes + " min";
+            document.getElementById("fee").value = "Rs. " + timeDifferenceInMinutes * 500 / 30;
+            console.log("Time difference in minutes: " + timeDifferenceInMinutes + "min");
+        }
+    </script>
 </body>
 
 </html>

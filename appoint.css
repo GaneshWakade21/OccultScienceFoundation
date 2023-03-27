@@ -18,14 +18,14 @@ body{
 .container{
   /* max-width: 700px; */
   /* height: 97vh; */
-  border: 2px solid green;
+  /* border: 2px solid green; */
   border-radius: 30px;
   width: 80%;
   background-color: #fff;
   padding: 25px 30px 0px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-  background-color: rgb(219 222 224);
+  background-color: rgb(249, 255, 208);
 }
 .container .title{
   /* border: 2px solid red; */
@@ -33,6 +33,8 @@ body{
   font-weight: 500;
   position: relative;
   text-align: center;
+  /* color: red; */
+  /* background-color: blue; */
 }
 .container .title::before{
   content: "";
@@ -158,7 +160,8 @@ form .input-boxno span.details{
   /* margin: 0px 20px 0px 0px; */
 /* } */
 
-.slotheading , .queryheading{
+.slotheading , .queryheading,form .query .querytitle, .userheading{
+  /* color: red; */
   font-size: 20px;
   font-weight: 500;
 }
@@ -228,13 +231,14 @@ form .input-boxno span.details{
 }
 
 
-form .query .querytitle{
+/* form .query .querytitle{
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0px 0px 20px 0px; */
+  /* border: 2px solid blue; */
+  /* padding: 10px 0px; */
   /* color: red; */
- font-size: 20px;
- font-weight: 500;
- /* border: 2px solid blue; */
-  padding: 10px 10px;
-}
+/* } */
 
 /* 
 
@@ -305,12 +309,15 @@ form .query .querytitle{
    letter-spacing: 1px;
    cursor: pointer;
    transition: all 0.3s ease;
-   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+   background-color: blue;
+   /* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
  }
 
  form .button input:hover{
   /* transform: scale(0.99); */
-  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  /* background: linear-gradient(-135deg, #71b7e6, #9b59b6); */
+  background-color: rgb(2, 2, 132);
+
   }
  @media(max-width: 584px){
  .container{
