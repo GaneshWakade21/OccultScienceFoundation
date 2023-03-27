@@ -13,7 +13,8 @@ body{
   align-items: center;
   padding: 10px;
   /* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
-  /* background-color: black; */
+  /* background-color: blue; */
+  background-image: url(images/appointbg.jpg);
 }
 .container{
   /* max-width: 700px; */
@@ -25,7 +26,10 @@ body{
   padding: 25px 30px 0px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-  background-color: rgb(249, 255, 208);
+  /* background-color: rgb(249, 255, 208); */
+  background-image: url(images/form.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .container .title{
   /* border: 2px solid red; */
@@ -33,6 +37,7 @@ body{
   font-weight: 500;
   position: relative;
   text-align: center;
+  color: blue;
   /* color: red; */
   /* background-color: blue; */
 }
@@ -53,7 +58,7 @@ body{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 20px 0 12px 0;
+  /* margin: 20px 0 12px 0; */
 }
 
 
@@ -74,10 +79,13 @@ form .payments .input-box{
   flex-direction: column;
 }
 
-form .user-details .input-box input , .gender,.upi,
+form .user-details .input-box input ,
+form .user-details .input-box select,
 form .slottime .input-box input,
-form .payments .input-box input{
-  /* border: 2px solid red; */
+form .slottime .input-box select,
+form .payments .input-box input,
+form .payments .input-box select{
+  border: 2px solid black;
   width: 75%;
 }
 
@@ -126,15 +134,15 @@ form .input-boxno span.details{
 }
 
 /* .slot  */
-.slot span .slotheading{
+/* .slot span .slotheading{
   margin: 0px 0px 20px 0px;
-}
+} */
 
 
 .slot{
   /* width: 70%; */
   width: 100%;
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   /* border: 2px solid yellow; */
 }
 
@@ -160,11 +168,20 @@ form .input-boxno span.details{
   /* margin: 0px 20px 0px 0px; */
 /* } */
 
+
+.subheading{
+  /* border: 2px solid red; */
+  padding: 1rem 0rem 0.5rem 0rem;
+}
 .slotheading , .queryheading,form .query .querytitle, .userheading{
   /* color: red; */
   font-size: 20px;
   font-weight: 500;
+  color: blue;
+  
 }
+
+
 
 /* slot time  */
 
@@ -216,7 +233,6 @@ form .input-boxno span.details{
 }
 
 .query .check{
-  padding: 1rem;
   display: flex;
   gap: 1rem 1rem;
   flex-wrap: wrap;
@@ -292,13 +308,13 @@ form .input-boxno span.details{
  }
 
 
- form .button{
+ form .button1{
   display: block;
   margin: 10px auto;
   width: 20%;
  }
 
- form .button input{
+ /* form .button input{
    height: 100%;
    width: 100%;
    border-radius: 5px;
@@ -309,16 +325,49 @@ form .input-boxno span.details{
    letter-spacing: 1px;
    cursor: pointer;
    transition: all 0.3s ease;
-   background-color: blue;
+   background-color: blue; */
    /* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
- }
+ /* } */
 
- form .button input:hover{
+ /* form .button input:hover{ */
   /* transform: scale(0.99); */
   /* background: linear-gradient(-135deg, #71b7e6, #9b59b6); */
-  background-color: rgb(2, 2, 132);
+  /* background-color: rgb(2, 2, 132);
 
+  } */
+
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    /* border-radius: 5px; */
+    border-radius: 40px;
+    /* background-color: #ff0505;
+    box-shadow: 0 4px #7a3535; */
+    background-color: #2205ff;
+    box-shadow: 0 4px #35397a;
   }
+  
+  .button:hover {
+    /* background-color: #ff0505;
+    box-shadow: 0 6px #7a3535; */
+    background-color: #2205ff;
+    box-shadow: 0 4px #35397a;
+    transform: translateY(-2px);
+  }
+  
+  .button:active {
+    background-color: #2e2586;
+    box-shadow: none;
+    transform: translateY(0);
+  }
+
+
+
  @media(max-width: 584px){
  .container{
   max-width: 100%;
