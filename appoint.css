@@ -337,7 +337,9 @@ form .input-boxno span.details{
   } */
 
   .button {
-    display: inline-block;
+    /* display: inline-block; */
+    display: block;
+    margin: auto;
     padding: 10px 20px;
     font-size: 18px;
     font-weight: bold;
@@ -346,17 +348,17 @@ form .input-boxno span.details{
     color: #fff;
     /* border-radius: 5px; */
     border-radius: 40px;
-    /* background-color: #ff0505;
-    box-shadow: 0 4px #7a3535; */
-    background-color: #2205ff;
-    box-shadow: 0 4px #35397a;
+    background-color: #ff0505;
+    box-shadow: 0 4px #7a3535;
+    /* background-color: #2205ff;
+    box-shadow: 0 4px #35397a; */
   }
   
   .button:hover {
-    /* background-color: #ff0505;
-    box-shadow: 0 6px #7a3535; */
-    background-color: #2205ff;
-    box-shadow: 0 4px #35397a;
+    background-color: #ff0505;
+    box-shadow: 0 6px #7a3535;
+    /* background-color: #2205ff;
+    box-shadow: 0 4px #35397a; */
     transform: translateY(-2px);
   }
   
