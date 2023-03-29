@@ -444,12 +444,14 @@
         timefrom.addEventListener("change", function () {
             var selectedFromTime = timefrom.value;
             timeto.innerHTML = "";
+            var count = 0;
 
             for (var i = 0; i < timefrom.options.length; i++) {
                 var option = timefrom.options[i];
 
-                if (option.value > selectedFromTime) {
+                if (option.value > selectedFromTime && count < 2) {
                     timeto.appendChild(option.cloneNode(true));
+                    count++;
                 }
             }
 
@@ -475,6 +477,46 @@
             document.getElementById("fee").value = "Rs. " + timeDifferenceInMinutes * 500 / 30;
             console.log("Time difference in minutes: " + timeDifferenceInMinutes + "min");
         }
+    </script>
+
+
+
+
+    <!-- Work under process
+    for current date, time selection -->
+    <script>
+        doappoint.addEventListener("change", function () {
+            const selectedDate = new Date(document.getElementById("doappoint").value);
+            // const selectedTime = document.getElementById("time").value;
+            const today = new Date();
+
+            if (selectedDate.toDateString() === today.toDateString()) {
+                const hours = parseInt(selectedTime.split(":")[0]);
+                const minutes = parseInt(selectedTime.split(":")[1]);
+
+                // const newTime = new Date();
+                // newTime.setHours(hours + 2, minutes);
+
+                // document.getElementById("time").value = newTime.toTimeString().slice(0, 5);
+
+                const currentHour = today.getHours();
+                const currentMinute = today.getMinutes();
+
+                var timefrom = document.getElementById("timefrom");
+
+                for (var i = 0; i < timefrom.options.length; i++) {
+                    var option = timefrom.options[i];
+                    const hours = parseInt(option.split(":")[0]);
+                    const minutes = parseInt(option.split(":")[1]);
+                    if (hours > currentHour + 3) {
+                        timefrom.appendChild(option.cloneNode(true));
+                    }
+                }
+
+
+
+            }
+        });
     </script>
 </body>
 
