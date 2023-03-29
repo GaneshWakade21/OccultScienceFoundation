@@ -212,13 +212,13 @@ $updateforgcnt = "UPDATE reports SET count=$forgcnt WHERE id = 12 ";
 
 // Canvas Query Bar Chart 
 
-$test=array();
-$count=0;
-$res=mysqli_query($conn,"SELECT * FROM reports");
-while($row=mysqli_fetch_array($res)){
-$test[$count]['label']=$row['query'];
-$test[$count]['y']=$row['count'];
-$count=$count+1;
+$test = array();
+$count = 0;
+$res = mysqli_query($conn, "SELECT * FROM reports");
+while ($row = mysqli_fetch_array($res)) {
+  $test[$count]['label'] = $row['query'];
+  $test[$count]['y'] = $row['count'];
+  $count = $count + 1;
 }
 
 
@@ -227,6 +227,8 @@ $count=$count+1;
 <html>
 
 <head>
+
+  <link rel="stylesheet" href="report.css">
 
 
   <!-- Gender Pie Chart  -->
@@ -309,7 +311,8 @@ $count=$count+1;
         animationEnabled: true,
         theme: "light1",
         title: {
-          text: "Query Reports"
+          text: "Query Reports",
+          fontFamily: "Arial"
         },
         axisY: {
           title: "Number of Queries"
@@ -317,7 +320,7 @@ $count=$count+1;
         data: [{
           type: "column",
           yValueFormatString: "#,##0.## tonnes",
-          dataPoints: <?php echo json_encode($test , JSON_NUMERIC_CHECK); ?>
+          dataPoints: <?php echo json_encode($test, JSON_NUMERIC_CHECK); ?>
         }]
       });
       chart.render();
@@ -326,13 +329,54 @@ $count=$count+1;
   </script>
 
 
+  <style>
 
+    .title{
+      display: flex;
+      justify-content: center;
+
+      /* border: 2px solid red; */
+
+    }
+    .subheading{
+      display: flex;
+      justify-content: center;
+
+      /* border: 2px solid red; */
+
+    }
+    
+    .timerange {
+      display: flex;
+      flex-direction: row;
+      /* border: 2px solid red; */
+      gap: 2rem;
+    }
+  </style>
 
 </head>
 
 <body>
+  <div class="title">
+    <h1>OCCULT SCIENCE FOUNDATION</h1>
+  </div>
 
-  <h1>Appointment Reports</h1>
+  <div class="subheading">
+    <h1>Appointment Reports</h1>
+
+  </div>
+
+  <div class="timerange">
+    <span>Date Range</span>
+    <div class="datefrom">
+      <span>Date From</span>
+      <input type="date">
+    </div>
+    <div class="dateto">
+      <span>Date To</span>
+      <input type="date">
+    </div>
+  </div>
 
 
   <div id="piechart" style="width: 900px; height: 500px;"></div>
