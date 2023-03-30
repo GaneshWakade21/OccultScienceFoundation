@@ -358,7 +358,7 @@ while ($row = mysqli_fetch_array($res)) {
 
 <body>
   <div class="title">
-    <h1>OCCULT SCIENCE FOUNDATION</h1>
+    <h1><u>OCCULT SCIENCE FOUNDATION</u></h1>
   </div>
 
   <div class="subheading">
@@ -366,22 +366,11 @@ while ($row = mysqli_fetch_array($res)) {
 
   </div>
 
-  <div class="timerange">
-    <span>Date Range</span>
-    <div class="datefrom">
-      <span>Date From</span>
-      <input type="date">
-    </div>
-    <div class="dateto">
-      <span>Date To</span>
-      <input type="date">
-    </div>
-  </div>
 
 
   <div id="piechart" style="width: 900px; height: 500px;"></div>
 
-  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+  <div id="chartContainer" style="height: 370px; width: 90%;"></div>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
