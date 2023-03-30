@@ -85,6 +85,11 @@ if (!$_COOKIE['aminloggedin']) {
               style="font-size:20px">Add Image</a>
           </li>
           <li>
+            <a href="reportgeneration.html"
+              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:light:hover:text-black light:text-gray-400 light:hover:bg-gray-700 light:hover:text-black md:light:hover:bg-transparent light:border-gray-700"
+              style="font-size:20px">Report Generation</a>
+          </li>
+          <li>
             <a href="logout.php"
               class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:light:hover:text-black light:text-gray-400 light:hover:bg-gray-700 light:hover:text-black md:light:hover:bg-transparent light:border-gray-700"
               style="font-size:20px">LOGOUT</a>
@@ -140,6 +145,7 @@ if (!$_COOKIE['aminloggedin']) {
 
         </form>
       </div>
+      
 
     </section>
 
