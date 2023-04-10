@@ -78,7 +78,6 @@ $result = mysqli_query($mysqli , $sql);
             <div class='text-center pb-2'>
                 <h4>Course Master Table</h4>
             </div>
-<<<<<<< HEAD
 
             <?php 
                 $sql = "SELECT * FROM coursemaster";
@@ -86,14 +85,15 @@ $result = mysqli_query($mysqli , $sql);
                 $num = mysqli_num_rows($result);
                 $no = 1;
                 echo '            <table style="width:100%" class="table-hover text-center ">
-=======
+
             <table style="width:100%" class="table-hover text-center ">
->>>>>>> 7ede5b81ee352992235cdc47723f4e7c4dd7a9af
+
                 <tr class="bg-dark">
                     <th>id</th>
                     <th>Course Name</th>
                     <th>Course Type</th>
                     <th>Course Duration</th>
+                    <th>Status</th>
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Actual Start Date</th>
@@ -104,7 +104,7 @@ $result = mysqli_query($mysqli , $sql);
                     <th>Remark</th>
                     <th>Action</th>
                 </tr>
-<<<<<<< HEAD
+
                 <tr>';
 
                 if($num > 0){
@@ -115,6 +115,7 @@ $result = mysqli_query($mysqli , $sql);
                     <td>'. $row["course_name"] .'</td>
                     <td>'. $row["course_type"] .'</td>
                     <td>'. $row["course_duration"] .'</td>
+                    <td>'. $row["status"] .'</td>
                     <td>'. $row["start_date"] .'</td>
                     <td>'. $row["end_date"] .'</td>
                     <td>'. $row["actual_start_date"] .'</td>
@@ -132,8 +133,7 @@ $result = mysqli_query($mysqli , $sql);
             ?>
 
 
-=======
-                <tr>
+                <!-- <tr>
                     <td>1</td>
                     <td>Tarot Cards Course</td>
                     <td>Basic</td>
@@ -146,8 +146,7 @@ $result = mysqli_query($mysqli , $sql);
                     <td>Offline</td>
                     <td>3</td>
                     <td></td>
-                    <td><button>Edit</button></td>
->>>>>>> 7ede5b81ee352992235cdc47723f4e7c4dd7a9af
+                    <td><button>Edit</button></td> -->
                     <!-- <?php
                     // echo "<td>
                     //     <form action=\"editForm.php\" method=\"get\"><input type=\"hidden\" name=\"id\"
@@ -156,13 +155,13 @@ $result = mysqli_query($mysqli , $sql);
                     // </td>";
                     ?> -->
 
-<<<<<<< HEAD
+
             
                 <!-- <tr>
-=======
+
                 </tr>
                 <tr>
->>>>>>> 7ede5b81ee352992235cdc47723f4e7c4dd7a9af
+
                     <td>1</td>
                     <td>Tarot Cards Course</td>
                     <td>Advance</td>
@@ -176,11 +175,10 @@ $result = mysqli_query($mysqli , $sql);
                     <td>3</td>
                     <td></td>
                     <td><button>Edit</button></td>
-<<<<<<< HEAD
+
                 </tr> -->
-=======
                 </tr>
->>>>>>> 7ede5b81ee352992235cdc47723f4e7c4dd7a9af
+
             </table>
         </div>
     </div>
