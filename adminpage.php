@@ -75,9 +75,9 @@ if (!$_COOKIE['aminloggedin']) {
               style="font-size:20px">Todays Appointment</a>
           </li>
           <li>
-            <a href="interns.php"
+            <a href="coursemaster.php"
               class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:light:hover:text-black light:text-gray-400 light:hover:bg-gray-700 light:hover:text-black md:light:hover:bg-transparent light:border-gray-700"
-              style="font-size:20px">Course Data</a>
+              style="font-size:20px">Course Master</a>
           </li>
           <li>
             <a href="product_add.php"
@@ -122,7 +122,7 @@ if (!$_COOKIE['aminloggedin']) {
       <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
         <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
           <h1 class="title-font font-medium text-3xl text-gray-900">Welcom to Admin Page
-            <?php echo " " . $_COOKIE['admin']; ?>
+            <!-- <?php echo " " . $_COOKIE['admin']; ?> -->
           </h1>
           <p class="leading-relaxed mt-4">“We need 4 hugs a day for survival. We need 8 hugs a day for maintenance. We
             need 12 hugs a day for growth.” –Virginia Satir</p>
