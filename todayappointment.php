@@ -90,6 +90,16 @@ if (!$_COOKIE['aminloggedin']) {
               style="font-size:20px">Add Course</a>
           </li>
           <li>
+            <a href="batchmaster.php"
+              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:light:hover:text-black light:text-gray-400 light:hover:bg-gray-700 light:hover:text-black md:light:hover:bg-transparent light:border-gray-700"
+              style="font-size:20px">Batch Master</a>
+          </li>
+          <li>
+            <a href="addbatches.php"
+              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:light:hover:text-black light:text-gray-400 light:hover:bg-gray-700 light:hover:text-black md:light:hover:bg-transparent light:border-gray-700"
+              style="font-size:20px">Add Batches</a>
+          </li>
+          <li>
             <a href="product_add.php"
               class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:light:hover:text-black light:text-gray-400 light:hover:bg-gray-700 light:hover:text-black md:light:hover:bg-transparent light:border-gray-700"
               style="font-size:20px">Add Image</a>
