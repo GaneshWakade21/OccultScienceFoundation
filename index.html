@@ -1,41 +1,4 @@
-<?php
 
-require('db.php');
-$msg = "";
-$conn = new mysqli($servername, $username, $password,$database);
-$sql = "SELECT * FROM `rates`";
-
-$result  = mysqli_query($conn, $sql);
-
-// if (mysqli_num_rows($result) > 0) {
-//   // output data of each row
-//   while($row = mysqli_fetch_assoc($result)) {
-//    $goldrate =  $row['Gold'];
-//    $silverrate = $row['SIlver'];
-//   }
-// } else {
-//   echo "0 results";
-// }
-
-
-
-
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  $Name = $_POST['name'];
-  $Email = $_POST['email'];
-  $Phone = $_POST['phone'];
-  $Message = $_POST['message'];
-  $sql ="INSERT INTO `contactus` (`name`, `email`, `phone`, `message`, `response_time`) VALUES ('$Name', '$Email', '$Phone', '$Message', NOW());";
- 
-  $result  = mysqli_query($conn, $sql);
-  if($result){
-   $msg = "Owner will contact you sooon";
-  }
- 
- }
- 
-
-?>
 <!DOCTYPE html>
 <html>
 
@@ -622,11 +585,9 @@ if (mysqli_num_rows($naresult) > 0) {
                                         required />
                                 </div>
                                 <div>
-                                    <?php
-                                            echo $msg;
-                                            ?>
+                                  
                                 </div>
-                                <div class="d-flex" style="margin">
+                                <div class="d-flex" style="margin:0cm;">
                                     <button type="submit">
                                         SEND
                                     </button>
@@ -653,7 +614,7 @@ if (mysqli_num_rows($naresult) > 0) {
 
     <!-- contact section -->
 
-    <section class="contact_section layout_padding">
+    <!-- <section class="contact_section layout_padding">
         <div class="design-box">
             <img src="images/design-2.png" alt="">
         </div>
@@ -704,12 +665,12 @@ if (mysqli_num_rows($naresult) > 0) {
                                             width: 100%; height:100%" allowfullscreen>
                             </iframe>
                         </div>
-                        <!-- </div> -->
+                         
                     </div>
                 </div>
             </div>
     </section>
-
+ -->
 
     <!-- end contact section -->
 
@@ -756,7 +717,7 @@ if (mysqli_num_rows($naresult) > 0) {
                             <a href="">
                                 <img src="images/mail.png" alt="">
                                 <span>
-
+                                    ushavasundhrra631@gmail.com
                                 </span>
                             </a>
                         </div>
