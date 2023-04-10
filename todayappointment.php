@@ -4,7 +4,7 @@ require('db.php');
 // $conn = new mysqli($servername, $username, $password,$database);
 
 $date = date("Y-m-d");
-$sql = "SELECT * FROM `appointment` WHERE date(`date_of_appointement`) = '$date';";
+$sql = "SELECT * FROM `appointment` WHERE date(`doappoint`) = '$date';";
 
 $result = mysqli_query($conn, $sql);
 
@@ -190,7 +190,7 @@ if (!$_COOKIE['aminloggedin']) {
           </th>
 
           <th scope="col" class="py-3 px-6">
-            Transction
+            Transaction
           </th>
 
           <th scope="col" class="py-3 px-6">
