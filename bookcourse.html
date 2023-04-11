@@ -17,87 +17,154 @@
     <div class="container">
         <div class="title"><u>COURSE BOOKING FORM</u></div>
         <div class="content">
-            <form action="">
+            <form action="bookingcourse.php" method="post">
+                <div class="input-box">
+                    <span class="details">Type</span>
+                    <select name="type" placeholder="Select Course Name">
+                        <option value="query">Query</option>
+                        <option value="bookcourse">Book Course</option>
+                    </select>
+                </div>
+                <div class="subheading">
+                    <span class="userheading"><u>User Details</u></span>
+                </div>
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">First Name</span>
-                        <input type="text" placeholder="First Name" name="firstname" required>
+                        <input type="text" placeholder="First Name" name="first_name" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Middle Name</span>
-                        <input type="text" placeholder="Middle Name" name="middlename" required>
+                        <input type="text" placeholder="Middle Name" name="middle_name" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Last Name</span>
-                        <input type="text" placeholder="Last Name" name="lastname" required>
+                        <input type="text" placeholder="Last Name" name="last_name" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Father's Name</span>
-                        <input type="text" placeholder="Father's Name" name="fathername" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Mother's Name</span>
-                        <input type="text" placeholder="Mother's Name" name="mothername" required>
+                        <input type="text" placeholder="Father's Name" name="fathers_name" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Phone Number</span>
-                        <input type="text" name="phone" placeholder="Enter Your Number" required>
+                        <input type="text" name="mob_no" placeholder="Enter Your Number" required>
                     </div>
 
                     <div class="input-box">
                         <span class="details">Email</span>
-                        <input type="text" name="email" placeholder="Enter Your Email">
+                        <input type="text" name="email_id" placeholder="Enter Your Email">
                     </div>
                     <div class="input-box">
                         <span class="details">Address</span>
-                        <input type="text" name="Address" placeholder="Address" required>
+                        <input type="text" name="address" placeholder="Address" required>
                     </div>
 
                     <div class="input-box">
                         <span class="details">Pin Code</span>
-                        <input type="text" name="pincode" placeholder="Pin Code" required>
+                        <input type="text" name="pin_code" placeholder="Pin Code" required>
                     </div>
 
-                    <div class="input-box">
-                        <span class="details">UPI</span>
-                        <select name="upi" placeholder="Select Payment Method">
-                            <option value="upi">UPI</option>
-                            <option value="gpay">GPay</option>
-                            <option value="phonepay">PhonePay</option>
-                            <option value="paytm">Paytm</option>
-                        </select>
+                   
+
+
+
+                </div>
+
+                <div class="course-details">
+                    <div class="subheading">
+                        <span class="slotheading"><u>Course Details</u></span>
                     </div>
                     <div class="input-box">
                         <span class="details">Course Name</span>
-                        <select name="coursename" placeholder="Select Course Name">
+                        <select name="course_name" placeholder="Select Course Name">
                             <option value="tarot">Tarot Cards Course</option>
                             <option value="chaledean">Chaledean Numerology Course</option>
                             <option value="lalkitaab">Lal Kitaab Course</option>
                             <option value="vastu">Vastu Shastra Course</option>
                             <option value="vedic">Vedic Astrology Course</option>
+                            <option value="mobilecourse">Mobile Numerology Course</option>
                         </select>
                     </div>
                     <div class="input-box">
-                        <span class="details">Fee</span>
-                        <input id="fee" type="text" name="fee" placeholder="" required>
+                        <span class="details">Course Type</span>
+                        <select name="course_type" placeholder="Select Course Name">
+                            <option value="tarot">Basic</option>
+                            <option value="tarot">Advance</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Batch</span>
+                        <select name="batch" placeholder="Please Course First">
+                            <option value="april">April</option>
+                            <option value="may">May</option>
+                        </select>
+                    </div>
+                   
+                </div>
+
+
+                <div class="payments-details">
+                    <div class="subheading">
+                        <span class="paymentheading"><u>Payment Details</u></span>
+                    </div>
+                    <div class="payments">
+                        <div class="input-box">
+                            <span class="details">Payment Type</span>
+                            <select name="pay_type" placeholder="Select Payment Method">
+                                <option value="fullpayment">Full Payment</option>
+                                <option value="emi">EMI</option>
+                            </select>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">UPI</span>
+                            <select name="upi" placeholder="Select Payment Method">
+                                <option value="upi">UPI</option>
+                                <option value="gpay">GPay</option>
+                                <option value="phonepay">PhonePay</option>
+                                <option value="paytm">Paytm</option>
+                            </select>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">UPI Numer</span>
+                            <input type="text" name="upi_no" placeholder="Enter UPI Number" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Amount Paid</span>
+                            <input type="text" name="amount_paid" placeholder="Enter Amount Paid" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Transction Date</span>
+                            <input type="date" name="trans_date" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Transction Time</span>
+                            <input type="time" name="trans_time" required>
+                        </div>
+                        <div class="input-box">
+                            <!-- class name is changed from input-box to input-boxt  -->
+                            <span class="details">Transction</span>
+                            <input class="choose" name="trans_slip" type="file"
+                                accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="remark">
+                    <div class="subheading">
+                        <span class="slotheading"><u>Remarks</u></span>
                     </div>
 
-
-                    
-
                     <div class="remark">
-                        <div class="subheading">
-                            <span class="slotheading"><u>Remarks</u></span>
-                        </div>
-                        
-                        <div class="remark">
-                            <textarea name="remark" id="" cols="172" rows="4"
+                        <textarea name="remark" id="" cols="172" rows="4"
                             placeholder="Your Message in 50 words..."></textarea>
-                        </div>
-                        
                     </div>
 
                 </div>
+
                 <div class="button1">
                     <div class="btn">
                         <input class="button" type="submit" value="Register">

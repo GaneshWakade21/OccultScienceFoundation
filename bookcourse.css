@@ -14,7 +14,7 @@ body{
   padding: 10px;
   /* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
   /* background-color: blue; */
-  background-image: url(images/appointbg.jpg);
+  /* background-image: url(images/appointbg.jpg); */
 }
 .container{
   /* max-width: 700px; */
@@ -27,16 +27,16 @@ body{
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
   /* background-color: rgb(249, 255, 208); */
-  background-image: url(images/form.jpg);
+  /* background-image: url(images/form.jpg);
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: 100% 100%; */
 }
 .container .title{
   font-size: 35px;
   font-weight: 500;
   position: relative;
   text-align: center;
-  color: blue;
+  /* color: blue; */
   padding: 0rem 0rem 1rem 0rem;
   /* color: red; */
   /* background-color: blue; */
@@ -94,7 +94,7 @@ form .user-details .input-box select{
   /* color: red; */
   font-size: 20px;
   font-weight: 500;
-  color: blue;
+  /* color: blue; */
   
 }
 
