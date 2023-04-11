@@ -1,40 +1,64 @@
 <?php
-$con=mysqli_connect("localhost", "root", "", "astrology");
-if(mysqli_connect_errno()){
-  echo "Connection Fail".mysqli_connect_error();
+$con = mysqli_connect("localhost", "root", "", "astrology");
+if (mysqli_connect_errno()) {
+    echo "Connection Fail" . mysqli_connect_error();
 }
 ?>
 
 <?php
 // session_start();
 error_reporting(0);
-if(($_SERVER['REQUEST_METHOD'] == 'POST'))
-{
+if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
-	$coursename=$_POST['coursenames'];
-	$types=$_POST['corsetypes'];
-	$dur=$_POST['coursedurations'];
-	$startdate=$_POST['date'];
-	$enddate=$_POST['dates'];
-	$start=$_POST['date'];
-	$end=$_POST['dates'];
-	$fee=$_POST['coursefees'];
-	$emi=$_POST['monthlyemis'];
-	$mode=$_POST['modes'];
-	$classperweek=$_POST['cpw'];
-	$stat=$_POST['status'];
-	$rem=$_POST['remarks'];
-	$query = "INSERT INTO `coursemaster` (`course_name`, `course_type`, `course_duration`, `status`, `start_date`, `end_date`, `actual_start_date`, `actual_end_date`, `course_fee`, `monthlyemi`, `mode`, `no_classes_per_week`, `remark`) VALUES ('$coursename', '$types', '$dur', '$stat', '$start', '$end', '$startdate', '$enddate', '$fee', '$emi', '$mode', '$classperweek', '$rem');";
-	mysqli_query($con, $query);
-	mysqli_close($con);
-		if ($query) {
-	    	$msg="Visitors Detail has been added.";
-	  	}
-	  	else
-	    {
-	      	$msg="Something Went Wrong. Please try again";
-	    }
-	}
+    $coursename = $_POST['coursenames'];
+    $types = $_POST['corsetypes'];
+    $dur = $_POST['coursedurations'];
+    $startdate = $_POST['date'];
+    $enddate = $_POST['dates'];
+    $start = $_POST['date'];
+    $end = $_POST['dates'];
+    $fee = $_POST['coursefees'];
+    $emi = $_POST['monthlyemis'];
+    $mode = $_POST['modes'];
+    $classperweek = $_POST['cpw'];
+    $stat = $_POST['status'];
+    $rem = $_POST['remarks'];
+
+    function id($coursename, $types , $startdate,$enddate)
+    {
+        $words = explode(" ", $coursename);
+        $firstWord = $words[0];
+        $secondWord = $words[1];
+        $firstWord = substr($firstWord, 0, 1);
+        $secondWord = substr($secondWord, 0, 1);
+
+        $types = substr($types, 0, 1);
+
+        //  date('d-m-y');
+        $startdate = date('d-m-y', strtotime($startdate));
+        $startdate = preg_replace('/[^\p{L}\p{N}\s]/u', '', $startdate);
+        $enddate = date('d-m-y', strtotime($enddate));
+        $enddate = preg_replace('/[^\p{L}\p{N}\s]/u', '', $enddate);
+
+        $id = $firstWord . $secondWord . $types . $startdate . $enddate;
+        return $id;
+    }
+
+    $pid = id($coursename, $types , $startdate,$enddate);
+    $id = strtoupper($pid);
+
+
+    $query = "INSERT INTO `coursemaster` (`id`,`course_name`, `course_type`, `course_duration`, `status`, `start_date`, `end_date`, `actual_start_date`, `actual_end_date`, `course_fee`, `monthlyemi`, `mode`, `no_classes_per_week`, `remark`) VALUES ('$id','$coursename', '$types', '$dur', '$stat', '$start', '$end', '$startdate', '$enddate', '$fee', '$emi', '$mode', '$classperweek', '$rem');";
+    mysqli_query($con, $query);
+    mysqli_close($con);
+    if ($query) {
+        $msg = "Visitors Detail has been added.";
+    } else {
+        $msg = "Something Went Wrong. Please try again";
+        echo "Error";
+        die("Prepare failed: " . $mysqli->error);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,7 +82,7 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
 
     <div class="container"><br>
         <div class="col-lg-6 m-auto d-block">
-            <form action="index (2).php" method="post" class="bg-light" onsubmit="return validation()">
+            <form action="courseform.php" method="post" class="bg-light" onsubmit="return validation()">
                 <div class="form-group">
                     <label for="coursenames" class="font-weight-bold"> Course Name: </label>
                     <select name="coursenames" id="coursenames">
@@ -105,7 +129,7 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
                     <span id="emailids" class="text-danger font-weight-bold"> </span>
                 </div>
                 <div class="form-group">
-                    <label for=""coursefees class="font-weight-bold"> Course Fee </label>
+                    <label for="" coursefees class="font-weight-bold"> Course Fee </label>
                     <input type="text" name="coursefees" id="coursefees" autocomplete="off">
                     <span id="coursefeesspan" class="text-danger font-weight-bold"> </span>
                 </div>
@@ -180,28 +204,28 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
     </div>
 
     <script>
-    function validation() {
-        var coursefees1 = document.getElementById('coursefees').value;
-        var monthlyemis1 = document.getElementById('monthlyemis').value;
-        var remark1 = document.getElementById('remarks').value;
+        function validation() {
+            var coursefees1 = document.getElementById('coursefees').value;
+            var monthlyemis1 = document.getElementById('monthlyemis').value;
+            var remark1 = document.getElementById('remarks').value;
 
-        if (coursefees1 == "") {
-            console.log("dfbhukjshy")
-            document.getElementById('coursefeesspan').innerHTML = " ** Please fill the coursefee field";
-            return false;
+            if (coursefees1 == "") {
+                console.log("dfbhukjshy")
+                document.getElementById('coursefeesspan').innerHTML = " ** Please fill the coursefee field";
+                return false;
+            }
+
+            if (monthlyemis1 == "") {
+                document.getElementById('monthlyemisspan').innerHTML = " ** Please fill the Monthly emi field";
+                return false;
+            }
+
+            if (remark1 == "") {
+                document.getElementById('remarksspan').innerHTML = " ** Please fill the remark field";
+                return false;
+
+            }
         }
-
-        if (monthlyemis1 == "") {
-            document.getElementById('monthlyemisspan').innerHTML = " ** Please fill the Monthly emi field";
-            return false;
-        }
-
-        if (remark1 == "") {
-            document.getElementById('remarksspan').innerHTML = " ** Please fill the remark field";
-            return false;
-
-        }
-    }
     </script>
 
 
