@@ -319,7 +319,7 @@ while ($row = mysqli_fetch_array($res)) {
         },
         data: [{
           type: "column",
-          yValueFormatString: "#,##0.## tonnes",
+          yValueFormatString: "#,##0.##",
           dataPoints: <?php echo json_encode($test, JSON_NUMERIC_CHECK); ?>
         }]
       });
@@ -329,23 +329,58 @@ while ($row = mysqli_fetch_array($res)) {
   </script>
 
 
+  <!-- Number of courses  -->
+
+  <script>
+    window.onload = function () {
+
+      var chart = new CanvasJS.Chart("NumberofCourses", {
+        animationEnabled: true,
+        theme: "light2",
+        data: {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          datasets: [{
+            label: 'Dataset 1',
+            data: [12, 19, 3, 5, 2, 3, 9],
+            fill: false,
+            borderColor: 'red'
+          }]
+        },
+        title: {
+          text: "Gold Reserves"
+        },
+        axisY: {
+          title: "Gold Reserves (in tonnes)"
+        },
+        data: [{
+          type: "column",
+          yValueFormatString: "#,##0.## tonnes",
+          dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+        }]
+      });
+      chart.render();
+
+    }
+  </script>
+
+
   <style>
-
-    .title{
+    .title {
       display: flex;
       justify-content: center;
 
       /* border: 2px solid red; */
 
     }
-    .subheading{
+
+    .subheading {
       display: flex;
       justify-content: center;
 
       /* border: 2px solid red; */
 
     }
-    
+
     .timerange {
       display: flex;
       flex-direction: row;
@@ -371,6 +406,10 @@ while ($row = mysqli_fetch_array($res)) {
   <div id="piechart" style="width: 900px; height: 500px;"></div>
 
   <div id="chartContainer" style="height: 370px; width: 90%;"></div>
+  <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
+
+
+  <div id="NumberofCourses" style="height: 370px; width: 100%;"></div>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
