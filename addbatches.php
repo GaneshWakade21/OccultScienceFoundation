@@ -12,6 +12,7 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
 {
 	$batch_id = '1';
 	$course_name = $_POST['coursenames'];
+	$course_type = $_POST['coursetypes'];
 	$batch_start_date = $_POST['start_date'];
 	$batch_end_date = $_POST['end_date'];
 	$batch_timefrom = $_POST['timefrom'];
@@ -21,8 +22,9 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
 	$batch_weekdays_string = implode(',', $batch_weekdays);
 	$batch_remark = $_POST['remark'];
 
-	$sql = "INSERT INTO `batchmaster` (`batch_id`, `course_name`, `batch_start_date`, `batch_end_date`, `batch_timefrom`, `batch_timeto`, `batch_mode`, `batch_weekdays`, `batch_remark`) VALUES ('$batch_id', '$course_name', '$batch_start_date', '$batch_end_date', '$batch_timefrom', '$batch_timeto', '$batch_mode', '$batch_weekdays_string', '$batch_remark');";
+	$sql = "INSERT INTO `batchmaster` (`batch_id`, `course_name`, `course_type`,`batch_start_date`, `batch_end_date`, `batch_timefrom`, `batch_timeto`, `batch_mode`, `batch_weekdays`, `batch_remark`) VALUES ('$batch_id', '$course_name', '$course_type', '$batch_start_date', '$batch_end_date', '$batch_timefrom', '$batch_timeto', '$batch_mode', '$batch_weekdays_string', '$batch_remark');";
 	$result = mysqli_query($con, $sql);
+    header("Location: batchmaster.php");
 	// mysqli_close($con);
 	}
 ?>
@@ -51,15 +53,66 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
             <form action="addbatches.php" method="post" class="bg-light">
                 <div class="form-group">
                     <label for="coursenames" class="font-weight-bold"> Course Name: </label>
-                    <select name="coursenames" id="coursenames">
-                        <option value="Tarot Cards Course">Tarot Cards Course</option>
-                        <option value="Chaledean Numerology Course">Chaledean Numerology Course</option>
-                        <option value="Lal Kitaab Course">Lal Kitaab Course</option>
-                        <option value="Vastu Shastra Course">Vastu Shastra Course</option>
-                        <option value="Vedic Astrology Course">Vedic Astrology Course</option>
+                    <select onclick="selectedCourse()" name="coursenames" id="coursenames">
+
+                        <?php 
+                        	$sql = "SELECT DISTINCT course_name FROM coursemaster;";
+                            $result = mysqli_query($con, $sql);
+                            $num = mysqli_num_rows($result);
+                            if($num > 0){
+                                while($row = mysqli_fetch_assoc($result)){
+                                    echo '
+                                    <option value="'. $row["course_name"] .'">'. $row["course_name"] .'</option>';
+                                    }
+                              }
+                    ?>
+
+
                     </select>
                     <span id="coursename" class="text-danger font-weight-bold"> </span>
                 </div>
+
+                <div class="form-group">
+                    <label for="coursetypes" class="font-weight-bold"> Course type: </label>
+                    <select name="coursetypes" id="coursetypes">
+
+                        <?php 
+                   
+                    echo '
+                    let selCourses
+                        <script>
+                                function selectedCourse(){ 
+                                selCourses = document.querySelector("#coursenames").value;
+                                // console.log(selCourses)
+
+                                ';
+                                echo '
+                                var callphp = selectCourse(selCourses);
+                            }
+                            </script>';
+
+                            function selectCourse($selCourses){
+                                echo $selCourses;
+                                return $selCourses;
+                            }
+                            // $selCourse = selCourses; 
+                       console.log(selCourses);   
+                        	$sql = "SELECT course_type FROM coursemaster WHERE `course_name`= '$selCourse';";
+                            $result = mysqli_query($con, $sql);
+                            $num = mysqli_num_rows($result);
+                            echo var_dump($result);
+                            if($num > 0){
+                                while($row = mysqli_fetch_assoc($result)){
+                                    echo '
+                                    <option value="'. $row["course_type"] .'">'. $row["course_type"] .'</option>';
+                                    }
+                              }
+                     
+                    ?>
+                    </select>
+                    <span id="coursetype" class="text-danger font-weight-bold"> </span>
+                </div>
+
 
                 <div class="form-group">
                     <label class="font-weight-bold"> Start Date </label>
@@ -71,6 +124,21 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
                     <label class="font-weight-bold"> End Date </label>
                     <input required type="date" name="end_date" id="date" autocomplete="off">
                     <span id="emailids" class="text-danger font-weight-bold"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="modes" class="font-weight-bold">No of sessions per week </label>
+                    <!-- <input type="text" name="text" class="form-control" id="text" autocomplete="off"> -->
+                    <select name="mode" id="modes">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                    </select>
+                    <span id="text" class="text-danger font-weight-bold"> </span>
                 </div>
 
                 <div class="form-group" style="display: inline-flex;">
@@ -159,14 +227,41 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="modes" class="font-weight-bold">Batch Mode </label>
-                    <!-- <input type="text" name="text" class="form-control" id="text" autocomplete="off"> -->
                     <select name="mode" id="modes">
                         <option value="Online">Online</option>
                         <option value="Offline">Offline</option>
                         <option value="Both">Both</option>
+                    </select>
+                    <span id="text" class="text-danger font-weight-bold"> </span>
+                </div> -->
 
+
+                <div class="form-group">
+                    <label for="modes" class="font-weight-bold">Batch Mode </label>
+                    <!-- <input type="text" name="text" class="form-control" id="text" autocomplete="off"> -->
+                    <input type="radio" id="age1" name="mode" value="Online">
+                    <label for="age1">Online</label><br>
+                    <input type="radio" id="age2" name="mode" value="Offline">
+                    <label for="age2">Offline</label><br>
+                    <input type="radio" id="age3" name="mode" value="Both">
+                    <label for="age3">Both</label><br><br>
+                    <span id="text" class="text-danger font-weight-bold"> </span>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="modes" class="font-weight-bold">No of sessions per week </label>
+                    <!-- <input type="text" name="text" class="form-control" id="text" autocomplete="off"> -->
+                    <select name="mode" id="modes">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
                     </select>
                     <span id="text" class="text-danger font-weight-bold"> </span>
                 </div>

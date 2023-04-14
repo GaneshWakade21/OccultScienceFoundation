@@ -129,7 +129,7 @@ $result = mysqli_query($mysqli , $sql);
           </li>
           <li>
             <a href="coursemaster.php"
-            class="block py-2 pr-4 pl-3 text-black bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 light:text-black"
+            class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:light:hover:text-black light:text-gray-400 light:hover:bg-gray-700 light:hover:text-black md:light:hover:bg-transparent light:border-gray-700"
               style="font-size:20px">Course Master</a>
           </li>
           <li>
@@ -139,7 +139,7 @@ $result = mysqli_query($mysqli , $sql);
           </li>
           <li>
             <a href="batchmaster.php"
-              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:light:hover:text-black light:text-gray-400 light:hover:bg-gray-700 light:hover:text-black md:light:hover:bg-transparent light:border-gray-700"
+            class="block py-2 pr-4 pl-3 text-black bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 light:text-black"
               style="font-size:20px">Batch Master</a>
           </li>
           <li>

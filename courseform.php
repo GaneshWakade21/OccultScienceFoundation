@@ -6,10 +6,14 @@ if(mysqli_connect_errno()){
 ?>
 
 <?php
+
+
+
 // session_start();
 error_reporting(0);
 if(($_SERVER['REQUEST_METHOD'] == 'POST'))
 {
+   
 
 	$coursename=$_POST['coursenames'];
 	$types=$_POST['corsetypes'];
@@ -24,7 +28,32 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
 	$classperweek=$_POST['cpw'];
 	$stat=$_POST['status'];
 	$rem=$_POST['remarks'];
-	$query = "INSERT INTO `coursemaster` (`course_name`, `course_type`, `course_duration`, `status`, `start_date`, `end_date`, `actual_start_date`, `actual_end_date`, `course_fee`, `monthlyemi`, `mode`, `no_classes_per_week`, `remark`) VALUES ('$coursename', '$types', '$dur', '$stat', '$start', '$end', '$startdate', '$enddate', '$fee', '$emi', '$mode', '$classperweek', '$rem');";
+
+    function id($coursename, $types , $startdate,$enddate)
+    {
+        $words = explode(" ", $coursename);
+        $firstWord = $words[0];
+        $secondWord = $words[1];
+        $firstWord = substr($firstWord, 0, 1);
+        $secondWord = substr($secondWord, 0, 1);
+
+        $types = substr($types, 0, 1);
+
+        //  date('d-m-y');
+        $startdate = date('d-m-y', strtotime($startdate));
+        $startdate = preg_replace('/[^\p{L}\p{N}\s]/u', '', $startdate);
+        $enddate = date('d-m-y', strtotime($enddate));
+        $enddate = preg_replace('/[^\p{L}\p{N}\s]/u', '', $enddate);
+
+        $id = $firstWord . $secondWord . $types . $startdate . $enddate;
+        return $id;
+    }
+
+    $pid = id($coursename, $types , $startdate,$enddate);
+    $id = strtoupper($pid);
+    echo $id;
+
+	$query = "INSERT INTO `coursemaster` (`id`,`course_name`, `course_type`, `course_duration`, `status`, `start_date`, `end_date`, `actual_start_date`, `actual_end_date`, `course_fee`, `monthlyemi`, `mode`, `no_classes_per_week`, `remark`) VALUES ('$id','$coursename', '$types', '$dur', '$stat', '$start', '$end', '$startdate', '$enddate', '$fee', '$emi', '$mode', '$classperweek', '$rem');";
 	mysqli_query($con, $query);
 	mysqli_close($con);
 		if ($query) {
@@ -58,7 +87,7 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
 
     <div class="container"><br>
         <div class="col-lg-6 m-auto d-block">
-            <form action="index (2).php" method="post" class="bg-light" onsubmit="return validation()">
+            <form action="courseform.php" method="post" class="bg-light" onsubmit="return validation()">
                 <div class="form-group">
                     <label for="coursenames" class="font-weight-bold"> Course Name: </label>
                     <select name="coursenames" id="coursenames">
