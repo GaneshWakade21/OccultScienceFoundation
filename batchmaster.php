@@ -57,12 +57,15 @@ $result = mysqli_query($mysqli , $sql);
             border: 1px solid black;
             padding: 15px;
         }
+
         table {
             border-spacing: 10px;
         }
+
         table th {
             font-size: 13px;
         }
+
         table {
             width: 50%;
         } */
@@ -172,32 +175,30 @@ $result = mysqli_query($mysqli , $sql);
         <br>
         <div class="py-4 mt-5">
             <div class='text-center pb-2'>
-                <h4>Course Master Table</h4>
+                <h4>Batch Master Table</h4>
             </div>
 
             <?php 
-                $sql = "SELECT * FROM coursemaster";
+                $sql = "SELECT * FROM batchmaster";
                 $result = mysqli_query($mysqli , $sql);
                 $num = mysqli_num_rows($result);
                 $no = 1;
-                echo '            <table style="width:100%" class="table-hover text-center ">
+                echo ' <table style="width:100%" class="table-hover text-center ">
+
             <table style="width:100%" class="table-hover text-center ">
+
                 <tr class="bg-dark">
                     <th>id</th>
                     <th>Course Name</th>
-                    <th>Course Type</th>
-                    <th>Course Duration</th>
-                    <th>Status</th>
                     <th>Start Date</th>
                     <th>End Date</th>
-                    <th>Actual Start Date</th>
-                    <th>Actual End Date</th>
-                    <th>Course Fee</th>
+                    <th>Batch Timing</th>
                     <th>Mode</th>
-                    <th>No_of_classes_per_week</th>
+                    <th>Weekdays</th>
                     <th>Remark</th>
                     <th>Action</th>
                 </tr>
+
                 <tr>';
 
                 if($num > 0){
@@ -206,17 +207,12 @@ $result = mysqli_query($mysqli , $sql);
                      
                     <td>'. $no .'</td>
                     <td>'. $row["course_name"] .'</td>
-                    <td>'. $row["course_type"] .'</td>
-                    <td>'. $row["course_duration"] .'</td>
-                    <td>'. $row["status"] .'</td>
-                    <td>'. $row["start_date"] .'</td>
-                    <td>'. $row["end_date"] .'</td>
-                    <td>'. $row["actual_start_date"] .'</td>
-                    <td>'. $row["actual_end_date"] .'</td>
-                    <td>'. $row["course_fee"] .'</td>
-                    <td>'. $row["mode"] .'</td>
-                    <td>'. $row["no_classes_per_week"] .'</td>
-                    <td>'. $row["remark"] .'</td>
+                    <td>'. $row["batch_start_date"] .'</td>
+                    <td>'. $row["batch_end_date"] .'</td>
+                    <td>'. $row["batch_timefrom"] .' to '. $row["batch_timeto"] .'</td>
+                    <td>'. $row["batch_mode"] .'</td>
+                    <td>'. $row["batch_weekdays"] .'</td>
+                    <td>'. $row["batch_remark"] .'</td>
                     <td><button>Edit</button></td>
                     </tr>';
                 $no++;
@@ -251,8 +247,10 @@ $result = mysqli_query($mysqli , $sql);
 
             
                 <!-- <tr>
+
                 </tr>
                 <tr>
+
                     <td>1</td>
                     <td>Tarot Cards Course</td>
                     <td>Advance</td>
@@ -266,6 +264,7 @@ $result = mysqli_query($mysqli , $sql);
                     <td>3</td>
                     <td></td>
                     <td><button>Edit</button></td>
+
                 </tr> -->
                 </tr>
 

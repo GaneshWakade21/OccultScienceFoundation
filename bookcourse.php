@@ -1,3 +1,12 @@
+<?php
+$con = mysqli_connect("localhost", "root", "", "astrology");
+if (mysqli_connect_errno()) {
+    echo "Connection Fail" . mysqli_connect_error();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,14 +24,14 @@
 <body>
 
     <div class="container">
-        <div class="title"><u>COURSE BOOKING FORM</u></div>
+        <div class="title"><u>COURSE BOOKING AND QUERY FORM</u></div>
         <div class="content">
             <form action="bookingcourse.php" method="post">
                 <div class="input-box">
                     <span class="details">Type</span>
                     <select name="type" placeholder="Select Course Name">
-                        <option value="query">Query</option>
-                        <option value="bookcourse">Book Course</option>
+                        <option value="Query">Query</option>
+                        <option value="Book Course">Book Course</option>
                     </select>
                 </div>
                 <div class="subheading">
@@ -64,7 +73,7 @@
                         <input type="text" name="pin_code" placeholder="Pin Code" required>
                     </div>
 
-                   
+
 
 
 
@@ -77,30 +86,101 @@
                     <div class="input-box">
                         <span class="details">Course Name</span>
                         <select name="course_name" placeholder="Select Course Name">
-                            <option value="tarot">Tarot Cards Course</option>
-                            <option value="chaledean">Chaledean Numerology Course</option>
-                            <option value="lalkitaab">Lal Kitaab Course</option>
-                            <option value="vastu">Vastu Shastra Course</option>
-                            <option value="vedic">Vedic Astrology Course</option>
-                            <option value="mobilecourse">Mobile Numerology Course</option>
+                        <?php
+                        $sql = "SELECT DISTINCT course_name FROM coursemaster;";
+                        $result = mysqli_query($con, $sql);
+                        $num = mysqli_num_rows($result);
+                        if ($num > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '
+                                    <option value="' . $row["course_name"] . '">' . $row["course_name"] . '</option>';
+                            }
+                        }
+                        ?>
+
                         </select>
                     </div>
                     <div class="input-box">
                         <span class="details">Course Type</span>
                         <select name="course_type" placeholder="Select Course Name">
-                            <option value="tarot">Basic</option>
-                            <option value="tarot">Advance</option>
+                        <script>
+                            function selectedCourse() {
+                                selCourses = document.querySelector("#coursenames").value;
+                                document.cookie = "name = " + selCourses;
+                            }
+                            
+                        </script>
+
+                        <?php
+
+                            $name = $_COOKIE['name'];
+                            // echo $name;
+                            $sql = "SELECT course_type FROM coursemaster WHERE `course_name`= '$name';";
+                            $result = mysqli_query($con, $sql);
+                            $num = mysqli_num_rows($result);
+                            echo var_dump($result);
+                            if($num > 0){
+                            while($row = mysqli_fetch_assoc($result)){
+                                echo '
+                                <option value="'. $row["course_type"] .'">'. $row["course_type"] .'</option>';
+                            }
+                            }
+                        ?>
+
                         </select>
                     </div>
                     <div class="input-box">
                         <span class="details">Batch</span>
                         <select name="batch" placeholder="Please Course First">
-                            <option value="april">April</option>
-                            <option value="may">May</option>
+                        <script>
+                            function selectedCourse() {
+                                selCourses = document.querySelector("#coursenames").value;
+                                document.cookie = "name = " + selCourses;
+                                
+                            }
+                            
+                        </script>
+
+                        <?php
+
+                        // batch_start_date
+                        // batch_end_dste
+                            $name = $_COOKIE['name'];
+                            // echo $name;
+                            $sql = "SELECT batch_start_date FROM batchmaster WHERE `course_name`= '$name';";
+                            $result = mysqli_query($con, $sql);
+                            $num = mysqli_num_rows($result);
+                            echo var_dump($result);
+                            if($num > 0){
+                            while($row = mysqli_fetch_assoc($result)){
+                                echo '
+                                <option value="'. $row["batch_start_date"] .'">'. $row["batch_start_date"] .'</option>';
+                            }
+                            }
+                        ?>
+
                         </select>
                     </div>
-                   
+
+                    <div class="input-box">
+                            <span class="details">Total Fee</span>
+                            <?php
+                                $name = $_COOKIE['name'];
+                                // echo $name;
+                                $sql = "SELECT course_fee FROM coursemaster WHERE `course_name`= '$name';";
+                                $result = mysqli_query($con, $sql);
+                                $row = mysqli_fetch_assoc($result);
+                                // echo $result;
+                            ?>
+                            <input type="text" name="upi_no" value="<?php echo $row['course_fee']; ?>" placeholder="Enter UPI Number" required>
+                        </div>
+
                 </div>
+
+                <div class="input-box">
+                            <span class="details">Course Duration</span>
+                            <input type="text" name="upi_no" placeholder="Enter UPI Number" required>
+                        </div>
 
 
                 <div class="payments-details">
@@ -111,18 +191,18 @@
                         <div class="input-box">
                             <span class="details">Payment Type</span>
                             <select name="pay_type" placeholder="Select Payment Method">
-                                <option value="fullpayment">Full Payment</option>
-                                <option value="emi">EMI</option>
+                                <option value="Full Payment">Full Payment</option>
+                                <option value="EMI">EMI</option>
                             </select>
                         </div>
 
                         <div class="input-box">
                             <span class="details">UPI</span>
                             <select name="upi" placeholder="Select Payment Method">
-                                <option value="upi">UPI</option>
-                                <option value="gpay">GPay</option>
-                                <option value="phonepay">PhonePay</option>
-                                <option value="paytm">Paytm</option>
+                                <option value="UPI">UPI</option>
+                                <option value="GPay">GPay</option>
+                                <option value="PhonePay">PhonePay</option>
+                                <option value="Paytm">Paytm</option>
                             </select>
                         </div>
 

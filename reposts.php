@@ -227,35 +227,6 @@ while ($row = mysqli_fetch_array($res)) {
 //Course Count Report
 
 
-// TAC
-// CNC
-// LKC
-// VSC
-// VAC
-// MNC
-
-// TAROT CARD COURSE
-
-// CHALEDEAN NUMEROLOGY COURSE
-
-// LAL KITAAB COURSE
-
-// VASTU SHASTRA COURSE
-
-// VEDIC ASTROLOGY COURSE
-
-// Mobile Numerology Course
-	
-$lkccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'LAL KITAAB COURSE' ";
-$lkc = mysqli_query($conn, $lkccount);
-$lkcrows = mysqli_fetch_all($lkc, MYSQLI_ASSOC);
-$lkccnt = "";
-foreach ($lkcrows as $row) {
-  $lkccnt .= implode(",", $row) . "\n";
-}
-
-$updatelkccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 3 ";
-
 
 $tcccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'TAROT CARD COURSE' ";
 $tcc = mysqli_query($conn, $tcccount);
@@ -266,8 +237,6 @@ foreach ($tccrows as $row) {
 }
 
 $updatetcccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 1 ";
-
-
 
 
 $cnccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'CHALEDEAN NUMEROLOGY COURSE' ";
@@ -281,8 +250,15 @@ foreach ($cncrows as $row) {
 $updatecnccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 2 ";
 
 
+$lkccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'LAL KITAAB COURSE' ";
+$lkc = mysqli_query($conn, $lkccount);
+$lkcrows = mysqli_fetch_all($lkc, MYSQLI_ASSOC);
+$lkccnt = "";
+foreach ($lkcrows as $row) {
+  $lkccnt .= implode(",", $row) . "\n";
+}
 
-
+$updatelkccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 3 ";
 
 
 $vsccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'VASTU SHASTRA COURSE' ";
@@ -297,7 +273,6 @@ $updatevsccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 4 ";
 
 
 
-
 $vaccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'VEDIC ASTROLOGY COURSE' ";
 $vac = mysqli_query($conn, $vaccount);
 $vacrows = mysqli_fetch_all($vac, MYSQLI_ASSOC);
@@ -309,7 +284,6 @@ foreach ($vacrows as $row) {
 $updatevaccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 5 ";
 
 
-
 $mnccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'Mobile Numerology Course' ";
 $mnc = mysqli_query($conn, $mnccount);
 $mncrows = mysqli_fetch_all($mnc, MYSQLI_ASSOC);
@@ -319,7 +293,6 @@ foreach ($mncrows as $row) {
 }
 
 $updatemnccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 6 ";
-
 
 
 
