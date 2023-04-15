@@ -222,6 +222,118 @@ while ($row = mysqli_fetch_array($res)) {
 }
 
 
+
+
+//Course Count Report
+
+
+// TAC
+// CNC
+// LKC
+// VSC
+// VAC
+// MNC
+
+// TAROT CARD COURSE
+
+// CHALEDEAN NUMEROLOGY COURSE
+
+// LAL KITAAB COURSE
+
+// VASTU SHASTRA COURSE
+
+// VEDIC ASTROLOGY COURSE
+
+// Mobile Numerology Course
+	
+$lkccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'LAL KITAAB COURSE' ";
+$lkc = mysqli_query($conn, $lkccount);
+$lkcrows = mysqli_fetch_all($lkc, MYSQLI_ASSOC);
+$lkccnt = "";
+foreach ($lkcrows as $row) {
+  $lkccnt .= implode(",", $row) . "\n";
+}
+
+$updatelkccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 3 ";
+
+
+$tcccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'TAROT CARD COURSE' ";
+$tcc = mysqli_query($conn, $tcccount);
+$tccrows = mysqli_fetch_all($tcc, MYSQLI_ASSOC);
+$tcccnt = "";
+foreach ($tccrows as $row) {
+  $tcccnt .= implode(",", $row) . "\n";
+}
+
+$updatetcccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 1 ";
+
+
+
+
+$cnccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'CHALEDEAN NUMEROLOGY COURSE' ";
+$cnc = mysqli_query($conn, $cnccount);
+$cncrows = mysqli_fetch_all($cnc, MYSQLI_ASSOC);
+$cnccnt = "";
+foreach ($cncrows as $row) {
+  $cnccnt .= implode(",", $row) . "\n";
+}
+
+$updatecnccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 2 ";
+
+
+
+
+
+
+$vsccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'VASTU SHASTRA COURSE' ";
+$vsc = mysqli_query($conn, $vsccount);
+$vscrows = mysqli_fetch_all($vsc, MYSQLI_ASSOC);
+$vsccnt = "";
+foreach ($vscrows as $row) {
+  $vsccnt .= implode(",", $row) . "\n";
+}
+
+$updatevsccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 4 ";
+
+
+
+
+$vaccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'VEDIC ASTROLOGY COURSE' ";
+$vac = mysqli_query($conn, $vaccount);
+$vacrows = mysqli_fetch_all($vac, MYSQLI_ASSOC);
+$vaccnt = "";
+foreach ($vacrows as $row) {
+  $vaccnt .= implode(",", $row) . "\n";
+}
+
+$updatevaccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 5 ";
+
+
+
+$mnccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'Mobile Numerology Course' ";
+$mnc = mysqli_query($conn, $mnccount);
+$mncrows = mysqli_fetch_all($mnc, MYSQLI_ASSOC);
+$mnccnt = "";
+foreach ($mncrows as $row) {
+  $mnccnt .= implode(",", $row) . "\n";
+}
+
+$updatemnccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 6 ";
+
+
+
+
+$coursecount = array();
+$count = 0;
+$res = mysqli_query($conn, "SELECT * FROM course_count_report");
+while ($row = mysqli_fetch_array($res)) {
+  $coursecount[$count]['label'] = $row['course_name'];
+  $coursecount[$count]['y'] = $row['count'];
+  $count = $count + 1;
+}
+
+
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -305,7 +417,10 @@ while ($row = mysqli_fetch_array($res)) {
 
 
   <script>
+
     window.onload = function () {
+
+      // Query Reports
 
       var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
@@ -325,43 +440,30 @@ while ($row = mysqli_fetch_array($res)) {
       });
       chart.render();
 
-    }
-  </script>
 
+        // Course Count Reports
 
-  <!-- Number of courses  -->
-
-  <script>
-    window.onload = function () {
-
-      var chart = new CanvasJS.Chart("NumberofCourses", {
+      var chart = new CanvasJS.Chart("courseCount", {
         animationEnabled: true,
-        theme: "light2",
-        data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-          datasets: [{
-            label: 'Dataset 1',
-            data: [12, 19, 3, 5, 2, 3, 9],
-            fill: false,
-            borderColor: 'red'
-          }]
-        },
+        theme: "light1",
         title: {
-          text: "Gold Reserves"
+          text: "Course Reports",
+          fontFamily: "Arial"
         },
         axisY: {
-          title: "Gold Reserves (in tonnes)"
+          title: "Number of Students"
         },
         data: [{
           type: "column",
-          yValueFormatString: "#,##0.## tonnes",
-          dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+          yValueFormatString: "#,##0.##",
+          dataPoints: <?php echo json_encode($coursecount, JSON_NUMERIC_CHECK); ?>
         }]
       });
       chart.render();
 
     }
   </script>
+
 
 
   <style>
@@ -406,11 +508,17 @@ while ($row = mysqli_fetch_array($res)) {
   <div id="piechart" style="width: 900px; height: 500px;"></div>
 
   <div id="chartContainer" style="height: 370px; width: 90%;"></div>
-  <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
 
+<br>
+<br>
+<br>
+<br>
+<br>
 
-  <div id="NumberofCourses" style="height: 370px; width: 100%;"></div>
+  <div id="courseCount" style="height: 370px; width: 80%;"></div>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
 
 
 
