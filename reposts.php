@@ -228,7 +228,7 @@ while ($row = mysqli_fetch_array($res)) {
 
 
 
-$tcccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'TAROT CARD COURSE' ";
+$tcccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'TAROT CARDS COURSE' ";
 $tcc = mysqli_query($conn, $tcccount);
 $tccrows = mysqli_fetch_all($tcc, MYSQLI_ASSOC);
 $tcccnt = "";
@@ -236,8 +236,12 @@ foreach ($tccrows as $row) {
   $tcccnt .= implode(",", $row) . "\n";
 }
 
-$updatetcccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 1 ";
-
+$updatetcccnt = "UPDATE course_count_report SET count=$tcccnt WHERE id = 1 ";
+// if (mysqli_query($conn, $updatetcccnt)) {
+//   echo "Record updateforgcnt updated successfully";
+// } else {
+//   echo "Error updating record: " . mysqli_error($conn);
+// }
 
 $cnccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'CHALEDEAN NUMEROLOGY COURSE' ";
 $cnc = mysqli_query($conn, $cnccount);
@@ -247,7 +251,7 @@ foreach ($cncrows as $row) {
   $cnccnt .= implode(",", $row) . "\n";
 }
 
-$updatecnccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 2 ";
+$updatecnccnt = "UPDATE course_count_report SET count=$cnccnt WHERE id = 2 ";
 
 
 $lkccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'LAL KITAAB COURSE' ";
@@ -258,7 +262,7 @@ foreach ($lkcrows as $row) {
   $lkccnt .= implode(",", $row) . "\n";
 }
 
-$updatelkccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 3 ";
+$updatelkccnt = "UPDATE course_count_report SET count=$lkccnt WHERE id = 3 ";
 
 
 $vsccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'VASTU SHASTRA COURSE' ";
@@ -269,7 +273,7 @@ foreach ($vscrows as $row) {
   $vsccnt .= implode(",", $row) . "\n";
 }
 
-$updatevsccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 4 ";
+$updatevsccnt = "UPDATE course_count_report SET count=$vsccnt WHERE id = 4 ";
 
 
 
@@ -281,7 +285,7 @@ foreach ($vacrows as $row) {
   $vaccnt .= implode(",", $row) . "\n";
 }
 
-$updatevaccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 5 ";
+$updatevaccnt = "UPDATE course_count_report SET count=$vaccnt WHERE id = 5 ";
 
 
 $mnccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'Mobile Numerology Course' ";
@@ -292,20 +296,57 @@ foreach ($mncrows as $row) {
   $mnccnt .= implode(",", $row) . "\n";
 }
 
-$updatemnccnt = "UPDATE course_count_report SET count=$forgcnt WHERE id = 6 ";
+$updatemnccnt = "UPDATE course_count_report SET count=$mnccnt WHERE id = 6 ";
 
+
+// if (mysqli_query($conn, $updatemnccnt)) {
+//   echo "Record updateforgcnt updated successfully";
+// } else {
+//   echo "Error updating record: " . mysqli_error($conn);
+// }
 
 
 $coursecount = array();
 $count = 0;
-$res = mysqli_query($conn, "SELECT * FROM course_count_report");
-while ($row = mysqli_fetch_array($res)) {
+$coursecountres = mysqli_query($conn, "SELECT * FROM course_count_report");
+while ($row = mysqli_fetch_array($coursecountres)) {
   $coursecount[$count]['label'] = $row['course_name'];
   $coursecount[$count]['y'] = $row['count'];
   $count = $count + 1;
 }
 
+$coursequery1 = "SELECT course_name, count(*) as number FROM coursebooking GROUP BY course_name";
+$courseresult1 = mysqli_query($conn, $coursequery1);
 
+
+
+//Revenue Report
+
+$appointrevenue = "SELECT SUM(fee) FROM appointment";
+$appointrev = mysqli_query($conn, $appointrevenue);
+$approws = mysqli_fetch_all($appointrev, MYSQLI_ASSOC);
+$appcnt = "";
+foreach ($approws as $row) {
+  $appcnt .= implode(",", $row) . "\n";
+}
+
+$updateappintrev = "UPDATE revenue_report SET total_revenue=$appcnt WHERE id = 1 ";
+if (mysqli_query($conn, $updateappintrev)) {
+  echo "Record updateforgcnt updated successfully";
+} else {
+  echo "Error updating record: " . mysqli_error($conn);
+}
+
+
+$revapp = array();
+$count = 0;
+$revenueappont = mysqli_query($conn, "SELECT * FROM revenue_report");
+while ($row = mysqli_fetch_array($revenueappont)) {
+  $revapp[$count]['label'] = $row['type'];
+  $revapp[$count]['y'] = $row['total_revenue'];
+  
+  $count = $count + 1;
+}
 
 ?>
 <!DOCTYPE HTML>
@@ -414,7 +455,7 @@ while ($row = mysqli_fetch_array($res)) {
       chart.render();
 
 
-        // Course Count Reports
+      // Course Count Reports
 
       var chart = new CanvasJS.Chart("courseCount", {
         animationEnabled: true,
@@ -434,6 +475,55 @@ while ($row = mysqli_fetch_array($res)) {
       });
       chart.render();
 
+
+      //Revenue Report
+
+      var chart = new CanvasJS.Chart("revenue", {
+        animationEnabled: true,
+        theme: "light1",
+        title: {
+          text: "Revenue Reports",
+          fontFamily: "Arial"
+        },
+        axisY: {
+          title: "Revenue Generated (In Rupee)"
+        },
+        data: [{
+          type: "bar",
+          yValueFormatString: "#,##0.##",
+          dataPoints: <?php echo json_encode($revapp, JSON_NUMERIC_CHECK); ?>
+        }]
+      });
+      chart.render();
+
+    }
+  </script>
+
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+
+        ['course_name', 'number'],
+        <?php
+        while ($row = mysqli_fetch_array($courseresult1)) {
+          echo "['" . $row["course_name"] . "', " . $row["number"] . "],";
+        }
+        ?>
+      ]);
+
+      var options = {
+        title: 'Courses'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('course'));
+
+      chart.draw(data, options);
     }
   </script>
 
@@ -482,15 +572,23 @@ while ($row = mysqli_fetch_array($res)) {
 
   <div id="chartContainer" style="height: 370px; width: 90%;"></div>
 
-<br>
-<br>
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 
-  <div id="courseCount" style="height: 370px; width: 80%;"></div>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <div class="courses">
+    <div id="courseCount" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
+
+
+    <div id="course" style="width: 900px; height: 500px;"></div>
+
+  </div>
+
+  <div id="revenue" style="height: 370px; width: 100%;"></div>
 
 
 

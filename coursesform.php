@@ -112,6 +112,7 @@
                         <option value = "LAL_KITAAB_COURSE">LAL KITAAB COURSE</option>
                         <option value = "VASTU_SHASTRA_COURSE">VASTU SHASTRA COURSE</option>
                         <option value = "VEDIC_ASTROLOGY_COURSE">VEDIC ASTROLOGY COURSE</option>
+                        <option value = "Mobile Numerology Course">Mobile Numerology Course</option>
                       </select>
                 </div>
               </div>

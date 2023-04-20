@@ -115,8 +115,8 @@ if (mysqli_connect_errno()) {
 
                             $name = $_COOKIE['name'];
                             // echo $name;
-                            $sql = "SELECT course_type FROM coursemaster WHERE `course_name`= '$name';";
-                            $result = mysqli_query($con, $sql);
+                            $sql1 = "SELECT course_type FROM coursemaster WHERE `course_name`= '$name';";
+                            $result = mysqli_query($con, $sql1);
                             $num = mysqli_num_rows($result);
                             echo var_dump($result);
                             if($num > 0){
@@ -147,8 +147,8 @@ if (mysqli_connect_errno()) {
                         // batch_end_dste
                             $name = $_COOKIE['name'];
                             // echo $name;
-                            $sql = "SELECT batch_start_date FROM batchmaster WHERE `course_name`= '$name';";
-                            $result = mysqli_query($con, $sql);
+                            $sql2 = "SELECT batch_start_date FROM batchmaster WHERE `course_name`= '$name';";
+                            $result = mysqli_query($con, $sql2);
                             $num = mysqli_num_rows($result);
                             echo var_dump($result);
                             if($num > 0){
@@ -167,8 +167,8 @@ if (mysqli_connect_errno()) {
                             <?php
                                 $name = $_COOKIE['name'];
                                 // echo $name;
-                                $sql = "SELECT course_fee FROM coursemaster WHERE `course_name`= '$name';";
-                                $result = mysqli_query($con, $sql);
+                                $sql3 = "SELECT course_fee FROM coursemaster WHERE `course_name`= '$name';";
+                                $result = mysqli_query($con, $sql3);
                                 $row = mysqli_fetch_assoc($result);
                                 // echo $result;
                             ?>
@@ -179,7 +179,35 @@ if (mysqli_connect_errno()) {
 
                 <div class="input-box">
                             <span class="details">Course Duration</span>
-                            <input type="text" name="upi_no" placeholder="Enter UPI Number" required>
+                            <select name="batch" placeholder="Please Course First">
+                        <script>
+                            function selectedCourse() {
+                                selCourses = document.querySelector("#coursenames").value;
+                                document.cookie = "name = " + selCourses;
+                                
+                            }
+                            
+                        </script>
+
+                        <?php
+
+                        // batch_start_date
+                        // batch_end_dste
+                            $name = $_COOKIE['name'];
+                            // echo $name;
+                            $sql2 = "SELECT batch_start_date FROM batchmaster WHERE `course_name`= '$name';";
+                            $result = mysqli_query($con, $sql2);
+                            $num = mysqli_num_rows($result);
+                            echo var_dump($result);
+                            if($num > 0){
+                            while($row = mysqli_fetch_assoc($result)){
+                                echo '
+                                <option value="'. $row["batch_start_date"] .'">'. $row["batch_start_date"] .'</option>';
+                            }
+                            }
+                        ?>
+
+                        </select>
                         </div>
 
 

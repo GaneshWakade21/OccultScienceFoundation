@@ -6,6 +6,9 @@ if (mysqli_connect_errno()) {
 ?>
 
 <?php
+
+
+
 // session_start();
 error_reporting(0);
 if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
@@ -91,6 +94,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         <option value="Lal Kitaab Course">Lal Kitaab Course</option>
                         <option value="Vastu Shastra Course">Vastu Shastra Course</option>
                         <option value="Vedic Astrology Course">Vedic Astrology Course</option>
+                        <option value="Mobile Numerology Course">Mobile Numerology Course</option>
                     </select>
                     <span id="coursename" class="text-danger font-weight-bold"> </span>
                 </div>
