@@ -222,6 +222,132 @@ while ($row = mysqli_fetch_array($res)) {
 }
 
 
+
+
+//Course Count Report
+
+
+
+$tcccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'TAROT CARDS COURSE' ";
+$tcc = mysqli_query($conn, $tcccount);
+$tccrows = mysqli_fetch_all($tcc, MYSQLI_ASSOC);
+$tcccnt = "";
+foreach ($tccrows as $row) {
+  $tcccnt .= implode(",", $row) . "\n";
+}
+
+$updatetcccnt = "UPDATE course_count_report SET count=$tcccnt WHERE id = 1 ";
+// if (mysqli_query($conn, $updatetcccnt)) {
+//   echo "Record updateforgcnt updated successfully";
+// } else {
+//   echo "Error updating record: " . mysqli_error($conn);
+// }
+
+$cnccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'CHALEDEAN NUMEROLOGY COURSE' ";
+$cnc = mysqli_query($conn, $cnccount);
+$cncrows = mysqli_fetch_all($cnc, MYSQLI_ASSOC);
+$cnccnt = "";
+foreach ($cncrows as $row) {
+  $cnccnt .= implode(",", $row) . "\n";
+}
+
+$updatecnccnt = "UPDATE course_count_report SET count=$cnccnt WHERE id = 2 ";
+
+
+$lkccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'LAL KITAAB COURSE' ";
+$lkc = mysqli_query($conn, $lkccount);
+$lkcrows = mysqli_fetch_all($lkc, MYSQLI_ASSOC);
+$lkccnt = "";
+foreach ($lkcrows as $row) {
+  $lkccnt .= implode(",", $row) . "\n";
+}
+
+$updatelkccnt = "UPDATE course_count_report SET count=$lkccnt WHERE id = 3 ";
+
+
+$vsccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'VASTU SHASTRA COURSE' ";
+$vsc = mysqli_query($conn, $vsccount);
+$vscrows = mysqli_fetch_all($vsc, MYSQLI_ASSOC);
+$vsccnt = "";
+foreach ($vscrows as $row) {
+  $vsccnt .= implode(",", $row) . "\n";
+}
+
+$updatevsccnt = "UPDATE course_count_report SET count=$vsccnt WHERE id = 4 ";
+
+
+
+$vaccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'VEDIC ASTROLOGY COURSE' ";
+$vac = mysqli_query($conn, $vaccount);
+$vacrows = mysqli_fetch_all($vac, MYSQLI_ASSOC);
+$vaccnt = "";
+foreach ($vacrows as $row) {
+  $vaccnt .= implode(",", $row) . "\n";
+}
+
+$updatevaccnt = "UPDATE course_count_report SET count=$vaccnt WHERE id = 5 ";
+
+
+$mnccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'Mobile Numerology Course' ";
+$mnc = mysqli_query($conn, $mnccount);
+$mncrows = mysqli_fetch_all($mnc, MYSQLI_ASSOC);
+$mnccnt = "";
+foreach ($mncrows as $row) {
+  $mnccnt .= implode(",", $row) . "\n";
+}
+
+$updatemnccnt = "UPDATE course_count_report SET count=$mnccnt WHERE id = 6 ";
+
+
+// if (mysqli_query($conn, $updatemnccnt)) {
+//   echo "Record updateforgcnt updated successfully";
+// } else {
+//   echo "Error updating record: " . mysqli_error($conn);
+// }
+
+
+$coursecount = array();
+$count = 0;
+$coursecountres = mysqli_query($conn, "SELECT * FROM course_count_report");
+while ($row = mysqli_fetch_array($coursecountres)) {
+  $coursecount[$count]['label'] = $row['course_name'];
+  $coursecount[$count]['y'] = $row['count'];
+  $count = $count + 1;
+}
+
+$coursequery1 = "SELECT course_name, count(*) as number FROM coursebooking GROUP BY course_name";
+$courseresult1 = mysqli_query($conn, $coursequery1);
+
+
+
+//Revenue Report
+
+$appointrevenue = "SELECT SUM(fee) FROM appointment";
+$appointrev = mysqli_query($conn, $appointrevenue);
+$approws = mysqli_fetch_all($appointrev, MYSQLI_ASSOC);
+$appcnt = "";
+foreach ($approws as $row) {
+  $appcnt .= implode(",", $row) . "\n";
+}
+
+$updateappintrev = "UPDATE revenue_report SET total_revenue=$appcnt WHERE id = 1 ";
+if (mysqli_query($conn, $updateappintrev)) {
+  echo "Record updateforgcnt updated successfully";
+} else {
+  echo "Error updating record: " . mysqli_error($conn);
+}
+
+
+$revapp = array();
+$count = 0;
+$revenueappont = mysqli_query($conn, "SELECT * FROM revenue_report");
+while ($row = mysqli_fetch_array($revenueappont)) {
+  $revapp[$count]['label'] = $row['type'];
+  $revapp[$count]['y'] = $row['total_revenue'];
+  
+  $count = $count + 1;
+}
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -305,7 +431,10 @@ while ($row = mysqli_fetch_array($res)) {
 
 
   <script>
+
     window.onload = function () {
+
+      // Query Reports
 
       var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
@@ -319,8 +448,50 @@ while ($row = mysqli_fetch_array($res)) {
         },
         data: [{
           type: "column",
-          yValueFormatString: "#,##0.## tonnes",
+          yValueFormatString: "#,##0.##",
           dataPoints: <?php echo json_encode($test, JSON_NUMERIC_CHECK); ?>
+        }]
+      });
+      chart.render();
+
+
+      // Course Count Reports
+
+      var chart = new CanvasJS.Chart("courseCount", {
+        animationEnabled: true,
+        theme: "light1",
+        title: {
+          text: "Course Reports",
+          fontFamily: "Arial"
+        },
+        axisY: {
+          title: "Number of Students"
+        },
+        data: [{
+          type: "column",
+          yValueFormatString: "#,##0.##",
+          dataPoints: <?php echo json_encode($coursecount, JSON_NUMERIC_CHECK); ?>
+        }]
+      });
+      chart.render();
+
+
+      //Revenue Report
+
+      var chart = new CanvasJS.Chart("revenue", {
+        animationEnabled: true,
+        theme: "light1",
+        title: {
+          text: "Revenue Reports",
+          fontFamily: "Arial"
+        },
+        axisY: {
+          title: "Revenue Generated (In Rupee)"
+        },
+        data: [{
+          type: "bar",
+          yValueFormatString: "#,##0.##",
+          dataPoints: <?php echo json_encode($revapp, JSON_NUMERIC_CHECK); ?>
         }]
       });
       chart.render();
@@ -329,23 +500,52 @@ while ($row = mysqli_fetch_array($res)) {
   </script>
 
 
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+
+        ['course_name', 'number'],
+        <?php
+        while ($row = mysqli_fetch_array($courseresult1)) {
+          echo "['" . $row["course_name"] . "', " . $row["number"] . "],";
+        }
+        ?>
+      ]);
+
+      var options = {
+        title: 'Courses'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('course'));
+
+      chart.draw(data, options);
+    }
+  </script>
+
+
+
   <style>
-
-    .title{
+    .title {
       display: flex;
       justify-content: center;
 
       /* border: 2px solid red; */
 
     }
-    .subheading{
+
+    .subheading {
       display: flex;
       justify-content: center;
 
       /* border: 2px solid red; */
 
     }
-    
+
     .timerange {
       display: flex;
       flex-direction: row;
@@ -371,7 +571,25 @@ while ($row = mysqli_fetch_array($res)) {
   <div id="piechart" style="width: 900px; height: 500px;"></div>
 
   <div id="chartContainer" style="height: 370px; width: 90%;"></div>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div class="courses">
+    <div id="courseCount" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+
+    <div id="course" style="width: 900px; height: 500px;"></div>
+
+  </div>
+
+  <div id="revenue" style="height: 370px; width: 100%;"></div>
+
 
 
 

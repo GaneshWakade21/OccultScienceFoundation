@@ -1,32 +1,31 @@
 <?php
-$con=mysqli_connect("localhost", "root", "", "astrology");
-if(mysqli_connect_errno()){
-  echo "Connection Fail".mysqli_connect_error();
+$con = mysqli_connect("localhost", "root", "", "astrology");
+if (mysqli_connect_errno()) {
+    echo "Connection Fail" . mysqli_connect_error();
 }
 ?>
 
 <?php
 // session_start();
 error_reporting(0);
-if(($_SERVER['REQUEST_METHOD'] == 'POST'))
-{
-	$batch_id = '1';
-	$course_name = $_POST['coursenames'];
-	$course_type = $_POST['coursetypes'];
-	$batch_start_date = $_POST['start_date'];
-	$batch_end_date = $_POST['end_date'];
-	$batch_timefrom = $_POST['timefrom'];
-	$batch_timeto = $_POST['timeto'];
-	$batch_mode = $_POST['mode'];
-	$batch_weekdays = $_POST['querytype'];
-	$batch_weekdays_string = implode(',', $batch_weekdays);
-	$batch_remark = $_POST['remark'];
+if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+    $batch_id = '1';
+    $course_name = $_POST['coursenames'];
+    $course_type = $_POST['coursetypes'];
+    $batch_start_date = $_POST['start_date'];
+    $batch_end_date = $_POST['end_date'];
+    $batch_timefrom = $_POST['timefrom'];
+    $batch_timeto = $_POST['timeto'];
+    $batch_mode = $_POST['mode'];
+    $batch_weekdays = $_POST['querytype'];
+    $batch_weekdays_string = implode(',', $batch_weekdays);
+    $batch_remark = $_POST['remark'];
 
-	$sql = "INSERT INTO `batchmaster` (`batch_id`, `course_name`, `course_type`,`batch_start_date`, `batch_end_date`, `batch_timefrom`, `batch_timeto`, `batch_mode`, `batch_weekdays`, `batch_remark`) VALUES ('$batch_id', '$course_name', '$course_type', '$batch_start_date', '$batch_end_date', '$batch_timefrom', '$batch_timeto', '$batch_mode', '$batch_weekdays_string', '$batch_remark');";
-	$result = mysqli_query($con, $sql);
+    $sql = "INSERT INTO `batchmaster` (`batch_id`, `course_name`, `course_type`,`batch_start_date`, `batch_end_date`, `batch_timefrom`, `batch_timeto`, `batch_mode`, `batch_weekdays`, `batch_remark`) VALUES ('$batch_id', '$course_name', '$course_type', '$batch_start_date', '$batch_end_date', '$batch_timefrom', '$batch_timeto', '$batch_mode', '$batch_weekdays_string', '$batch_remark');";
+    $result = mysqli_query($con, $sql);
     header("Location: batchmaster.php");
-	// mysqli_close($con);
-	}
+    // mysqli_close($con);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,17 +54,17 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
                     <label for="coursenames" class="font-weight-bold"> Course Name: </label>
                     <select onchange="selectedCourse()" name="coursenames" id="coursenames">
 
-                        <?php 
-                        	$sql = "SELECT DISTINCT course_name FROM coursemaster;";
-                            $result = mysqli_query($con, $sql);
-                            $num = mysqli_num_rows($result);
-                            if($num > 0){
-                                while($row = mysqli_fetch_assoc($result)){
-                                    echo '
-                                    <option value="'. $row["course_name"] .'">'. $row["course_name"] .'</option>';
-                                    }
-                              }
-                    ?>
+                        <?php
+                        $sql = "SELECT DISTINCT course_name FROM coursemaster;";
+                        $result = mysqli_query($con, $sql);
+                        $num = mysqli_num_rows($result);
+                        if ($num > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '
+                                    <option value="' . $row["course_name"] . '">' . $row["course_name"] . '</option>';
+                            }
+                        }
+                        ?>
 
 
                     </select>

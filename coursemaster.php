@@ -57,15 +57,12 @@ $result = mysqli_query($mysqli , $sql);
             border: 1px solid black;
             padding: 15px;
         }
-
         table {
             border-spacing: 10px;
         }
-
         table th {
             font-size: 13px;
         }
-
         table {
             width: 50%;
         } */
@@ -184,9 +181,7 @@ $result = mysqli_query($mysqli , $sql);
                 $num = mysqli_num_rows($result);
                 $no = 1;
                 echo '            <table style="width:100%" class="table-hover text-center ">
-
             <table style="width:100%" class="table-hover text-center ">
-
                 <tr class="bg-dark">
                     <th>id</th>
                     <th>Course Name</th>
@@ -203,7 +198,6 @@ $result = mysqli_query($mysqli , $sql);
                     <th>Remark</th>
                     <th>Action</th>
                 </tr>
-
                 <tr>';
 
                 if($num > 0){
@@ -257,10 +251,8 @@ $result = mysqli_query($mysqli , $sql);
 
             
                 <!-- <tr>
-
                 </tr>
                 <tr>
-
                     <td>1</td>
                     <td>Tarot Cards Course</td>
                     <td>Advance</td>
@@ -274,7 +266,6 @@ $result = mysqli_query($mysqli , $sql);
                     <td>3</td>
                     <td></td>
                     <td><button>Edit</button></td>
-
                 </tr> -->
                 </tr>
 
