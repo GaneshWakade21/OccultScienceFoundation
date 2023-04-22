@@ -322,6 +322,8 @@ $courseresult1 = mysqli_query($conn, $coursequery1);
 
 //Revenue Report
 
+//Updation Appointment Revenue
+
 $appointrevenue = "SELECT SUM(fee) FROM appointment";
 $appointrev = mysqli_query($conn, $appointrevenue);
 $approws = mysqli_fetch_all($appointrev, MYSQLI_ASSOC);
@@ -331,22 +333,128 @@ foreach ($approws as $row) {
 }
 
 $updateappintrev = "UPDATE revenue_report SET total_revenue=$appcnt WHERE id = 1 ";
-if (mysqli_query($conn, $updateappintrev)) {
-  echo "Record updateforgcnt updated successfully";
-} else {
-  echo "Error updating record: " . mysqli_error($conn);
+
+//Updation Tarot Cards Course Revenue
+
+$tccrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Tarot Cards Course' " ;
+$tccrev = mysqli_query($conn, $tccrevenue);
+$tccrows = mysqli_fetch_all($tccrev, MYSQLI_ASSOC);
+$tcccnt = "";
+foreach ($tccrows as $row) {
+  $tcccnt .= implode(",", $row) . "\n";
 }
+$updatetccrev = "UPDATE revenue_report SET total_revenue=$tcccnt WHERE id = 2 ";
+
+
+//Updation Chaledean Numerology Course Revenue
+
+$cncrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Chaledean Numerology Course' " ;
+$cncrev = mysqli_query($conn, $cncrevenue);
+$cncrows = mysqli_fetch_all($cncrev, MYSQLI_ASSOC);
+$cnccnt = "";
+foreach ($cncrows as $row) {
+  $cnccnt .= implode(",", $row) . "\n";
+}
+
+$updatecncrev = "UPDATE revenue_report SET total_revenue=$cnccnt WHERE id = 3 ";
+
+
+
+//Updation Lal Kitaab Course Revenue
+
+$lkcrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Lal Kitaab Course' " ;
+$lkcrev = mysqli_query($conn, $lkcrevenue);
+$lkcrows = mysqli_fetch_all($lkcrev, MYSQLI_ASSOC);
+$lkccnt = "";
+foreach ($lkcrows as $row) {
+  $lkccnt .= implode(",", $row) . "\n";
+}
+
+$updatelkcrev = "UPDATE revenue_report SET total_revenue=$lkccnt WHERE id = 4 ";
+
+
+
+//Updation Vastu Shastra Course Revenue
+
+$vscrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Vastu Shastra Course' " ;
+$vscrev = mysqli_query($conn, $vscrevenue);
+$vscrows = mysqli_fetch_all($vscrev, MYSQLI_ASSOC);
+$vsccnt = "";
+foreach ($vscrows as $row) {
+  $vsccnt .= implode(",", $row) . "\n";
+}
+
+$updatevscrev = "UPDATE revenue_report SET total_revenue=$vsccnt WHERE id = 5 ";
+
+
+
+//Updation Vastu Shastra Course Revenue
+
+$vacrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Vedic Astrology Course' " ;
+$vacrev = mysqli_query($conn, $vacrevenue);
+$vacrows = mysqli_fetch_all($vacrev, MYSQLI_ASSOC);
+$vaccnt = "";
+foreach ($vacrows as $row) {
+  $vaccnt .= implode(",", $row) . "\n";
+}
+
+$updatevacrev = "UPDATE revenue_report SET total_revenue=$vaccnt WHERE id = 6 ";
+
+
+
+//Updation Vastu Shastra Course Revenue
+
+$mncrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Mobile Numerology Course' " ;
+$mncrev = mysqli_query($conn, $mncrevenue);
+$mncrows = mysqli_fetch_all($mncrev, MYSQLI_ASSOC);
+$mnccnt = "";
+foreach ($mncrows as $row) {
+  $mnccnt .= implode(",", $row) . "\n";
+}
+
+$updatemncrev = "UPDATE revenue_report SET total_revenue=$mnccnt WHERE id = 7 ";
 
 
 $revapp = array();
 $count = 0;
 $revenueappont = mysqli_query($conn, "SELECT * FROM revenue_report");
 while ($row = mysqli_fetch_array($revenueappont)) {
-  $revapp[$count]['label'] = $row['type'];
+  $revapp[$count]['label'] = $row['Type'];
   $revapp[$count]['y'] = $row['total_revenue'];
   
   $count = $count + 1;
 }
+
+
+
+
+//Course Status 
+
+$coursestatus = array();
+$count = 0;
+$courstat = mysqli_query($conn, "SELECT * FROM course_status");
+while ($row = mysqli_fetch_array($courstat)) {
+  $coursestatus[$count]['label'] = $row['type'];
+  $coursestatus[$count]['y'] = $row['count'];
+  $count = $count + 1;
+}
+
+
+
+//Certificate Report
+
+
+
+$certificate_status = array();
+$count = 0;
+$certistat = mysqli_query($conn, "SELECT * FROM certificate_status");
+while ($row = mysqli_fetch_array($certistat)) {
+  $certificate_status[$count]['label'] = $row['status'];
+  $certificate_status[$count]['y'] = $row['count'];
+  $count = $count + 1;
+}
+
+
 
 ?>
 <!DOCTYPE HTML>
@@ -489,9 +597,51 @@ while ($row = mysqli_fetch_array($revenueappont)) {
           title: "Revenue Generated (In Rupee)"
         },
         data: [{
-          type: "bar",
+          type: "column",
           yValueFormatString: "#,##0.##",
           dataPoints: <?php echo json_encode($revapp, JSON_NUMERIC_CHECK); ?>
+        }]
+      });
+      chart.render();
+
+
+      //Course Status Report
+
+      var chart = new CanvasJS.Chart("course_status", {
+        animationEnabled: true,
+        theme: "light1",
+        title: {
+          text: "Course Status Reports",
+          fontFamily: "Arial"
+        },
+        axisY: {
+          title: "Number Of Courses"
+        },
+        data: [{
+          type: "column",
+          yValueFormatString: "#,##0.##",
+          dataPoints: <?php echo json_encode($coursestatus, JSON_NUMERIC_CHECK); ?>
+        }]
+      });
+      chart.render();
+
+
+      //Certificate Status Report
+
+      var chart = new CanvasJS.Chart("certificate_status", {
+        animationEnabled: true,
+        theme: "light1",
+        title: {
+          text: "Certificate Status Reports",
+          fontFamily: "Arial"
+        },
+        axisY: {
+          title: "Number Of Students"
+        },
+        data: [{
+          type: "column",
+          yValueFormatString: "#,##0.##",
+          dataPoints: <?php echo json_encode($certificate_status, JSON_NUMERIC_CHECK); ?>
         }]
       });
       chart.render();
@@ -588,7 +738,20 @@ while ($row = mysqli_fetch_array($revenueappont)) {
 
   </div>
 
-  <div id="revenue" style="height: 370px; width: 100%;"></div>
+  <div id="revenue" style="height: 370px; width: 90%;"></div>
+
+<br>
+<br>
+<br>
+<br>
+
+  <div id="course_status" style="height: 370px; width: 40%;"></div>
+  <br>
+<br>
+<br>
+<br>
+
+  <div id="certificate_status" style="height: 370px; width: 40%;"></div>
 
 
 
