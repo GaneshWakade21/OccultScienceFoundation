@@ -52,7 +52,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
             <form action="addbatches.php" method="post" class="bg-light">
                 <div class="form-group">
                     <label for="coursenames" class="font-weight-bold"> Course Name: </label>
-                    <select onclick="selectedCourse()" name="coursenames" id="coursenames">
+                    <select onchange="selectedCourse()" name="coursenames" id="coursenames">
 
                         <?php
                         $sql = "SELECT DISTINCT course_name FROM coursemaster;";
@@ -73,19 +73,15 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
                 <div class="form-group">
                     <label for="coursetypes" class="font-weight-bold"> Course type: </label>
-                    <select name="coursetypes" id="coursetypes">
-
-
+                    <select onclick="selectedCourseType()" name="coursetypes" id="coursetypes">
                         <script>
-                            function selectedCourse() {
-                                selCourses = document.querySelector("#coursenames").value;
-                                document.cookie = "name = " + selCourses;
-                                ;
-                            }
-                            
+                        function selectedCourse() {
+                            selCourses = document.querySelector("#coursenames").value;
+                            document.cookie = "name = " + selCourses;
+                        }
                         </script>
 
-                            <?php
+                        <?php
                                 $name = $_COOKIE['name'];
                                 // echo $name;
                                 $sql = "SELECT course_type FROM coursemaster WHERE `course_name`= '$name';";
@@ -99,7 +95,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                                 }
                               }
                             ?>
-
                     </select>
                     <span id="coursetype" class="text-danger font-weight-bold"> </span>
                 </div>
@@ -107,19 +102,43 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
                 <div class="form-group">
                     <label class="font-weight-bold"> Start Date </label>
-                    <input required type="date" name="start_date" id="date" autocomplete="off">
+                    <input onchange="autoEndDate()" required type="date" name="start_date" id="startdate"
+                        autocomplete="off">
                     <span id="mobileno" class="text-danger font-weight-bold"> </span>
                 </div>
+                <?php
+
+              echo ' <script>
+                function selectedCourseType() {
+                    selCoursesType = document.querySelector("#coursetypes").value;
+                    document.cookie = "type = " + selCoursesType;
+                    console.log(document.cookie)';
+               $selc = selCoursesType;
+               console.log($selc);
+                  $type = $_COOKIE['type'];
+                //   echo $type;
+                                $sql = "SELECT course_duration FROM coursemaster WHERE `course_name`= '$name' AND `course_type` = '$type';";
+                                $result = mysqli_query($con, $sql);
+                                $num = mysqli_num_rows($result);
+                                if($num > 0){
+                                    $row = mysqli_fetch_assoc($result);
+                                    // echo $row["course_duration"];
+                                    setcookie("course_duration", $row["course_duration"]);
+                                }
+                              
+                            ?>
+               }
+                </script>
 
                 <div class="form-group">
                     <label class="font-weight-bold"> End Date </label>
-                    <input required type="date" name="end_date" id="date" autocomplete="off">
+                    <input required type="date" name="end_date" id="enddate" autocomplete="off">
                     <span id="emailids" class="text-danger font-weight-bold"> </span>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="modes" class="font-weight-bold">No of sessions per week </label>
-                    <!-- <input type="text" name="text" class="form-control" id="text" autocomplete="off"> -->
+               
                     <select name="mode" id="modes">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -130,7 +149,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         <option value="7">7</option>
                     </select>
                     <span id="text" class="text-danger font-weight-bold"> </span>
-                </div>
+                </div> -->
 
                 <div class="form-group" style="display: inline-flex;">
                     <label class="font-weight-bold"> Batch Timings </label>
@@ -218,7 +237,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     </div>
                 </div>
 
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label for="modes" class="font-weight-bold">Batch Mode </label>
                     <select name="mode" id="modes">
                         <option value="Online">Online</option>
@@ -226,12 +245,11 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         <option value="Both">Both</option>
                     </select>
                     <span id="text" class="text-danger font-weight-bold"> </span>
-                </div> -->
+                </div>
 
-
+<!-- 
                 <div class="form-group">
                     <label for="modes" class="font-weight-bold">Batch Mode </label>
-                    <!-- <input type="text" name="text" class="form-control" id="text" autocomplete="off"> -->
                     <input type="radio" id="age1" name="mode" value="Online">
                     <label for="age1">Online</label><br>
                     <input type="radio" id="age2" name="mode" value="Offline">
@@ -239,13 +257,28 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     <input type="radio" id="age3" name="mode" value="Both">
                     <label for="age3">Both</label><br><br>
                     <span id="text" class="text-danger font-weight-bold"> </span>
-                </div>
+                </div> -->
 
+
+                <!-- <div class="form-group">
+                    <label for="sessions" class="font-weight-bold">No of sessions per week </label>
+                    <input type="text" name="text" class="form-control" id="text" autocomplete="off">
+                    <select onclick="selectedSession()" name="sessions" id="sessions">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                    </select>
+                    <span id="text" class="text-danger font-weight-bold"> </span>
+                </div> -->
 
                 <div class="form-group">
-                    <label for="modes" class="font-weight-bold">No of sessions per week </label>
+                    <label for="cpw" class="font-weight-bold">Classes Per week</label>
                     <!-- <input type="text" name="text" class="form-control" id="text" autocomplete="off"> -->
-                    <select name="mode" id="modes">
+                    <select oninput="autoWeekLimit()" name="cpw" id="cpw">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -264,34 +297,46 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     <div class="check">
                         <div class="option">
                             <label for="dot-1">Sunday</label>
-                            <input type="checkbox" name="querytype[]" value="Sunday" id="dot-1">
+                            <input class="weekCheckBox" type="checkbox" name="querytype[]" value="Sunday" id="dot-1">
                         </div>
 
                         <div class="option">
                             <label for="dot-2">Monday</label>
-                            <input type="checkbox" name="querytype[]" value="Monday" id="dot-2">
+                            <input class="weekCheckBox" type="checkbox" name="querytype[]" value="Monday" id="dot-2">
                         </div>
                         <div class="option">
                             <label for="dot-3">Tuesday</label>
-                            <input type="checkbox" name="querytype[]" value="Tuesday" id="dot-3">
+                            <input class="weekCheckBox" type="checkbox" name="querytype[]" value="Tuesday" id="dot-3">
                         </div>
                         <div class="option">
                             <label for="dot-4">Wednesday</label>
-                            <input type="checkbox" name="querytype[]" value="Wednesday" id="dot-4">
+                            <input class="weekCheckBox" type="checkbox" name="querytype[]" value="Wednesday" id="dot-4">
                         </div>
                         <div class="option">
                             <label for="dot-5">Thursday</label>
-                            <input type="checkbox" name="querytype[]" value="Thursday" id="dot-5">
+                            <input class="weekCheckBox" type="checkbox" name="querytype[]" value="Thursday" id="dot-5">
                         </div>
                         <div class="option">
                             <label for="dot-7">Friday</label>
-                            <input type="checkbox" name="querytype[]" value="Friday" id="dot-7">
+                            <input class="weekCheckBox" type="checkbox" name="querytype[]" value="Friday" id="dot-7">
                         </div>
                         <div class="option">
                             <label for="dot-6">Saturday</label>
-                            <input type="checkbox" name="querytype[]" value="Saturday" id="dot-6">
+                            <input class="weekCheckBox" type="checkbox" name="querytype[]" value="Saturday" id="dot-6">
                         </div>
                     </div>
+
+                    <script>
+                    function autoWeekLimit() {
+                        classPerWeek = parseInt(document.getElementById("cpw").value);
+                        $('.weekCheckBox').click(function() {
+                            if ($('.weekCheckBox:checked').length >= classPerWeek) {
+                                $(".weekCheckBox").not(":checked").attr("disabled", true);
+                            } else
+                                $(".weekCheckBox").not(":checked").removeAttr('disabled');
+                        });
+                    }
+                    </script>
 
                 </div>
 
@@ -307,6 +352,33 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
         </div>
     </div>
+
+    <script>
+    function autoEndDate() {
+        increamentMonth = document.cookie.slice(document.cookie.indexOf("Month") - 4, document.cookie.indexOf("Month") -
+            3);
+        // console.log(increamentMonth)
+        sdate = document.getElementById("startdate").value;
+        edate = document.getElementById("enddate");
+        let sdateYear = sdate.slice(0, 4)
+        let sdateMonth = sdate.slice(5, 7)
+        let sdateDay = sdate.slice(8, 10)
+        let sdateNewMonth = parseInt(sdateMonth) + parseInt(increamentMonth);
+
+        var d = new Date(),
+            month = '' + sdateNewMonth;
+        day = '' + sdateDay,
+            year = sdateYear;
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        edate.value = [year, month, day].join('-');
+    }
+    </script>
+
 </body>
 
 </html>

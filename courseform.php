@@ -13,19 +13,19 @@ if (mysqli_connect_errno()) {
 error_reporting(0);
 if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
-    $coursename = $_POST['coursenames'];
-    $types = $_POST['corsetypes'];
-    $dur = $_POST['coursedurations'];
-    $startdate = $_POST['date'];
-    $enddate = $_POST['dates'];
-    $start = $_POST['date'];
-    $end = $_POST['dates'];
-    $fee = $_POST['coursefees'];
-    $emi = $_POST['monthlyemis'];
-    $mode = $_POST['modes'];
-    $classperweek = $_POST['cpw'];
-    $stat = $_POST['status'];
-    $rem = $_POST['remarks'];
+	$coursename=$_POST['coursenames'];
+	$types=$_POST['corsetypes'];
+	$dur=$_POST['coursedurations'];
+	$startdate=$_POST['startdate'];
+	$enddate=$_POST['enddate'];
+	$start=$_POST['startdate'];
+	$end=$_POST['enddate'];
+	$fee=$_POST['coursefees'];
+	$emi=$_POST['monthlyemis'];
+	$mode=$_POST['modes'];
+	$classperweek=$_POST['cpw'];
+	$stat=$_POST['status'];
+	$rem=$_POST['remarks'];
 
     function id($coursename, $types , $startdate,$enddate)
     {
@@ -110,7 +110,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
                 <div class="form-group">
                     <label for="coursedurations" class="font-weight-bold">Course Duration: </label>
-                    <select name="coursedurations" id="coursedurations">
+                    <select  onchange="{autoManHours();updateMonths()}" onclick="autoEndDate()" name="coursedurations" id="coursedurations"> 
                         <option value="1 Month">1 Month</option>
                         <option value="2 Month">2 Month</option>
                         <option value="3 Month">3 Month</option>
@@ -123,20 +123,45 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
                 <div class="form-group">
                     <label class="font-weight-bold"> Start Date </label>
-                    <input required type="date" name="date" id="date" autocomplete="off">
+                    <input onchange="autoEndDate()" required type="date" name="startdate" id="startdate" autocomplete="off">
                     <span id="mobileno" class="text-danger font-weight-bold"> </span>
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold"> End Date </label>
-                    <input required type="date" name="dates" id="date" autocomplete="off">
+                    <input required type="date" name="enddate" id="enddate" autocomplete="off">
                     <span id="emailids" class="text-danger font-weight-bold"> </span>
                 </div>
+
                 <div class="form-group">
-                    <label for="" coursefees class="font-weight-bold"> Course Fee </label>
-                    <input type="text" name="coursefees" id="coursefees" autocomplete="off">
+                    <label for=""coursefees class="font-weight-bold"> Course Fee </label>
+                    <input oninput="autoEmi()" type="text" name="coursefees" id="coursefees" autocomplete="off">
                     <span id="coursefeesspan" class="text-danger font-weight-bold"> </span>
                 </div>
+                
+                <div class="form-group">
+                <label for="emimonth" class="font-weight-bold"> EMI Option</label>
+                <select onchange="autoEmi()" onclick="autoEndDate()" name="emimonth" id="emimonth"> 
+                <option value="1 Month">1 Month</option>
+                <script>
+                    function updateMonths(){
+                        // document.getElementById("emimonth").removeChild(document.getElementById("emimonth").firstElementChild);
+                        document.getElementById("emimonth").innerHTML = '';
+                        months = document.querySelector("#coursedurations").value;
+                        noOfMonths = months.slice(0, months.indexOf("Month")-1);
+                        console.log(noOfMonths)
+                        for (let i = 1; i <= noOfMonths; i++) {
+                            node = document.createElement("option");
+                            node.innerHTML = `${i} Month`;
+                            node.setAttribute("value", `${i} Month`); 
+                            document.getElementById("emimonth").appendChild(node);
+                        }
+                    }
+                </script>
+                    </select>
+                    <span id="emimonthsspan" class="text-danger font-weight-bold"> </span>
+                </div>
+
                 <div class="form-group">
                     <label for="monthlyemis" class="font-weight-bold"> Monthly EMI</label>
                     <input type="text" name="monthlyemis" id="monthlyemis" autocomplete="off">
@@ -158,7 +183,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                 <div class="form-group">
                     <label for="cpw" class="font-weight-bold">Classes Per week</label>
                     <!-- <input type="text" name="text" class="form-control" id="text" autocomplete="off"> -->
-                    <select name="cpw" id="cpw">
+                    <select onchange="autoManHours()" name="cpw" id="cpw">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -169,10 +194,11 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     </select>
                     <span id="text" class="text-danger font-weight-bold"> </span>
                 </div>
+                
                 <div class="form-group">
                     <label for="durations" class="font-weight-bold"> Duration </label>
                     <!-- <input type="text" name="date" class="form-control" id="date" autocomplete="off"> -->
-                    <select name="durations" id="durations">
+                    <select onchange="autoManHours()" name="durations" id="durations">
                         <option value="60 Min">60 Min</option>
                         <option value="90 Min">90 Min</option>
                         <option value="120 Min">120 Min</option>
@@ -180,6 +206,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     </select>
                     <span id="emailids" class="text-danger font-weight-bold"> </span>
                 </div>
+
                 <div class="form-group">
                     <label for="status" class="font-weight-bold"> Status </label>
                     <!-- <input type="text" name="text" class="form-control" id="text" autocomplete="off"> -->
@@ -188,10 +215,14 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         <option value="Completed">Completed</option>
                         <option value="Suspended">Suspended</option>
                         <option value="Dropout">Dropout</option>
-
                     </select>
                     <span id="text" class="text-danger font-weight-bold"> </span>
+                </div>
 
+                <div class="form-group">
+                    <label for="manhours" class="font-weight-bold"> Total Man Hours</label>
+                    <input type="text" name="manhours" id="manhours" autocomplete="off">
+                    <span id="manhoursspan" class="text-danger font-weight-bold"> </span>
                 </div>
 
                 <div class="form-group">
@@ -230,6 +261,73 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
             }
         }
+
+        if (monthlyemis1 == "") {
+            document.getElementById('monthlyemisspan').innerHTML = " ** Please fill the Monthly emi field";
+            return false;
+        }
+
+        if (remark1 == "") {
+            document.getElementById('remarksspan').innerHTML = " ** Please fill the remark field";
+            return false;
+
+        }
+    
+
+    // function selectedCourseType(){
+    //     selCourseType = document.querySelector("#corsetypes").value;
+    //     document.cookie = "type = " + selCourseType;
+    // }
+
+    // function selectedCourseMonth(){
+    //     selCourseMonth = document.querySelector("#coursedurations").value;
+    //     document.cookie = "courseDura = " + selCourseMonth;
+    // }
+
+
+    function autoEndDate() {
+        sdate = document.getElementById("startdate").value;
+        edate = document.getElementById("enddate");
+        if(sdate == ""){
+            return;
+        }
+        dura = document.getElementById("coursedurations").value;
+        increamentMonth = dura.slice(dura.indexOf("Month")-2,dura.indexOf("Month")-1);
+        // increamentMonth = document.cookie.slice(document.cookie.indexOf("Month")-2,document.cookie.indexOf("Month")-1);
+        let sdateYear = sdate.slice(0, 4)
+        let sdateMonth = sdate.slice(5, 7)
+        let sdateDay = sdate.slice(8, 10)
+        let sdateNewMonth = parseInt(sdateMonth) + parseInt(increamentMonth);
+
+        var d = new Date(),
+            month = '' + sdateNewMonth;
+        day = '' + sdateDay,
+            year = sdateYear;
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        edate.value = [year, month, day].join('-');
+    }
+
+    function autoEmi(){
+        coursefees = parseInt(document.getElementById("coursefees").value);
+        emiMonth = parseInt(document.getElementById("emimonth").value);
+        emiAmount = document.getElementById("monthlyemis");
+        emiAmount.value = coursefees/emiMonth
+    }
+
+    function autoManHours(){
+        classPerWeek = parseInt(document.getElementById("cpw").value);
+        courseMonth = document.getElementById("coursedurations").value;
+        courseMinutes = document.getElementById("durations").value;
+        manhours = document.getElementById("manhours");
+        newcourseMonth = parseInt(courseMonth.slice(0, courseMonth.indexOf("Month")-1));
+        newcourseMinutes = parseInt(courseMinutes.slice(0, courseMonth.indexOf("Min")-1))
+        manhours.value = (newcourseMonth*classPerWeek*4*newcourseMinutes)/60
+    }
     </script>
 
 
