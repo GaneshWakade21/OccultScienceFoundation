@@ -433,20 +433,48 @@ while ($row = mysqli_fetch_array($revenueappont)) {
 
 $currentDate = date('Y-m-d');
 
-// Output current date
-echo "Current date is: " . $currentDate;
+//Proposed Course Updation
+
 $proposedcnt = "SELECT COUNT(*) FROM coursemaster WHERE start_date > CURDATE()" ;
 
-// $sql = "SELECT * FROM your_table_name WHERE date_column_name < CURDATE()";
-$mnc = mysqli_query($conn, $proposedcnt);
-$mncrows = mysqli_fetch_all($mnc, MYSQLI_ASSOC);
-$mnccnt = "";
-foreach ($mncrows as $row) {
-  $mnccnt .= implode(",", $row) . "\n";
+$prop = mysqli_query($conn, $proposedcnt);
+$proprows = mysqli_fetch_all($prop, MYSQLI_ASSOC);
+$proposecnt = "";
+foreach ($proprows as $row) {
+  $proposecnt .= implode(",", $row) . "\n";
 }
 
+$updatepropcnt = "UPDATE course_status SET count=$proposecnt WHERE id = 3 ";
+mysqli_query($conn, $updatepropcnt);
 
 
+//Completed Course Updation
+
+$completedcnt = "SELECT COUNT(*) FROM coursemaster WHERE end_date < CURDATE()" ;
+
+$comp = mysqli_query($conn, $completedcnt);
+$comprows = mysqli_fetch_all($comp, MYSQLI_ASSOC);
+$compcnt = "";
+foreach ($comprows as $row) {
+  $compcnt .= implode(",", $row) . "\n";
+}
+$updatecompcnt = "UPDATE course_status SET count=$compcnt WHERE id = 1 ";
+mysqli_query($conn, $updatecompcnt);
+
+
+
+//Onging Course Updation
+
+$ongoingcount = "SELECT COUNT(*) FROM coursemaster WHERE end_date >= CURDATE() AND start_date <= CURDATE()" ;
+
+$ongoing = mysqli_query($conn, $ongoingcount);
+$ongoingrows = mysqli_fetch_all($ongoing, MYSQLI_ASSOC);
+$ongoingcnt = "";
+foreach ($ongoingrows as $row) {
+  $ongoingcnt .= implode(",", $row) . "\n";
+}
+$updateongoingcnt = "UPDATE course_status SET count=$ongoingcnt WHERE id = 2 ";
+mysqli_query($conn, $updateongoingcnt);
 
 
 
@@ -463,6 +491,36 @@ while ($row = mysqli_fetch_array($courstat)) {
 
 
 //Certificate Report
+
+//Issued Certificate Updation
+
+$issuedcnt = "SELECT COUNT(*) FROM coursebooking WHERE `certificate`='Issued'" ;
+
+$issue = mysqli_query($conn, $issuedcnt);
+$issuerows = mysqli_fetch_all($issue, MYSQLI_ASSOC);
+$issuecnt = "";
+foreach ($issuerows as $row) {
+  $issuecnt .= implode(",", $row) . "\n";
+}
+
+$updateissuecnt = "UPDATE certificate_status SET count=$issuecnt WHERE id = 1 ";
+mysqli_query($conn, $updateissuecnt);
+
+
+//Not Issued Certificate Updation
+
+$notissuedcnt = "SELECT COUNT(*) FROM coursebooking WHERE `certificate`='Not Issued'" ;
+
+$notissue = mysqli_query($conn, $notissuedcnt);
+$notissuerows = mysqli_fetch_all($notissue, MYSQLI_ASSOC);
+$notissuecnt = "";
+foreach ($notissuerows as $row) {
+  $notissuecnt .= implode(",", $row) . "\n";
+}
+
+$updatenotissuecnt = "UPDATE certificate_status SET count=$notissuecnt WHERE id = 2 ";
+mysqli_query($conn, $updatenotissuecnt);
+
 
 
 
