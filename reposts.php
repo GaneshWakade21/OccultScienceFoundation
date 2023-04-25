@@ -430,6 +430,27 @@ while ($row = mysqli_fetch_array($revenueappont)) {
 
 //Course Status 
 
+
+$currentDate = date('Y-m-d');
+
+// Output current date
+echo "Current date is: " . $currentDate;
+$proposedcnt = "SELECT COUNT(*) FROM coursemaster WHERE start_date > CURDATE()" ;
+
+// $sql = "SELECT * FROM your_table_name WHERE date_column_name < CURDATE()";
+$mnc = mysqli_query($conn, $proposedcnt);
+$mncrows = mysqli_fetch_all($mnc, MYSQLI_ASSOC);
+$mnccnt = "";
+foreach ($mncrows as $row) {
+  $mnccnt .= implode(",", $row) . "\n";
+}
+
+
+
+
+
+
+
 $coursestatus = array();
 $count = 0;
 $courstat = mysqli_query($conn, "SELECT * FROM course_status");
