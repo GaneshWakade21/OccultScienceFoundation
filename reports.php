@@ -1,6 +1,18 @@
 <!-- Repost Graphs -->
 <?php
 
+// $datefrom = date("Y-m-d", strtotime("2023-04-01"));
+// $dateto = date("Y-m-d", strtotime("2023-05-01"));
+
+$datefrom = $_POST['datefrom'];
+$dateto = $_POST['dateto'];
+
+// $ongoingcount = "SELECT COUNT(*) FROM coursemaster WHERE end_date >= CURDATE() AND start_date <= CURDATE()" ;
+
+echo $datefrom;
+echo $dateto;
+
+
 // Gender Pie Chart
 
 $conn = mysqli_connect("localhost", "root", "", "astrology");
@@ -11,7 +23,7 @@ $result1 = mysqli_query($conn, $query1);
 
 // Business count updation done 
 
-$businesscount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('business', query) > 0 ";
+$businesscount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('business', query) > 0 AND doappoint >= datefrom AND start_date <= dateto";
 $b = mysqli_query($conn, $businesscount);
 // print_r($b);
 
@@ -28,6 +40,8 @@ foreach ($rows as $row) {
 // echo $b;
 
 $updatebusicnt = "UPDATE reports SET count=$bcnt WHERE id = 1 ";
+
+mysqli_query($conn, $updatebusicnt);
 
 // if (mysqli_query($conn, $updatebusicnt)) {
 //     echo "Record updated successfully";
@@ -46,6 +60,8 @@ foreach ($irows as $row) {
 }
 $updateicnt = "UPDATE reports SET count=$icnt WHERE id = 2 ";
 
+mysqli_query($conn, $updateicnt);
+
 
 // Relationship Updation 
 
@@ -57,6 +73,7 @@ foreach ($relrows as $row) {
   $relcnt .= implode(",", $row) . "\n";
 }
 $updaterelcnt = "UPDATE reports SET count=$relcnt WHERE id = 3 ";
+mysqli_query($conn, $updaterelcnt);
 
 
 // Health Updation 
@@ -69,6 +86,7 @@ foreach ($hltrows as $row) {
   $hltcnt .= implode(",", $row) . "\n";
 }
 $updatehltcnt = "UPDATE reports SET count=$hltcnt WHERE id = 4 ";
+mysqli_query($conn, $updatehltcnt);
 
 
 // Property Updation 
@@ -81,6 +99,7 @@ foreach ($prtrows as $row) {
   $prtcnt .= implode(",", $row) . "\n";
 }
 $updateprtcnt = "UPDATE reports SET count=$prtcnt WHERE id = 5 ";
+mysqli_query($conn, $updateprtcnt);
 
 
 // Marriage Updation 
@@ -93,6 +112,7 @@ foreach ($mrirows as $row) {
   $mricnt .= implode(",", $row) . "\n";
 }
 $updatemricnt = "UPDATE reports SET count=$mricnt WHERE id = 6 ";
+mysqli_query($conn, $updatemricnt);
 
 
 // Job Updation 
@@ -105,6 +125,7 @@ foreach ($jobrows as $row) {
   $jobcnt .= implode(",", $row) . "\n";
 }
 $updatejobcnt = "UPDATE reports SET count=$jobcnt WHERE id = 7 ";
+mysqli_query($conn, $updatejobcnt);
 
 
 // Transfer Updation 
@@ -117,6 +138,7 @@ foreach ($transrows as $row) {
   $transcnt .= implode(",", $row) . "\n";
 }
 $updatetranscnt = "UPDATE reports SET count=$transcnt WHERE id = 8 ";
+mysqli_query($conn, $updatetranscnt);
 
 
 // Promotion Updation 
@@ -129,6 +151,7 @@ foreach ($prorows as $row) {
   $procnt .= implode(",", $row) . "\n";
 }
 $updateprocnt = "UPDATE reports SET count=$procnt WHERE id = 9 ";
+mysqli_query($conn, $updateprocnt);
 
 
 // Pregnancy Updation 
@@ -141,6 +164,7 @@ foreach ($prerows as $row) {
   $precnt .= implode(",", $row) . "\n";
 }
 $updateprecnt = "UPDATE reports SET count=$precnt WHERE id = 10 ";
+mysqli_query($conn, $updateprecnt);
 
 
 // Litigation Updation 
@@ -153,6 +177,7 @@ foreach ($prerows as $row) {
   $precnt .= implode(",", $row) . "\n";
 }
 $updateprecnt = "UPDATE reports SET count=$precnt WHERE id = 11 ";
+mysqli_query($conn, $updateprecnt);
 
 
 
@@ -166,6 +191,7 @@ foreach ($forgrows as $row) {
   $forgcnt .= implode(",", $row) . "\n";
 }
 $updateforgcnt = "UPDATE reports SET count=$forgcnt WHERE id = 12 ";
+mysqli_query($conn, $updateforgcnt);
 
 
 
@@ -237,6 +263,9 @@ foreach ($tccrows as $row) {
 }
 
 $updatetcccnt = "UPDATE course_count_report SET count=$tcccnt WHERE id = 1 ";
+mysqli_query($conn, $updatetcccnt);
+
+
 // if (mysqli_query($conn, $updatetcccnt)) {
 //   echo "Record updateforgcnt updated successfully";
 // } else {
@@ -252,6 +281,7 @@ foreach ($cncrows as $row) {
 }
 
 $updatecnccnt = "UPDATE course_count_report SET count=$cnccnt WHERE id = 2 ";
+mysqli_query($conn, $updatecnccnt);
 
 
 $lkccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'LAL KITAAB COURSE' ";
@@ -263,6 +293,7 @@ foreach ($lkcrows as $row) {
 }
 
 $updatelkccnt = "UPDATE course_count_report SET count=$lkccnt WHERE id = 3 ";
+mysqli_query($conn, $updatelkccnt);
 
 
 $vsccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'VASTU SHASTRA COURSE' ";
@@ -274,6 +305,7 @@ foreach ($vscrows as $row) {
 }
 
 $updatevsccnt = "UPDATE course_count_report SET count=$vsccnt WHERE id = 4 ";
+mysqli_query($conn, $updatevsccnt);
 
 
 
@@ -286,6 +318,7 @@ foreach ($vacrows as $row) {
 }
 
 $updatevaccnt = "UPDATE course_count_report SET count=$vaccnt WHERE id = 5 ";
+mysqli_query($conn, $updatevaccnt);
 
 
 $mnccount = "SELECT COUNT(*) FROM coursebooking WHERE course_name = 'Mobile Numerology Course' ";
@@ -297,6 +330,7 @@ foreach ($mncrows as $row) {
 }
 
 $updatemnccnt = "UPDATE course_count_report SET count=$mnccnt WHERE id = 6 ";
+mysqli_query($conn, $updatemnccnt);
 
 
 // if (mysqli_query($conn, $updatemnccnt)) {
@@ -333,6 +367,7 @@ foreach ($approws as $row) {
 }
 
 $updateappintrev = "UPDATE revenue_report SET total_revenue=$appcnt WHERE id = 1 ";
+mysqli_query($conn, $updateappintrev);
 
 //Updation Tarot Cards Course Revenue
 
@@ -344,6 +379,7 @@ foreach ($tccrows as $row) {
   $tcccnt .= implode(",", $row) . "\n";
 }
 $updatetccrev = "UPDATE revenue_report SET total_revenue=$tcccnt WHERE id = 2 ";
+mysqli_query($conn, $updatetccrev);
 
 
 //Updation Chaledean Numerology Course Revenue
@@ -357,6 +393,7 @@ foreach ($cncrows as $row) {
 }
 
 $updatecncrev = "UPDATE revenue_report SET total_revenue=$cnccnt WHERE id = 3 ";
+mysqli_query($conn, $updatecncrev);
 
 
 
@@ -371,6 +408,7 @@ foreach ($lkcrows as $row) {
 }
 
 $updatelkcrev = "UPDATE revenue_report SET total_revenue=$lkccnt WHERE id = 4 ";
+mysqli_query($conn, $updatelkcrev);
 
 
 
@@ -385,6 +423,7 @@ foreach ($vscrows as $row) {
 }
 
 $updatevscrev = "UPDATE revenue_report SET total_revenue=$vsccnt WHERE id = 5 ";
+mysqli_query($conn, $updatevscrev);
 
 
 
@@ -399,6 +438,7 @@ foreach ($vacrows as $row) {
 }
 
 $updatevacrev = "UPDATE revenue_report SET total_revenue=$vaccnt WHERE id = 6 ";
+mysqli_query($conn, $updatevacrev);
 
 
 
@@ -413,6 +453,7 @@ foreach ($mncrows as $row) {
 }
 
 $updatemncrev = "UPDATE revenue_report SET total_revenue=$mnccnt WHERE id = 7 ";
+mysqli_query($conn, $updatemncrev);
 
 
 $revapp = array();
