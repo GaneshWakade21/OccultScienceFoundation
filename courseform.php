@@ -1,7 +1,7 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "astrology");
-if (mysqli_connect_errno()) {
-    echo "Connection Fail" . mysqli_connect_error();
+$con=mysqli_connect("localhost", "root", "", "astrology");
+if(mysqli_connect_errno()){
+  echo "Connection Fail".mysqli_connect_error();
 }
 ?>
 
@@ -11,7 +11,9 @@ if (mysqli_connect_errno()) {
 
 // session_start();
 error_reporting(0);
-if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+if(($_SERVER['REQUEST_METHOD'] == 'POST'))
+{
+   
 
 	$coursename=$_POST['coursenames'];
 	$types=$_POST['corsetypes'];
@@ -49,19 +51,19 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
     $pid = id($coursename, $types , $startdate,$enddate);
     $id = strtoupper($pid);
+    echo $id;
 
-
-    $query = "INSERT INTO `coursemaster` (`id`,`course_name`, `course_type`, `course_duration`, `status`, `start_date`, `end_date`, `actual_start_date`, `actual_end_date`, `course_fee`, `monthlyemi`, `mode`, `no_classes_per_week`, `remark`) VALUES ('$id','$coursename', '$types', '$dur', '$stat', '$start', '$end', '$startdate', '$enddate', '$fee', '$emi', '$mode', '$classperweek', '$rem');";
-    mysqli_query($con, $query);
-    mysqli_close($con);
-    if ($query) {
-        $msg = "Visitors Detail has been added.";
-    } else {
-        $msg = "Something Went Wrong. Please try again";
-        echo "Error";
-        die("Prepare failed: " . $mysqli->error);
-    }
-}
+	$query = "INSERT INTO `coursemaster` (`id`,`course_name`, `course_type`, `course_duration`, `status`, `start_date`, `end_date`, `actual_start_date`, `actual_end_date`, `course_fee`, `monthlyemi`, `mode`, `no_classes_per_week`, `remark`) VALUES ('$id','$coursename', '$types', '$dur', '$stat', '$start', '$end', '$startdate', '$enddate', '$fee', '$emi', '$mode', '$classperweek', '$rem');";
+	mysqli_query($con, $query);
+	mysqli_close($con);
+		if ($query) {
+	    	$msg="Visitors Detail has been added.";
+	  	}
+	  	else
+	    {
+	      	$msg="Something Went Wrong. Please try again";
+	    }
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -94,7 +96,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         <option value="Lal Kitaab Course">Lal Kitaab Course</option>
                         <option value="Vastu Shastra Course">Vastu Shastra Course</option>
                         <option value="Vedic Astrology Course">Vedic Astrology Course</option>
-                        <option value="Mobile Numerology Course">Mobile Numerology Course</option>
                     </select>
                     <span id="coursename" class="text-danger font-weight-bold"> </span>
                 </div>
@@ -239,27 +240,15 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
     </div>
 
     <script>
-        function validation() {
-            var coursefees1 = document.getElementById('coursefees').value;
-            var monthlyemis1 = document.getElementById('monthlyemis').value;
-            var remark1 = document.getElementById('remarks').value;
+    function validation() {
+        var coursefees1 = document.getElementById('coursefees').value;
+        var monthlyemis1 = document.getElementById('monthlyemis').value;
+        var remark1 = document.getElementById('remarks').value;
 
-            if (coursefees1 == "") {
-                console.log("dfbhukjshy")
-                document.getElementById('coursefeesspan').innerHTML = " ** Please fill the coursefee field";
-                return false;
-            }
-
-            if (monthlyemis1 == "") {
-                document.getElementById('monthlyemisspan').innerHTML = " ** Please fill the Monthly emi field";
-                return false;
-            }
-
-            if (remark1 == "") {
-                document.getElementById('remarksspan').innerHTML = " ** Please fill the remark field";
-                return false;
-
-            }
+        if (coursefees1 == "") {
+            console.log("dfbhukjshy")
+            document.getElementById('coursefeesspan').innerHTML = " ** Please fill the coursefee field";
+            return false;
         }
 
         if (monthlyemis1 == "") {
@@ -272,7 +261,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
             return false;
 
         }
-    
+    }
 
     // function selectedCourseType(){
     //     selCourseType = document.querySelector("#corsetypes").value;

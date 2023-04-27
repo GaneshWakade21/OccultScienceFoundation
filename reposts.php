@@ -342,7 +342,7 @@ $revapp = array();
 $count = 0;
 $revenueappont = mysqli_query($conn, "SELECT * FROM revenue_report");
 while ($row = mysqli_fetch_array($revenueappont)) {
-  $revapp[$count]['label'] = $row['type'];
+  $revapp[$count]['label'] = $row['Type'];
   $revapp[$count]['y'] = $row['total_revenue'];
   
   $count = $count + 1;
