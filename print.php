@@ -70,7 +70,8 @@ $msg = "";
 
 
 // }
-$pid = $_GET['pid'];
+
+$pid = ucwords($_POST['id']);
 $firstname = ucwords($_POST['first_name']);
 $middlename = ucwords($_POST['middle_name']);
 $lastname = ucwords($_POST['last_name']);
@@ -101,6 +102,10 @@ $sql = "UPDATE `appointment` SET `firstname`='$firstname',`middlename`='$middlen
 
 $conn = new mysqli($servername, $username, $password,$database);
 $result  = mysqli_query($conn, $sql);
+
+// header("Location : adminpage_search_user.php?pid=");
+
+
 // $today = date("Y-m-d");
 // $diff = date_diff(date_create($date_of_birth), date_create($today));
 // $age = $diff->format('%y');
@@ -132,30 +137,30 @@ $result  = mysqli_query($conn, $sql);
 // $transaction_details = $_POST['transaction_details'];
 // $doc_remarks = $_POST['doc_remarks'];
 
-// function id($fn,$lastname,$gendera,$doa){
-//     // echo $fn;
-//     $fnf =  substr($fn,0,1);
-//     $snf =  substr($lastname,0,1);
-//     $gen =  substr($gendera,0,1);
-//     $date = date('d-m-y h:i:s');
-//     $datea = preg_replace('/[^\p{L}\p{N}\s]/u', '', $date);
-//     $string = str_replace(' ', '', $datea);
-//     $doad = preg_replace('/[^\p{L}\p{N}\s]/u', '', $doa);
-//     // echo "<br>".$fnf."<br>";
-//     $id = $fnf.$snf.$gen.$doad.$string;
-//     // echo $id;
-//     return $id;
-//   }
+function id($fn,$lastname,$gendera,$doa){
+    // echo $fn;
+    $fnf =  substr($fn,0,1);
+    $snf =  substr($lastname,0,1);
+    $gen =  substr($gendera,0,1);
+    $date = date('d-m-y h:i:s');
+    $datea = preg_replace('/[^\p{L}\p{N}\s]/u', '', $date);
+    $string = str_replace(' ', '', $datea);
+    $doad = preg_replace('/[^\p{L}\p{N}\s]/u', '', $doa);
+    // echo "<br>".$fnf."<br>";
+    $id = $fnf.$snf.$gen.$doad.$string;
+    // echo $id;
+    return $id;
+  }
 
-  $pid = id($first_name,$last_name,$gender,$date_of_appointment);
+//   $pid = id($first_name,$last_name,$gender,$date_of_appointment);
   $id = strtoupper($pid);  
 
-  
-  $transaction_details = $_FILES['transaction_details'];
+//   commented 151,157,158,155,159,179 currently we are on 154 line
+//   $transaction_details = $_FILES['transaction_details'];
 
-$transaction_details_filename = "$id".$_FILES["transaction_details"]["name"];
-$transaction_details_tempname = $_FILES["transaction_details"]["tmp_name"];
-$transaction_details_folder = "./assets/docs/" . $transaction_details_filename;
+// $transaction_details_filename = "$id".$_FILES["transaction_details"]["name"];
+// $transaction_details_tempname = $_FILES["transaction_details"]["tmp_name"];
+// $transaction_details_folder = "./assets/docs/" . $transaction_details_filename;
   
   
 //   $masked_adhar_card_filename = $masked_aadhar_card;
@@ -175,7 +180,7 @@ $transaction_details_folder = "./assets/docs/" . $transaction_details_filename;
 
   
   
-move_uploaded_file($transaction_details_tempname, $transaction_details_folder);
+// move_uploaded_file($transaction_details_tempname, $transaction_details_folder);
 //   move_uploaded_file($passport_size_photo_tempname, $passport_size_photo_folder);
 //   move_uploaded_file($medical_document_tempname, $medical_document_folder);
   
@@ -207,6 +212,7 @@ $cid = $_POST['cid'];
 //   }
   
   
+echo "Updation successful";
   
 ?>
 
@@ -217,4 +223,3 @@ $cid = $_POST['cid'];
 //     include('error.php');
 // }
 ?>
-

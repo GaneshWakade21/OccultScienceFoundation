@@ -55,8 +55,23 @@ $upino = $_POST['upino'];
 $amount = $_POST['amount'];
 $transdate = $_POST['transdate'];
 $transtime = $_POST['transtime'];
-$translip = $_POST['translip'];
+// $translip = $_POST['translip'];
 $remark = $_POST['remark'];
+     
+ #file name with a random number so that similar dont get replaced
+  $translip = $_FILES["translip"]["name"];
+
+ #temporary file name to store file
+ $tempname = $_FILES["translip"]["tmp_name"];
+
+ #TO move the uploaded file to specific location
+ move_uploaded_file($tempname, "appoint_translip/".$translip);
+
+ 
+ #retrieve file title
+//  $img_ex = pathinfo($translip, PATHINFO_EXTENSION);
+//  $img_ex_lc = strtolower($img_ex);
+//  $filetitle =   $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
 
 // if (isset($_POST['age'])) {
 //     $age = $_POST['age'];
@@ -118,49 +133,54 @@ $mysqli = new mysqli("localhost", "root", "", "astrology");
 if ($mysqli->connect_error) {
   die("Connection failed: " . $mysqli->connect_error);
 }
-$stmt = $mysqli->prepare("INSERT INTO appointment (id, firstname, middlename, lastname, fathername, dob, age, tob, gender, birthplace, birthstate, email, phone, doappoint, 
--- hour, minfrom, ampmfrom, hrto, minto, ampmto,
-timefrom,timeto, 
-totaldur, fee, query, upi, upino, amount,transdate,transtime, translip, remark) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-if ($stmt === false) {
-  die("Prepare failed: " . $mysqli->error);
-}
-$stmt->bind_param(
-  "ssssssisssssisssssssssssbs",
-  $id,
-  $firstname,
-  $middlename,
-  $lastname,
-  $fathername,
-  $dob,
-  $age,
-  $tob,
-  $gender,
-  $birthpalce,
-  $birthstate,
-  $email,
-  $phone,
-  $doappoint,
-  // $hour, $minfrom, $ampmfrom, $hrto, $minto, $ampmto, 
-  $timefrom,
-  $timeto,
-  $totaldur,
-  $fee,
-  $querystring,
-  $upi,
-  $upino,
-  $amount,
-  $transdate,
-  $transtime,
-  $translip,
-  $remark
-);
+
+$sql = "INSERT INTO `appointment` (`id`, `firstname`, `middlename`, `lastname`, `fathername`, `dob`, `age`, `tob`, `gender`, `birthplace`, `birthstate`, `email`, `phone`, `doappoint`, `timefrom`, `timeto`, `totaldur`, `fee`, `query`, `upi`, `upino`, `amount`, `transdate`, `transtime` ,`translip` , `remark`) VALUES ('$id', '$firstname', '$middlename', '$lastname', '$fathername', '$dob', '$age', '$tob', '$gender', '$birthpalce', '$birthstate', '$email', '$phone', '$doappoint', '$timefrom', '$timeto', '$totaldur', '$fee', '$querystring', '$upi', '$upino', '$amount', '$transdate', '$transtime', '$translip', '$remark');";
+$result = mysqli_query($mysqli, $sql);
+header("Location: appoint.html");
+
+// $stmt = $mysqli->prepare("INSERT INTO appointment (id, firstname, middlename, lastname, fathername, dob, age, tob, gender, birthplace, birthstate, email, phone, doappoint, 
+// -- hour, minfrom, ampmfrom, hrto, minto, ampmto,
+// timefrom,timeto, 
+// totaldur, fee, query, upi, upino, amount,transdate,transtime, translip, remark) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+// if ($stmt === false) {
+//   die("Prepare failed: " . $mysqli->error);
+// }
+// $stmt->bind_param(
+//   "ssssssisssssisssssssssssbs",
+//   $id,
+//   $firstname,
+//   $middlename,
+//   $lastname,
+//   $fathername,
+//   $dob,
+//   $age,
+//   $tob,
+//   $gender,
+//   $birthpalce,
+//   $birthstate,
+//   $email,
+//   $phone,
+//   $doappoint,
+//   // $hour, $minfrom, $ampmfrom, $hrto, $minto, $ampmto, 
+//   $timefrom,
+//   $timeto,
+//   $totaldur,
+//   $fee,
+//   $querystring,
+//   $upi,
+//   $upino,
+//   $amount,
+//   $transdate,
+//   $transtime,
+//   $filetitle,
+//   $remark
+// );
 
 
-$stmt->execute();
-echo "Regestration Successfully... ";
-$stmt->close();
-$mysqli->close();
+// $stmt->execute();
+// echo "Regestration Successfully... ";
+// $stmt->close();
+// $mysqli->close();
 
 // i - integer 
 // d-double 
