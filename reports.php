@@ -23,7 +23,15 @@ $result1 = mysqli_query($conn, $query1);
 
 // Business count updation done 
 
-$businesscount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('business', query) > 0 AND doappoint >= datefrom AND start_date <= dateto";
+$businesscount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('business', query) > 0 AND doappoint >= $datefrom AND doappoint <= $dateto";
+
+echo $businesscount;
+if (mysqli_query($conn, $businesscount)) {
+    echo "Record updated successfully";
+  } else {
+    echo "Error updating record: " . mysqli_error($conn);
+  }
+
 $b = mysqli_query($conn, $businesscount);
 // print_r($b);
 
