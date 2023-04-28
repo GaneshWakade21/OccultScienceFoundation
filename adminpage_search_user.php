@@ -1,8 +1,78 @@
 <?php
 require('db.php');
+// $msg = "";
+
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $pid = $_COOKIE["pidcookie"];
+// $firstname = ucwords($_POST['first_name']);
+// $middlename = ucwords($_POST['middle_name']);
+// $lastname = ucwords($_POST['last_name']);
+// $father_name = ucwords($_POST['father_name']);
+// $date_of_birth = $_POST['date_of_birth'];
+// $age = $_POST['age'];
+// $time_of_birth = $_POST['time_of_birth'];
+// $gender = $_POST['gender'];
+// $city = $_POST['city'];
+// $state = $_POST['state'];
+// $email_id = $_POST['email_id'];
+// $phone_number = $_POST['phone_number'];
+// $date_of_appointment = $_POST['date_of_appointment'];
+// $timefrom = $_POST['timefrom'];
+// $timeto = $_POST['timeto'];
+// $duration = $_POST['duration'];
+// $fee = $_POST['fee'];
+// $query = $_POST['query_type'];
+// $upi = $_POST['upi'];
+// $upi_phone = $_POST['upi_phone_number'];
+// $amount = $_POST['amount'];
+// $trans_date = $_POST['trans_date'];
+// $trans_time = $_POST['trans_time'];
+// $trans_slip = $_POST['trans_slip'];
+// $remark = $_POST['remarks'];
+
+// $conn = new mysqli($servername, $username, $password,$database);
+
+// function id($fn,$lastname,$gendera,$doa){
+//     // echo $fn;
+//     $fnf =  substr($fn,0,1);
+//     $snf =  substr($lastname,0,1);
+//     $gen =  substr($gendera,0,1);
+//     $date = date('d-m-y h:i:s');
+//     $datea = preg_replace('/[^\p{L}\p{N}\s]/u', '', $date);
+//     $string = str_replace(' ', '', $datea);
+//     $doad = preg_replace('/[^\p{L}\p{N}\s]/u', '', $doa);
+//     // echo "<br>".$fnf."<br>";
+//     $id = $fnf.$snf.$gen.$doad.$string;
+//     // echo $id;
+//     return $id;
+//   }
+
+//   $pid = id($first_name,$last_name,$gender,$date_of_appointment);
+//   $id = strtoupper($pid);  
+
+//   $sql = "UPDATE `appointment` SET `firstname`='$firstname',`middlename`='$middlename',`lastname`='$lastname',`fathername`='$father_name',`dob`='$date_of_birth',`age`='$age',`tob`='$time_of_birth',`gender`='$gender',`birthplace`='$city',`birthstate`='$state',`email`='$email_id',`phone`='$phone_number',`doappoint`='$date_of_appointment',`timefrom`='$timefrom',`timeto`='$timeto',`totaldur`='$duration',`fee`='$fee',`query`='$query',`upi`='$upi',`upino`='$upi_phone',`amount`='$amount',`transdate`='$trans_date',`transtime`='$trans_time',`translip`='$trans_slip',`remark`='$remark' WHERE `id`='$id'";
+
+//   $result  = mysqli_query($conn, $sql);
+
+// $transaction_details = $_FILES['transaction_details'];
+
+// $transaction_details_filename = "$id".$_FILES["transaction_details"]["name"];
+// $transaction_details_tempname = $_FILES["transaction_details"]["tmp_name"];
+// $transaction_details_folder = "./assets/docs/" . $transaction_details_filename;
+
+// move_uploaded_file($transaction_details_tempname, $transaction_details_folder);
+// //   move_uploaded_file($passport_size_photo_tempname, $passport_size_photo_folder);
+// //   move_uploaded_file($medical_document_tempname, $medical_document_folder);
+// }
+
+?>
+
+
+
+<?php
+require('db.php');
 // $conn = new mysqli($servername, $username, $password,$database);
 $pid = $_GET['pid'];
-
 
 $user = array();
 $sql = "SELECT * FROM `appointment`";
@@ -31,7 +101,7 @@ if(!$avail){
 }
 
 
-
+// echo var_dump($user);
 ?>
 
 
@@ -131,6 +201,8 @@ if(!$avail){
                             Personal Details
                         </h6>
                         <div class="flex flex-wrap">
+
+                        <input name="id" type="text" hidden value="<?php echo $user['id'];?>">
 
                             <div class="w-full lg:w-2/12 px-4">
                                 <div class="relative w-full mb-3">
@@ -386,7 +458,7 @@ if(!$avail){
                                     </label>
                                     <input type="number" class="w-full h-8 px-2 text-sm
       text-gray-700 placeholder-gray-600 border rounded-lg
-      focus:shadow-outline" placeholder="Age" name="duration" value="<?php echo $user['totaldur'];?>" required>
+      focus:shadow-outline" name="duration" value="<?php echo $user['totaldur'];?>" required>
                                 </div>
                             </div>
 

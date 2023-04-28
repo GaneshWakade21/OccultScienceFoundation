@@ -26,7 +26,7 @@ if (mysqli_connect_errno()) {
     <div class="container">
         <div class="title"><u>COURSE BOOKING AND QUERY FORM</u></div>
         <div class="content">
-            <form action="bookingcourse.php" method="post">
+            <form action="bookingcourse.php" method="post" enctype="multipart/form-data">
                 <div class="input-box">
                     <span class="details">Type</span>
                     <select name="type" placeholder="Select Course Name">
@@ -85,7 +85,7 @@ if (mysqli_connect_errno()) {
                     </div>
                     <div class="input-box">
                         <span class="details">Course Name</span>
-                        <select name="course_name" placeholder="Select Course Name">
+                        <select onchange="change()" name="course_name" id="coursenames" placeholder="Select Course Name">
                         <?php
                         $sql = "SELECT DISTINCT course_name FROM coursemaster;";
                         $result = mysqli_query($con, $sql);
@@ -102,21 +102,10 @@ if (mysqli_connect_errno()) {
                     </div>
                     <div class="input-box">
                         <span class="details">Course Type</span>
-                        <select name="course_type" placeholder="Select Course Name">
-                        <script>
-                            function selectedCourse() {
-                                selCourses = document.querySelector("#coursenames").value;
-                                document.cookie = "name = " + selCourses;
-                            }
-                            
-                        </script>
-
-                        <?php
-
-                            $name = $_COOKIE['name'];
-                            // echo $name;
-                            $sql1 = "SELECT course_type FROM coursemaster WHERE `course_name`= '$name';";
-                            $result = mysqli_query($con, $sql1);
+                        <select onchange="change()" name="course_type" id="coursetypes" placeholder="Select Course Name">
+                            <?php
+                            $sql = "SELECT course_type FROM coursemaster WHERE `course_name`= 'Tarot Cards Course';";
+                            $result = mysqli_query($con, $sql);
                             $num = mysqli_num_rows($result);
                             echo var_dump($result);
                             if($num > 0){
@@ -125,89 +114,29 @@ if (mysqli_connect_errno()) {
                                 <option value="'. $row["course_type"] .'">'. $row["course_type"] .'</option>';
                             }
                             }
-                        ?>
+                    
+                            ?>
 
                         </select>
                     </div>
+
                     <div class="input-box">
                         <span class="details">Batch</span>
-                        <select name="batch" placeholder="Please Course First">
-                        <script>
-                            function selectedCourse() {
-                                selCourses = document.querySelector("#coursenames").value;
-                                document.cookie = "name = " + selCourses;
-                                
-                            }
-                            
-                        </script>
-
-                        <?php
-
-                        // batch_start_date
-                        // batch_end_dste
-                            $name = $_COOKIE['name'];
-                            // echo $name;
-                            $sql2 = "SELECT batch_start_date FROM batchmaster WHERE `course_name`= '$name';";
-                            $result = mysqli_query($con, $sql2);
-                            $num = mysqli_num_rows($result);
-                            echo var_dump($result);
-                            if($num > 0){
-                            while($row = mysqli_fetch_assoc($result)){
-                                echo '
-                                <option value="'. $row["batch_start_date"] .'">'. $row["batch_start_date"] .'</option>';
-                            }
-                            }
-                        ?>
-
+                        <select onchange="change()" name="batch" id="batches" placeholder="Please Course First">
                         </select>
                     </div>
 
                     <div class="input-box">
                             <span class="details">Total Fee</span>
-                            <?php
-                                $name = $_COOKIE['name'];
-                                // echo $name;
-                                $sql3 = "SELECT course_fee FROM coursemaster WHERE `course_name`= '$name';";
-                                $result = mysqli_query($con, $sql3);
-                                $row = mysqli_fetch_assoc($result);
-                                // echo $result;
-                            ?>
-                            <input type="text" name="upi_no" value="<?php echo $row['course_fee']; ?>" placeholder="Enter UPI Number" required>
+                          
+                            <input onchange="change()" type="text" id="fee" name="fee" value="" placeholder="" required>
                         </div>
 
                 </div>
 
                 <div class="input-box">
                             <span class="details">Course Duration</span>
-                            <select name="batch" placeholder="Please Course First">
-                        <script>
-                            function selectedCourse() {
-                                selCourses = document.querySelector("#coursenames").value;
-                                document.cookie = "name = " + selCourses;
-                                
-                            }
-                            
-                        </script>
-
-                        <?php
-
-                        // batch_start_date
-                        // batch_end_dste
-                            $name = $_COOKIE['name'];
-                            // echo $name;
-                            $sql2 = "SELECT batch_start_date FROM batchmaster WHERE `course_name`= '$name';";
-                            $result = mysqli_query($con, $sql2);
-                            $num = mysqli_num_rows($result);
-                            echo var_dump($result);
-                            if($num > 0){
-                            while($row = mysqli_fetch_assoc($result)){
-                                echo '
-                                <option value="'. $row["batch_start_date"] .'">'. $row["batch_start_date"] .'</option>';
-                            }
-                            }
-                        ?>
-
-                        </select>
+                            <input onchange="change()" type="text" id="duration" name="duration" value="" placeholder="" required>
                         </div>
 
 
@@ -281,12 +210,118 @@ if (mysqli_connect_errno()) {
 
 
             </form>
-
-
-
-
         </div>
     </div>
+
+<script>
+        function change(){
+            autoCourseType();
+            autoBatch();
+            autoFee();
+            autoCourseDuration();
+        }
+
+       function autoCourseType() {
+        coursetypes = document.querySelector("#coursetypes");
+        coursetypes.innerHTML = '';
+        cnames = document.querySelector("#coursenames").value;
+        ctypes = document.querySelector("#coursetypes").value;
+        dataString = {
+            "cname": cnames,
+            "ctype": ctypes
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'batch_auto_ctype.php',
+            data: {
+                data: dataString,
+            },
+            success: function(response) {
+                ctypeArr = JSON.parse(response)
+                for (let i = 0; i < ctypeArr.length; i++) {
+                    option = document.createElement("option");
+                    option.innerText = ctypeArr[i];
+                    option.setAttribute("value", ctypeArr[i]);
+                    coursetypes.appendChild(option);
+                }
+            }
+        });
+    }
+
+    function autoBatch() {
+        batches = document.querySelector("#batches");
+        batches.innerHTML = '';
+        cnames = document.querySelector("#coursenames").value;
+        ctypes = document.querySelector("#coursetypes").value;
+        dataString = {
+            "cname": cnames,
+            "ctype": ctypes
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'course_auto_startdate.php',
+            data: {
+                data: dataString,
+            },
+            success: function(response) {
+                ctypeArr = JSON.parse(response)
+                for (let i = 0; i < ctypeArr.length; i++) {
+                    option = document.createElement("option");
+                    option.innerText = ctypeArr[i];
+                    option.setAttribute("value", ctypeArr[i]);
+                    batches.appendChild(option);
+                }
+            }
+        });
+    }
+
+    function autoFee(){
+        fee = document.querySelector("#fee");
+ 
+        cnames = document.querySelector("#coursenames").value;
+        ctypes = document.querySelector("#coursetypes").value;
+        dataString = {
+            "cname": cnames,
+            "ctype": ctypes
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'course_auto_fee.php',
+            data: {
+                data: dataString,
+            },
+            success: function(response) {
+                console.log(response)
+                fee.value = 547;
+            }
+        });
+    }
+
+    function autoCourseDuration(){
+        duration = document.querySelector("#duration");
+    
+        cnames = document.querySelector("#coursenames").value;
+        ctypes = document.querySelector("#coursetypes").value;
+        dataString = {
+            "cname": cnames,
+            "ctype": ctypes
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'course_auto_duration.php',
+            data: {
+                data: dataString,
+            },
+            success: function(response) {
+                console.log(response)
+                duration.value = 547;
+            }
+        });
+    }
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.4.js"
+integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 </body>
 
 </html>

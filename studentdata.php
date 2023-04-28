@@ -193,7 +193,7 @@ $result = mysqli_query($mysqli, $sql);
                     <td>' . $row["amount_paid"] . '</td>
                     <td>' . $row["trans_date"] . '</td>
                     <td>' . $row["trans_time"] . '</td>
-                    <td>' . $row["trans_slip"] . '</td>
+                    <td><a> <img src="course_translip/'. $row["trans_slip"] .'" width="30" height="30"> '. $row["trans_slip"] .'</a></td>  
                     <td>' . $row["remark"] . '</td>
                     <td><a href="update_design.php?id=' . $row["id"] . '">Edit</a></td>
                     </tr>';

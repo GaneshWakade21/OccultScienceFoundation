@@ -3,10 +3,7 @@ require('db.php');
 
 // $conn = new mysqli($servername, $username, $password,$database);
 
-$date = date("Y-m-d");
-$sql = "SELECT * FROM `appointment` WHERE date(`doappoint`) = '$date';";
 
-$result = mysqli_query($conn, $sql);
 
 
 if (!$_COOKIE['aminloggedin']) {
@@ -123,7 +120,11 @@ if (!$_COOKIE['aminloggedin']) {
 
   <div class="w-full flex mt-44 justify-center items-center my-14 text-2xl font-semibold">TODAY APPOINTMENT</div>
   <div class="overflow-x-auto relative ">
-    <table class="w-full text-sm text-left text-gray-500 ">
+
+
+  
+           
+               <table class="w-full text-sm text-left text-gray-500 ">
       <thead class="text-xs text-gray-700 uppercase">
         <tr>
           <th scope="col" class="py-3 px-6">
@@ -148,46 +149,37 @@ if (!$_COOKIE['aminloggedin']) {
             Age
           </th>
           <th scope="col" class="py-3 px-6">
-            Profession
+            Time Of Birth
           </th>
           <th scope="col" class="py-3 px-6">
             Gender
           </th>
           <th scope="col" class="py-3 px-6">
+            Birthplace
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Birthstate
+          </th>
+          <th scope="col" class="py-3 px-6">
             Email
           </th>
           <th scope="col" class="py-3 px-6">
-            Phone Number
+            Phone no
           </th>
           <th scope="col" class="py-3 px-6">
-            Hrs
+            Date of Appointment
           </th>
           <th scope="col" class="py-3 px-6">
-            Min
+            Time
           </th>
           <th scope="col" class="py-3 px-6">
-            AM/PM
+            Total Duration
           </th>
           <th scope="col" class="py-3 px-6">
-            City
+            Fee
           </th>
           <th scope="col" class="py-3 px-6">
-            State
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Date Of Appointment
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Booking Time
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Booking Slots
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Fee Charged
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Query Type
+            Query
           </th>
           <th scope="col" class="py-3 px-6">
             UPI
@@ -198,16 +190,64 @@ if (!$_COOKIE['aminloggedin']) {
           <th scope="col" class="py-3 px-6">
             Amount
           </th>
-
           <th scope="col" class="py-3 px-6">
-            Transaction
+            Transaction Date
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Transaction Time
           </th>
 
           <th scope="col" class="py-3 px-6">
-            Remarks of Doctor
+            Transaction Slip
+          </th>
+
+          <th scope="col" class="py-3 px-6">
+            Remarks
           </th>
         </tr>
       </thead>
+
+<?php
+  $date = date("Y-m-d");
+  $sql = "SELECT * FROM `appointment` WHERE date(`doappoint`) = '$date';";
+//   $sql = "SELECT * FROM `appointment`;";
+  $result = mysqli_query($conn, $sql);
+              $num = mysqli_num_rows($result);
+      if($num > 0){
+        while($row = mysqli_fetch_assoc($result)){
+            echo '
+          <td>'. $row["id"] .'</td>
+          <td>'. $row["firstname"] .'</td>
+          <td>'. $row["middlename"] .'</td>
+          <td>'. $row["lastname"] .'</td>
+          <td>'. $row["fathername"] .'</td>
+          <td>'. $row["dob"] .'</td>
+          <td>'. $row["age"] .'</td>
+          <td>'. $row["tob"] .'</td>
+          <td>'. $row["gender"] .'</td>
+          <td>'. $row["birthplace"] .'</td>
+          <td>'. $row["birthstate"] .'</td>
+          <td>'. $row["email"] .'</td>
+          <td>'. $row["phone"] .'</td>
+          <td>'. $row["doappoint"] .'</td>
+          <td>'. $row["timefrom"] .' to '. $row["timeto"] .'</td>
+          <td>'. $row["totaldur"] .'</td>
+          <td>'. $row["fee"] .'</td>
+          <td>'. $row["query"] .'</td>
+          <td>'. $row["upi"] .'</td>
+          <td>'. $row["upino"] .'</td>
+          <td>'. $row["amount"] .'</td>
+          <td>'. $row["transdate"] .'</td>
+          <td>'. $row["transtime"] .'</td>
+          <td><a> <img src="appoint_translip/'. $row["translip"] .'" width="30" height="30"> '. $row["translip"] .'</a></td>  
+          <td>'. $row["remark"] .'</td>
+          </tr>';
+     
+            }
+      }
+
+  ?>
+
       <script> function myFunction() {
           // Get the text field
           var copyText = document.getElementById("myInput");

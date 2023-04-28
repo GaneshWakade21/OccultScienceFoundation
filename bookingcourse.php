@@ -16,8 +16,17 @@ $upi_no = $_POST['upi_no'];
 $amount_paid = $_POST['amount_paid'];
 $trans_date = $_POST['trans_date'];
 $trans_time = $_POST['trans_time'];
-$trans_slip = $_POST['trans_slip'];
+// $trans_slip = $_POST['trans_slip'];
 $remark = $_POST['remark'];
+
+ #file name with a random number so that similar dont get replaced
+ $translip = $_FILES["trans_slip"]["name"];
+
+ #temporary file name to store file
+ $tempname = $_FILES["trans_slip"]["tmp_name"];
+
+ #TO move the uploaded file to specific location
+ move_uploaded_file($tempname, "course_translip/".$translip);
 
 function id($first_name, $middle_name, $last_name, $coursename, $types)
 {
@@ -51,53 +60,15 @@ function id($first_name, $middle_name, $last_name, $coursename, $types)
 $pid = id($first_name, $middle_name, $last_name, $course_name, $course_type);
 $id = strtoupper($pid);
 
-
-
 // Database Connection 
 error_reporting(E_ALL);
 $mysqli = new mysqli("localhost", "root", "", "astrology");
 if ($mysqli->connect_error) {
   die("Connection failed: " . $mysqli->connect_error);
 }
-$stmt = $mysqli->prepare("INSERT INTO coursebooking (id, first_name, middle_name, last_name, fathers_name, mob_no , email_id , address , pin_code , course_name , course_type , batch ,pay_type ,  upi, upi_no, amount_paid ,trans_date, trans_time, trans_slip, remark) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-if ($stmt === false) {
-  die("Prepare failed: " . $mysqli->error);
-}
-$stmt->bind_param(
-  "ssssssssisssssisssbs",
-  $id,
-  $first_name,
-  $middle_name,
-  $last_name,
-  $fathers_name,
-  $mob_no,
-  $email_id,
-  $address,
-  $pin_code,
-  $course_name,
-  $course_type,
-  $batch,
-  $pay_type,
-  $upi,
-  $upi_no,
-  $amount_paid,
-  $trans_date,
-  $trans_time,
-  $trans_slip,
-  $remark
-);
 
-
-$stmt->execute();
-echo "Regestration Successfully... ";
-// header("location: ./courses.html");
-$stmt->close();
-$mysqli->close();
-
-// i - integer 
-// d-double 
-// s- string 
-// b - blob
-
+$sql = "INSERT INTO `coursebooking` (`id`, `first_name`, `middle_name`, `last_name`, `fathers_name`, `mob_no`, `email_id`, `address`, `pin_code`, `course_name`, `course_type`, `batch`, `pay_type`, `upi`, `upi_no`, `amount_paid`, `trans_date`, `trans_time`, `trans_slip`, `remark`) VALUES ('$id', '$first_name', '$middle_name', '$last_name', '$fathers_name', '$mob_no', '$email_id', '$address', '$pin_code', '$course_name', '$course_type', '$batch', '$pay_type', '$upi', '$upi_no', '$amount_paid', '$trans_date', '$trans_time', '$translip', '$remark');";
+$result = mysqli_query($mysqli, $sql);
+header("Location: bookcourse.php");
 
 ?>
