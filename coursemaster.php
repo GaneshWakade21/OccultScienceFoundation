@@ -188,10 +188,6 @@ $result = mysqli_query($mysqli , $sql);
                     <th>Course Type</th>
                     <th>Course Duration</th>
                     <th>Status</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Actual Start Date</th>
-                    <th>Actual End Date</th>
                     <th>Course Fee</th>
                     <th>Mode</th>
                     <th>No_of_classes_per_week</th>
@@ -209,10 +205,6 @@ $result = mysqli_query($mysqli , $sql);
                     <td>'. $row["course_type"] .'</td>
                     <td>'. $row["course_duration"] .'</td>
                     <td>'. $row["status"] .'</td>
-                    <td>'. $row["start_date"] .'</td>
-                    <td>'. $row["end_date"] .'</td>
-                    <td>'. $row["actual_start_date"] .'</td>
-                    <td>'. $row["actual_end_date"] .'</td>
                     <td>'. $row["course_fee"] .'</td>
                     <td>'. $row["mode"] .'</td>
                     <td>'. $row["no_classes_per_week"] .'</td>

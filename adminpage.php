@@ -137,7 +137,7 @@ if (!$_COOKIE['aminloggedin']) {
 
       <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
         <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-          <h1 class="title-font font-medium text-3xl text-gray-900">Welcom to Admin Page
+          <h1 class="title-font font-medium text-3xl text-gray-900">Welcome to Admin Page
             <!-- <?php echo " " . $_COOKIE['admin']; ?> -->
           </h1>
           <p class="leading-relaxed mt-4">“We need 4 hugs a day for survival. We need 8 hugs a day for maintenance. We
@@ -148,7 +148,7 @@ if (!$_COOKIE['aminloggedin']) {
 
           <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Search Candidate</h2>
           <div class="relative mb-4">
-            <label for="full-name" class="leading-7 text-sm text-gray-600">Candidate ID</label>
+            <label for="full-name" class="leading-7 text-sm text-gray-600">Enter Candidate ID or Phone</label>
             <input type="text" id="full-name" placeholde="Candidate ID / Mobile Number" name="pid"
               class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
           </div>
