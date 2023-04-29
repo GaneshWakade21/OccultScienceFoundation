@@ -131,60 +131,60 @@ if (!$_COOKIE['aminloggedin']) {
             Applicant id
           </th>
           <th scope="col" class="py-3 px-6">
-            First Name
+            Name
           </th>
-          <th scope="col" class="py-3 px-6">
+          <!-- <th scope="col" class="py-3 px-6">
             Middle Name
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Last Name
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Father's name
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Date Of Birth
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Age
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Time Of Birth
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Gender
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Birthplace
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Birthstate
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Email
-          </th>
+          </th> -->
           <th scope="col" class="py-3 px-6">
             Phone no
           </th>
-          <th scope="col" class="py-3 px-6">
+          <!-- <th scope="col" class="py-3 px-6">
             Date of Appointment
-          </th>
+          </th> -->
           <th scope="col" class="py-3 px-6">
             Time
           </th>
-          <th scope="col" class="py-3 px-6">
+          <!-- <th scope="col" class="py-3 px-6">
             Total Duration
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             Fee
-          </th>
+          </th> -->
           <th scope="col" class="py-3 px-6">
             Query
           </th>
-          <th scope="col" class="py-3 px-6">
+          <!-- <th scope="col" class="py-3 px-6">
             UPI
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th> -->
+          <!-- <th scope="col" class="py-3 px-6">
             UPI Phone
           </th>
           <th scope="col" class="py-3 px-6">
@@ -203,7 +203,7 @@ if (!$_COOKIE['aminloggedin']) {
 
           <th scope="col" class="py-3 px-6">
             Remarks
-          </th>
+          </th> -->
         </tr>
       </thead>
 
@@ -217,30 +217,10 @@ if (!$_COOKIE['aminloggedin']) {
         while($row = mysqli_fetch_assoc($result)){
             echo '
           <td>'. $row["id"] .'</td>
-          <td>'. $row["firstname"] .'</td>
-          <td>'. $row["middlename"] .'</td>
-          <td>'. $row["lastname"] .'</td>
-          <td>'. $row["fathername"] .'</td>
-          <td>'. $row["dob"] .'</td>
-          <td>'. $row["age"] .'</td>
-          <td>'. $row["tob"] .'</td>
-          <td>'. $row["gender"] .'</td>
-          <td>'. $row["birthplace"] .'</td>
-          <td>'. $row["birthstate"] .'</td>
-          <td>'. $row["email"] .'</td>
+          <td>'. $row["firstname"] .' '. $row["middlename"] .' '. $row["lastname"] .'</td>
           <td>'. $row["phone"] .'</td>
-          <td>'. $row["doappoint"] .'</td>
           <td>'. $row["timefrom"] .' to '. $row["timeto"] .'</td>
-          <td>'. $row["totaldur"] .'</td>
-          <td>'. $row["fee"] .'</td>
           <td>'. $row["query"] .'</td>
-          <td>'. $row["upi"] .'</td>
-          <td>'. $row["upino"] .'</td>
-          <td>'. $row["amount"] .'</td>
-          <td>'. $row["transdate"] .'</td>
-          <td>'. $row["transtime"] .'</td>
-          <td><a> <img src="appoint_translip/'. $row["translip"] .'" width="30" height="30"> '. $row["translip"] .'</a></td>  
-          <td>'. $row["remark"] .'</td>
           </tr>';
      
             }

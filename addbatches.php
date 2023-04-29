@@ -75,19 +75,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
             <div class="form-group">
                 <label for="coursetypes" class="font-weight-bold"> Course type: </label>
                 <select onchange="autoGetMonth()" name="coursetypes" id="coursetypes">
-                    <?php
-                            $sql = "SELECT course_type FROM coursemaster WHERE `course_name`= 'Tarot Cards Course';";
-                            $result = mysqli_query($con, $sql);
-                            $num = mysqli_num_rows($result);
-                            echo var_dump($result);
-                            if($num > 0){
-                            while($row = mysqli_fetch_assoc($result)){
-                                echo '
-                                <option value="'. $row["course_type"] .'">'. $row["course_type"] .'</option>';
-                            }
-                            }
-                    
-                            ?>
+           
                 </select>
                 <span id="coursetype" class="text-danger font-weight-bold"> </span>
             </div>
@@ -337,6 +325,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
     <script>
 
+
   function autoWeekLimit() {
                     classPerWeek = parseInt(document.getElementById("cpw").value);
                     $('.weekCheckBox').click(function() {
@@ -370,43 +359,43 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     option.setAttribute("value", ctypeArr[i]);
                     coursetypes.appendChild(option);
                 }
+                autoGetMonth();
+               
             }
         });
     }
 
-    function autoGetMonth() {
-        startdate = document.getElementById("startdate");
-        hiddenGetMonth = document.getElementById("hiddenGetMonth");
-        
+    function autoGetMonth(){
         cnames = document.querySelector("#coursenames").value;
         ctypes = document.querySelector("#coursetypes").value;
         dataString = {
             "cname": cnames,
             "ctype": ctypes
         };
+        // console.log("ctypes is",ctypes);
 
-        $.ajax({
+                $.ajax({
             type: 'POST',
             url: 'batch_auto_getDate.php',
             data: {
                 data: dataString,
             },
             success: function(response) {
-                hiddenGetMonth.innerText = response;
+                // console.log("datastring is ", dataString)
+                // console.log("Response",response)
+                hiddenGetMonth.value = response;
             }
         });
     }
 
     function autoEndDate() {
-        dura = document.getElementById("hiddenGetMonth").innerText;
+        dura = document.getElementById("hiddenGetMonth").value;
         sdate = document.getElementById("startdate").value;
         edate = document.getElementById("enddate");
         if(sdate == ""){
             return;
         }
         increamentMonth = dura.slice(dura.indexOf("Month")-2,dura.indexOf("Month")-1);
-console.log(dura)
-console.log(increamentMonth)
         let sdateYear = sdate.slice(0, 4)
         let sdateMonth = sdate.slice(5, 7)
         let sdateDay = sdate.slice(8, 10)
@@ -424,6 +413,11 @@ console.log(increamentMonth)
 
         edate.value = [year, month, day].join('-');
     }
+
+    $(document).ready(function () {
+            $("#coursenames").trigger('change');
+            // $("#coursetypes").trigger('change');
+        });
     </script>
     <!-- <script src="jquery-3.6.4.min.js"></script> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

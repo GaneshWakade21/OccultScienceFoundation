@@ -1,13 +1,6 @@
 <?php
 require('db.php');
 $msg = "";
-
-
-
-
-
-
-
 // UPDATE `patients` SET `concern` = 'Career', `date_of_appointement` = '2022-10-17', `time_of_appointement` = '12:00pm - 13:00pm', `appointment_fill_time` = NOW(), `next_appointement_date` = '2022-10-26', `next_appointement-time` = '12:00pm - 13:00pm', `fee_charged` = '500', `mode_of_payment` = 'cash', `transaction_details` = 'cash payment', `remarks_doctor` = 'having carrer issure gets more testion which is not requierd' WHERE `patients`.`id` = 'SKF2022102020221018';
 
 

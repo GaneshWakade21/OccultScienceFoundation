@@ -11,11 +11,9 @@ $result = mysqli_query($con, $sql);
 $num = mysqli_num_rows($result);
 
 if($num > 0){
-    $ctypeArr = array();
     while($row = mysqli_fetch_assoc($result)){
-        array_push($ctypeArr,$row["course_fee"]);
+    echo $row["course_fee"];
     }
-    echo json_encode($ctypeArr);
 }
 
 ?>

@@ -73,10 +73,6 @@ if (mysqli_connect_errno()) {
                         <input type="text" name="pin_code" placeholder="Pin Code" required>
                     </div>
 
-
-
-
-
                 </div>
 
                 <div class="course-details">
@@ -85,8 +81,9 @@ if (mysqli_connect_errno()) {
                     </div>
                     <div class="input-box">
                         <span class="details">Course Name</span>
-                        <select onchange="change()" name="course_name" id="coursenames" placeholder="Select Course Name">
-                        <?php
+                        <select onchange="courseNameClick()" name="course_name" id="coursenames"
+                            placeholder="Select Course Name">
+                            <?php
                         $sql = "SELECT DISTINCT course_name FROM coursemaster;";
                         $result = mysqli_query($con, $sql);
                         $num = mysqli_num_rows($result);
@@ -102,42 +99,31 @@ if (mysqli_connect_errno()) {
                     </div>
                     <div class="input-box">
                         <span class="details">Course Type</span>
-                        <select onchange="change()" name="course_type" id="coursetypes" placeholder="Select Course Name">
-                            <?php
-                            $sql = "SELECT course_type FROM coursemaster WHERE `course_name`= 'Tarot Cards Course';";
-                            $result = mysqli_query($con, $sql);
-                            $num = mysqli_num_rows($result);
-                            echo var_dump($result);
-                            if($num > 0){
-                            while($row = mysqli_fetch_assoc($result)){
-                                echo '
-                                <option value="'. $row["course_type"] .'">'. $row["course_type"] .'</option>';
-                            }
-                            }
-                    
-                            ?>
-
+                        <select onchange="courseTypeClick()" name="course_type" id="coursetypes"
+                            placeholder="Select Course Name">
+                           
                         </select>
                     </div>
 
                     <div class="input-box">
                         <span class="details">Batch</span>
-                        <select onchange="change()" name="batch" id="batches" placeholder="Please Course First">
+                        <select name="batch" id="batches" placeholder="Please Course First">
                         </select>
                     </div>
 
                     <div class="input-box">
-                            <span class="details">Total Fee</span>
-                          
-                            <input onchange="change()" type="text" id="fee" name="fee" value="" placeholder="" required>
-                        </div>
+                        <span class="details">Total Fee</span>
+
+                        <input readonly type="text" id="fee" name="fee" value="" placeholder="" required>
+                    </div>
 
                 </div>
 
                 <div class="input-box">
-                            <span class="details">Course Duration</span>
-                            <input onchange="change()" type="text" id="duration" name="duration" value="" placeholder="" required>
-                        </div>
+                    <span class="details">Course Duration</span>
+                    <input readonly type="text" id="duration" name="duration" value="" placeholder=""
+                        required>
+                </div>
 
 
                 <div class="payments-details">
@@ -212,116 +198,129 @@ if (mysqli_connect_errno()) {
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script>
 
-<script>
-        function change(){
-            autoCourseType();
+        function courseTypeClick(){
             autoBatch();
-            autoFee();
             autoCourseDuration();
+            autoFee();
         }
 
-       function autoCourseType() {
-        coursetypes = document.querySelector("#coursetypes");
-        coursetypes.innerHTML = '';
-        cnames = document.querySelector("#coursenames").value;
-        ctypes = document.querySelector("#coursetypes").value;
-        dataString = {
-            "cname": cnames,
-            "ctype": ctypes
-        };
-        $.ajax({
-            type: 'POST',
-            url: 'batch_auto_ctype.php',
-            data: {
-                data: dataString,
-            },
-            success: function(response) {
-                ctypeArr = JSON.parse(response)
-                for (let i = 0; i < ctypeArr.length; i++) {
-                    option = document.createElement("option");
-                    option.innerText = ctypeArr[i];
-                    option.setAttribute("value", ctypeArr[i]);
-                    coursetypes.appendChild(option);
+        function courseNameClick(){
+            autoCourseType();
+            autoBatch();
+            autoCourseDuration();
+            autoFee();
+        }
+
+        function autoCourseType() {
+            coursetypes = document.querySelector("#coursetypes");
+            coursetypes.innerHTML = '';
+            cnames = document.querySelector("#coursenames").value;
+            ctypes = document.querySelector("#coursetypes").value;
+            dataString = {
+                "cname": cnames,
+                "ctype": ctypes
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'batch_auto_ctype.php',
+                data: {
+                    data: dataString,
+                },
+                success: function (response) {
+                    ctypeArr = JSON.parse(response)
+                    for (let i = 0; i < ctypeArr.length; i++) {
+                        option = document.createElement("option");
+                        option.innerText = ctypeArr[i];
+                        option.setAttribute("value", ctypeArr[i]);
+                        coursetypes.appendChild(option);
+                    }
+                    autoCourseDuration();
+                    autoFee()
                 }
-            }
-        });
-    }
+                
+            });
+        }
 
-    function autoBatch() {
-        batches = document.querySelector("#batches");
-        batches.innerHTML = '';
-        cnames = document.querySelector("#coursenames").value;
-        ctypes = document.querySelector("#coursetypes").value;
-        dataString = {
-            "cname": cnames,
-            "ctype": ctypes
-        };
-        $.ajax({
-            type: 'POST',
-            url: 'course_auto_startdate.php',
-            data: {
-                data: dataString,
-            },
-            success: function(response) {
-                ctypeArr = JSON.parse(response)
-                for (let i = 0; i < ctypeArr.length; i++) {
-                    option = document.createElement("option");
-                    option.innerText = ctypeArr[i];
-                    option.setAttribute("value", ctypeArr[i]);
-                    batches.appendChild(option);
+        function autoBatch() {
+            batches = document.querySelector("#batches");
+            batches.innerHTML = '';
+            cnames = document.querySelector("#coursenames").value;
+            ctypes = document.querySelector("#coursetypes").value;
+            dataString = {
+                "cname": cnames,
+                "ctype": ctypes
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'course_auto_startdate.php',
+                data: {
+                    data: dataString,
+                },
+                success: function (response) {
+                    ctypeArr = JSON.parse(response)
+                    for (let i = 0; i < ctypeArr.length; i++) {
+                        option = document.createElement("option");
+                        option.innerText = ctypeArr[i];
+                        option.setAttribute("value", ctypeArr[i]);
+                        batches.appendChild(option);
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
 
-    function autoFee(){
-        fee = document.querySelector("#fee");
- 
-        cnames = document.querySelector("#coursenames").value;
-        ctypes = document.querySelector("#coursetypes").value;
-        dataString = {
-            "cname": cnames,
-            "ctype": ctypes
-        };
-        $.ajax({
-            type: 'POST',
-            url: 'course_auto_fee.php',
-            data: {
-                data: dataString,
-            },
-            success: function(response) {
-                console.log(response)
-                fee.value = 547;
-            }
-        });
-    }
+        function autoFee() {
+            fee = document.querySelector("#fee");
+            cnames = document.querySelector("#coursenames").value;
+            ctypes = document.querySelector("#coursetypes").value;
+            dataString = {
+                "cname": cnames,
+                "ctype": ctypes
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'course_auto_fee.php',
+                data: {
+                    data: dataString,
+                },
+                success: function (response) {
+                    fee.value = response;
+                }
+            });
+        }
 
-    function autoCourseDuration(){
-        duration = document.querySelector("#duration");
-    
-        cnames = document.querySelector("#coursenames").value;
-        ctypes = document.querySelector("#coursetypes").value;
-        dataString = {
-            "cname": cnames,
-            "ctype": ctypes
-        };
-        $.ajax({
-            type: 'POST',
-            url: 'course_auto_duration.php',
-            data: {
-                data: dataString,
-            },
-            success: function(response) {
-                console.log(response)
-                duration.value = 547;
-            }
-        });
-    }
+        function autoCourseDuration() {
+            duration = document.querySelector("#duration");
 
-</script>
-<script src="https://code.jquery.com/jquery-3.6.4.js"
-integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+            cnames = document.querySelector("#coursenames").value;
+            ctypes = document.querySelector("#coursetypes").value;
+            dataString = {
+                "cname": cnames,
+                "ctype": ctypes
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'course_auto_duration.php',
+                data: {
+                    data: dataString,
+                },
+                success: function (response) {
+                    duration.value = response;
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $("#coursenames").trigger('change');
+        });
+    </script>
+
 </body>
 
 </html>

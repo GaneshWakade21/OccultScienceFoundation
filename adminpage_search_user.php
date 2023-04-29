@@ -456,7 +456,7 @@ if(!$avail){
       font-bold mb-2" htmlfor="grid-password">
                                         Total Duration
                                     </label>
-                                    <input type="number" class="w-full h-8 px-2 text-sm
+                                    <input type="text" class="w-full h-8 px-2 text-sm
       text-gray-700 placeholder-gray-600 border rounded-lg
       focus:shadow-outline" name="duration" value="<?php echo $user['totaldur'];?>" required>
                                 </div>

@@ -122,7 +122,7 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
                     <span id="coursedur" class="text-danger font-weight-bold"> </span>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="font-weight-bold"> Start Date </label>
                     <input onchange="autoEndDate()" required type="date" name="startdate" id="startdate" autocomplete="off">
                     <span id="mobileno" class="text-danger font-weight-bold"> </span>
@@ -132,7 +132,7 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
                     <label class="font-weight-bold"> End Date </label>
                     <input required type="date" name="enddate" id="enddate" autocomplete="off">
                     <span id="emailids" class="text-danger font-weight-bold"> </span>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label for=""coursefees class="font-weight-bold"> Course Fee </label>
@@ -142,7 +142,7 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
                 
                 <div class="form-group">
                 <label for="emimonth" class="font-weight-bold"> EMI Option</label>
-                <select onchange="autoEmi()" onclick="autoEndDate()" name="emimonth" id="emimonth"> 
+                <select onchange="autoEmi()" name="emimonth" id="emimonth"> 
                 <option value="1 Month">1 Month</option>
                 <script>
                     function updateMonths(){
@@ -274,32 +274,32 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST'))
     // }
 
 
-    function autoEndDate() {
-        sdate = document.getElementById("startdate").value;
-        edate = document.getElementById("enddate");
-        if(sdate == ""){
-            return;
-        }
-        dura = document.getElementById("coursedurations").value;
-        increamentMonth = dura.slice(dura.indexOf("Month")-2,dura.indexOf("Month")-1);
-        // increamentMonth = document.cookie.slice(document.cookie.indexOf("Month")-2,document.cookie.indexOf("Month")-1);
-        let sdateYear = sdate.slice(0, 4)
-        let sdateMonth = sdate.slice(5, 7)
-        let sdateDay = sdate.slice(8, 10)
-        let sdateNewMonth = parseInt(sdateMonth) + parseInt(increamentMonth);
+    // function autoEndDate() {
+    //     sdate = document.getElementById("startdate").value;
+    //     edate = document.getElementById("enddate");
+    //     if(sdate == ""){
+    //         return;
+    //     }
+    //     dura = document.getElementById("coursedurations").value;
+    //     increamentMonth = dura.slice(dura.indexOf("Month")-2,dura.indexOf("Month")-1);
+    //     // increamentMonth = document.cookie.slice(document.cookie.indexOf("Month")-2,document.cookie.indexOf("Month")-1);
+    //     let sdateYear = sdate.slice(0, 4)
+    //     let sdateMonth = sdate.slice(5, 7)
+    //     let sdateDay = sdate.slice(8, 10)
+    //     let sdateNewMonth = parseInt(sdateMonth) + parseInt(increamentMonth);
 
-        var d = new Date(),
-            month = '' + sdateNewMonth;
-        day = '' + sdateDay,
-            year = sdateYear;
+    //     var d = new Date(),
+    //         month = '' + sdateNewMonth;
+    //     day = '' + sdateDay,
+    //         year = sdateYear;
 
-        if (month.length < 2)
-            month = '0' + month;
-        if (day.length < 2)
-            day = '0' + day;
+    //     if (month.length < 2)
+    //         month = '0' + month;
+    //     if (day.length < 2)
+    //         day = '0' + day;
 
-        edate.value = [year, month, day].join('-');
-    }
+    //     edate.value = [year, month, day].join('-');
+    // }
 
     function autoEmi(){
         coursefees = parseInt(document.getElementById("coursefees").value);

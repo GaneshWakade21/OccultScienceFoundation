@@ -37,7 +37,29 @@ $result = mysqli_query($mysqli, $sql);
       border: 2px solid black;
     }
   </style>
+<style>
+/* The modal window */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
 
+/* The image inside the modal */
+.modal img {
+  display: block;
+  margin: auto;
+  max-width: 50%;
+  max-height: 50%;
+}
+</style>
 </head>
 
 <body class="sub_page">
@@ -193,7 +215,7 @@ $result = mysqli_query($mysqli, $sql);
                     <td>' . $row["amount_paid"] . '</td>
                     <td>' . $row["trans_date"] . '</td>
                     <td>' . $row["trans_time"] . '</td>
-                    <td><a> <img src="course_translip/'. $row["trans_slip"] .'" width="30" height="30"> '. $row["trans_slip"] .'</a></td>  
+                    <td><img class="uploadedImage" src="course_translip/'. $row["trans_slip"] .'" width="30" height="30"> '. $row["trans_slip"] .'</td>  
                     <td>' . $row["remark"] . '</td>
                     <td><a href="update_design.php?id=' . $row["id"] . '">Edit</a></td>
                     </tr>';
@@ -208,7 +230,59 @@ $result = mysqli_query($mysqli, $sql);
     </div>
   </div>
 
+  <script>
 
+
+  // Get the uploaded image element
+  var img = document.getElementsByClassName("uploadedImage");
+   Array.from(img).forEach((e) => {
+    e.addEventListener("click",()=>{
+
+
+    console.log(e)
+    console.log(e.getAttribute("src"));
+  var modal = document.createElement("div");
+  modal.style.display = "block";
+  modal.style.position = "fixed";
+  modal.style.zIndex = "1";
+  modal.style.paddingTop = "100px";
+  modal.style.left = "0";
+  modal.style.top = "0";
+  modal.style.width = "100%";
+  modal.style.height = "100%";
+  modal.style.overflow = "auto";
+  modal.style.backgroundColor = "rgba(0,0,0,0.9)";
+  
+  // Create a new image element inside the modal window
+  var modalImg = document.createElement("img");
+//   console.log(img[i])
+//   modalImg.src = (img[i].src).slice(0, 5);;
+  modalImg.src = e.getAttribute("src");
+  modalImg.style.display = "block";
+  modalImg.style.margin = "auto";
+  modalImg.style.width = "80%";
+  modalImg.style.maxWidth = "1200px";
+  
+  // Add the image element to the modal window
+  modal.appendChild(modalImg);
+  
+  // Add the modal window to the page
+  document.body.appendChild(modal);
+  
+  // Center the modal window
+  var modalWidth = modal.offsetWidth;
+  var modalHeight = modal.offsetHeight;
+  modal.style.left = "50%";
+  modal.style.top = "50%";
+  modal.style.transform = "translate(-50%, -50%)";
+  
+  // Add a click event listener to close the modal window
+  modal.addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+})
+})
+</script>
 </body>
 
 </html>
