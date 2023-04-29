@@ -122,7 +122,7 @@
                                     <a class="nav-link scrollto text-dark" href="appoint.html">Book Appointment</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link scrollto text-dark" href="coursesform.php">Dev Team</a>
+                                    <a class="nav-link scrollto text-dark" href="dev.html">Dev Team</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link scrollto text-dark" href="adminlogin.php">Admin Login</a>
@@ -223,6 +223,28 @@
                         <span style="font-size: 23px; font-weight: bold; margin:auto">Ms. Usha Vasundhrra</span>
                     </div>
                 </div>
+                <div class="-my-8 divide-y-2 divide-gray-100">
+                    <div class="md:py-8 flex flex-wrap md:flex-nowrap">
+                      <div class="md:w-96 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                        <h2 class="my-2 md:my-4 text-lg  md:text-2xl font-semibold title-font text-red-700">MISSION</h2>
+                      </div>
+                      <div class="md:flex-grow  md:mx-4 text-xl text-justify text-dark">
+                        <p class="leading-relaxed flex flex-wrap" style="font-family: geogira">
+                          Our mission is crisp and clear in respect to provide True & Best  Astrological, Numerological & Vastu Shastra based solutions to the individuals in order to assist them to try achieve their desired professional & personal desires with a pinch of economical costs. 
+                          The idea behind is to help society preferably the weaker sections who would like to learn or get cosmic remedies but can not afford to do so due to any logical or ethical reasons, which we will consider and assist them gracefully within predefined limits as per our Organization rules and regulations.
+                    </div>
+                    <div class="py-8 flex flex-col md:flex-nowrap">
+                      <div class="md:w-96 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                        <h2 class=" my-2 md:my-4 text-lg  md:text-2xl font-semibold title-font text-red-700">VISION</h2>
+                      </div>
+                      <div class="md:flex-grow" style="font-family: geogira">
+                        <div class="leading-relaxed text-xl text-justify text-dark md:py-5">
+                           <P>The prima facia vision for setting up this Cosmic Science Training Institute is to make people learn and earn the precious knowledge bytes which can help them and Society in having guidance regarding basic queries of respective lives. 
+                              This also helps the motive to make people have indepth knowledge of Astrology, Numerology, Vastu Science etc. as this will not only have an earning perspective but also helps in attaining respect and earn with dignity among various social parameters.          
+                              The basic facts of these sciences if learnt and practiced gracefully can lead for a lifetime solutions and success for various queries which have been troubling one's life since long. These wisdom bytes will also help individuals to setup a path towards religious mindset and inculcate the habit of assisting the society on a bigger perspective. The solutions derived out of practice and learnings can help in making a society which could be beneficial not for individual but also for nation. Knowledge will help all to lead a successful & satisfied life with a return to assist others to the maximum one could do gracefully.</P>
+                        </div>
+                       </div>
+                    </div>
             </div>
         </div>
     </section>
