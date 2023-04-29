@@ -95,7 +95,7 @@ $result = mysqli_query($mysqli , $sql);
 <nav
     class="bg-light px-2 sm:px-4 py-2 light:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 light:border-gray-600">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-      <a href="logout.php" class="flex items-center">
+      <a class="flex items-center">
         <!-- <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo"> -->
         <span class="self-center text-xl font-semibold whitespace-nowrap light:text-black">Occult Science
           Foundation</span>

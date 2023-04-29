@@ -1,4 +1,4 @@
-
+<?php include "db.php"; ?>
 <!DOCTYPE html>
 <html>
 
@@ -31,9 +31,36 @@
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" href="preloader.css">
+ 
     <link href="images/osf.png" rel="icon">
     <link rel="stylesheet" href="ploader.css">
+    
+
+    <style>
+        .alb{
+            width: 250px;
+            height: 250px;
+            padding: 10px;
+        }
+        .alb img{
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            border: 3px solid blue;
+            transition: transform .2s;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        .uploadimg{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            min-height: 100vh;
+        }
+    </style>
 
 </head>
 
@@ -74,7 +101,7 @@
                                 align-items-center">
                             <ul class="navbar-nav ">
                                 <li class="nav-item active ">
-                                    <a class="nav-link scrollto text-dark" href="home.html">Home <span
+                                    <a class="nav-link scrollto text-dark" href="home.php">Home <span
                                             class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
@@ -674,6 +701,27 @@ if (mysqli_num_rows($naresult) > 0) {
 
     <!-- end contact section -->
 
+    <!-- Upload Images Section -->
+
+    <div class="uploadimg">
+        <?php 
+        $sql = "SELECT * FROM images ORDER BY id DESC";
+        $res = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($res) > 0) {
+            while ($images = mysqli_fetch_assoc($res)) { ?>
+                <div class="alb">
+                    <img src="uploads/<?=$images['image_url']?>" >
+                    
+                    <!-- Delete Button Start-->
+                    <!-- <a href="delete.php?id=<?=$images['id']?>" style="color: red">DELETE</a> -->
+                    <!-- Delete Button end -->
+
+                </div>
+    <?php } }?>
+    </div>
+
+
     <!-- info section -->
     <section class="info_section ">
         <div class="container h-90">
@@ -782,17 +830,7 @@ if (mysqli_num_rows($naresult) > 0) {
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
 
-    <script>
-        var loader = document.getElementById("preloader");
-
-        var dismissLoadingScreen = function () {
-            loader.style.display = "none";
-        }
-        var wait5Seconds = function () {
-            var result = setTimeout(dismissLoadingScreen, 10500);
-        }
-        window.addEventListener("load", wait5Seconds);
-    </script>
+   
 
     <!-- <script>
         var loader = document.getElementById("loader_bg");

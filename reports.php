@@ -24,6 +24,7 @@ $result1 = mysqli_query($conn, $query1);
 // Business count updation done 
 
 $businesscount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('business', query) > 0 AND doappoint >= $datefrom AND doappoint <= $dateto";
+// <input type="text" name="first-name" value="<?php echo $row['first_name']; ?>" placeholder="First Name"
 
 echo $businesscount;
 if (mysqli_query($conn, $businesscount)) {
