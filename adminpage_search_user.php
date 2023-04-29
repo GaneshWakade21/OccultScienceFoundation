@@ -190,7 +190,7 @@ if(!$avail){
                             <input id="submit" type="submit" class="font-bold bg-pink-500 text-white active:bg-pink-600 font-bold
                 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md
                 outline-none focus:outline-none mr-1 ease-linear transition-all
-                duration-150" value="submit">
+                duration-150" value="update">
 
                         </div>
                     </div>
@@ -580,7 +580,7 @@ if(!$avail){
 
                     </div>
 
-                    <footer class="relative pt-3 pb-6 ">
+                    <!-- <footer class="relative pt-3 pb-6 ">
                         <div class="container mx-auto px-4">
                             <div class="flex flex-wrap items-center md:justify-between
                 justify-center">
@@ -600,7 +600,7 @@ if(!$avail){
                                 </div>
                             </div>
                         </div>
-                    </footer>
+                    </footer> -->
                 </div>
         </section>
     </form>
