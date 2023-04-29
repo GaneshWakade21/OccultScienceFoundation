@@ -24,16 +24,16 @@ if (mysqli_connect_errno()) {
 <body>
 
     <div class="container">
-        <div class="title"><u>COURSE BOOKING AND QUERY FORM</u></div>
+        <div class="title"><u>COURSE BOOKING</u></div>
         <div class="content">
             <form action="bookingcourse.php" method="post" enctype="multipart/form-data">
-                <div class="input-box">
+                <!-- <div class="input-box">
                     <span class="details">Type</span>
                     <select name="type" placeholder="Select Course Name">
                         <option value="Query">Query</option>
                         <option value="Book Course">Book Course</option>
                     </select>
-                </div>
+                </div> -->
                 <div class="subheading">
                     <span class="userheading"><u>User Details</u></span>
                 </div>
