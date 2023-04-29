@@ -590,24 +590,24 @@
                                 }
                             }
 
-                      
+
 
                         }
-                        for (var j = 0; j < timefrom.options.length; j++) {
-                                if ((timefrom.options[j].getAttribute("disabled")) && (timefrom.options[j+2].getAttribute("disabled"))) {
-                                    timefrom.options[j+1].setAttribute("disabled", true)
-
-                                }
-                            }
-                        // for (let i = 0; i < timefromArr.length; i=i+2) {
                         // for (var j = 0; j < timefrom.options.length; j++) {
-                        //     console.log()
-                        //         if((timefrom.options[j].value>timefromArr[i]) && (timefrom.options[j].value<timefromArr[i])){
-                        //             console.log("jhfgj")
-                        //             timefrom.options[j].setAttribute("disabled", true)
+                        //         if ((timefrom.options[j].getAttribute("disabled")) && (timefrom.options[j+2].getAttribute("disabled"))) {
+                        //             timefrom.options[j+1].setAttribute("disabled", true)
+
                         //         }
                         //     }
-                        //     }
+                        for (let i = 0; i < timefromArr.length; i = i + 2) {
+                            for (var j = 0; j < timefrom.options.length; j++) {
+                                // console.log()
+                                if ((timefrom.options[j].value >= timefromArr[i]) && (timefrom.options[j].value <= timefromArr[i+1])) {
+                                    console.log("jhfgj")
+                                    timefrom.options[j].setAttribute("disabled", true)
+                                }
+                            }
+                        }
                     }
 
                 }
