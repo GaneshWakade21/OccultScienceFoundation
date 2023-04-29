@@ -7,31 +7,31 @@
 $datefrom = $_POST['datefrom'];
 $dateto = $_POST['dateto'];
 
-// $ongoingcount = "SELECT COUNT(*) FROM coursemaster WHERE end_date >= CURDATE() AND start_date <= CURDATE()" ;
 
-echo $datefrom;
-echo $dateto;
+// echo $datefrom;
+// echo $dateto;
 
 
 // Gender Pie Chart
 
 $conn = mysqli_connect("localhost", "root", "", "astrology");
-$query1 = "SELECT gender, count(*) as number FROM appointment GROUP BY gender";
+$query1 = "SELECT gender, count(*) as number FROM appointment WHERE doappoint >= '$datefrom' AND doappoint <= '$dateto' GROUP BY gender ";
 $result1 = mysqli_query($conn, $query1);
 // print_r($result1);
 
 
 // Business count updation done 
 
-$businesscount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('business', query) > 0 AND doappoint >= $datefrom AND doappoint <= $dateto";
-// <input type="text" name="first-name" value="<?php echo $row['first_name']; ?>" placeholder="First Name"
+// $businesscount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('business', query) > 0 ";
 
-echo $businesscount;
-if (mysqli_query($conn, $businesscount)) {
-    echo "Record updated successfully";
-  } else {
-    echo "Error updating record: " . mysqli_error($conn);
-  }
+$businesscount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('business', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
+
+// echo $businesscount;
+// if (mysqli_query($conn, $businesscount)) {
+//     echo "Record updated successfully";
+//   } else {
+//     echo "Error updating record: " . mysqli_error($conn);
+//   }
 
 $b = mysqli_query($conn, $businesscount);
 // print_r($b);
@@ -60,7 +60,7 @@ mysqli_query($conn, $updatebusicnt);
 
 //   Investment Update 
 
-$invcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('investment', query) > 0 ";
+$invcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('investment', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $inv = mysqli_query($conn, $invcount);
 $irows = mysqli_fetch_all($inv, MYSQLI_ASSOC);
 $icnt = "";
@@ -74,7 +74,7 @@ mysqli_query($conn, $updateicnt);
 
 // Relationship Updation 
 
-$relcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('relationship', query) > 0 ";
+$relcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('relationship', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $rel = mysqli_query($conn, $relcount);
 $relrows = mysqli_fetch_all($rel, MYSQLI_ASSOC);
 $relcnt = "";
@@ -87,7 +87,7 @@ mysqli_query($conn, $updaterelcnt);
 
 // Health Updation 
 
-$hltcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('health', query) > 0 ";
+$hltcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('health', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $hlt = mysqli_query($conn, $hltcount);
 $hltrows = mysqli_fetch_all($hlt, MYSQLI_ASSOC);
 $hltcnt = "";
@@ -100,7 +100,7 @@ mysqli_query($conn, $updatehltcnt);
 
 // Property Updation 
 
-$prtcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('property', query) > 0 ";
+$prtcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('property', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $prt = mysqli_query($conn, $prtcount);
 $prtrows = mysqli_fetch_all($prt, MYSQLI_ASSOC);
 $prtcnt = "";
@@ -113,7 +113,7 @@ mysqli_query($conn, $updateprtcnt);
 
 // Marriage Updation 
 
-$mricount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('marriage', query) > 0 ";
+$mricount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('marriage', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $mri = mysqli_query($conn, $mricount);
 $mrirows = mysqli_fetch_all($mri, MYSQLI_ASSOC);
 $mricnt = "";
@@ -126,7 +126,7 @@ mysqli_query($conn, $updatemricnt);
 
 // Job Updation 
 
-$jobcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('job', query) > 0 ";
+$jobcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('job', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $job = mysqli_query($conn, $jobcount);
 $jobrows = mysqli_fetch_all($job, MYSQLI_ASSOC);
 $jobcnt = "";
@@ -139,7 +139,7 @@ mysqli_query($conn, $updatejobcnt);
 
 // Transfer Updation 
 
-$transcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('transfer', query) > 0 ";
+$transcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('transfer', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $trans = mysqli_query($conn, $transcount);
 $transrows = mysqli_fetch_all($trans, MYSQLI_ASSOC);
 $transcnt = "";
@@ -152,7 +152,7 @@ mysqli_query($conn, $updatetranscnt);
 
 // Promotion Updation 
 
-$procount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('promotion', query) > 0 ";
+$procount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('promotion', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $pro = mysqli_query($conn, $procount);
 $prorows = mysqli_fetch_all($pro, MYSQLI_ASSOC);
 $procnt = "";
@@ -165,7 +165,7 @@ mysqli_query($conn, $updateprocnt);
 
 // Pregnancy Updation 
 
-$precount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('pregnancy', query) > 0 ";
+$precount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('pregnancy', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $pre = mysqli_query($conn, $precount);
 $prerows = mysqli_fetch_all($pre, MYSQLI_ASSOC);
 $precnt = "";
@@ -178,7 +178,7 @@ mysqli_query($conn, $updateprecnt);
 
 // Litigation Updation 
 
-$precount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('litigation', query) > 0 ";
+$precount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('litigation', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $pre = mysqli_query($conn, $precount);
 $prerows = mysqli_fetch_all($pre, MYSQLI_ASSOC);
 $precnt = "";
@@ -192,7 +192,7 @@ mysqli_query($conn, $updateprecnt);
 
 // ForeignTravel Updation 
 
-$forgcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('foreigntravel', query) > 0 ";
+$forgcount = "SELECT COUNT(query) FROM appointment WHERE FIND_IN_SET('foreigntravel', query) > 0 AND doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $forg = mysqli_query($conn, $forgcount);
 $forgrows = mysqli_fetch_all($forg, MYSQLI_ASSOC);
 $forgcnt = "";
