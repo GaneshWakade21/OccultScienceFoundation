@@ -223,7 +223,7 @@ $result = mysqli_query($mysqli, $sql);
                     <td>' . $row["trans_time"] . '</td>
                     <td><img class="uploadedImage" src="course_translip/'. $row["trans_slip"] .'" width="30" height="30"> '. $row["trans_slip"] .'</td>  
                     <td>' . $row["remark"] . '</td>
-                    <td><a href="update_design.php?id=' . $row["id"] . '">Edit</a></td>
+                    <td><a href="update_degin.php?id=' . $row["id"] . '">Edit</a></td>
                     </tr>';
           $no++;
         }

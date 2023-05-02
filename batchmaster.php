@@ -222,7 +222,7 @@ $result = mysqli_query($mysqli , $sql);
                     <td>'. $row["batch_mode"] .'</td>
                     <td>'. $row["batch_weekdays"] .'</td>
                     <td>'. $row["batch_remark"] .'</td>
-                    <td><button>Edit</button></td>
+                    <td><a href="update_batches.php?id=' . $row["batch_id"] . '">Edit</a></td>
                     </tr>';
                 $no++;
                       }

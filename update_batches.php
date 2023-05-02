@@ -7,7 +7,7 @@ $id = $_GET['id'];
 $sql = "SELECT * FROM batchmaster WHERE batch_id = '$id'";
 $result = mysqli_query($mysqli, $sql);
 $row = mysqli_fetch_assoc($result);
-$week = $_GET['weekdays'];
+$week = $row['batch_weekdays'];
 $week1 = explode(",", $week);
 
 
