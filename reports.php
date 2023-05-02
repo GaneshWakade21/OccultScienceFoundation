@@ -380,7 +380,7 @@ mysqli_query($conn, $updateappintrev);
 
 //Updation Tarot Cards Course Revenue
 
-$tccrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Tarot Cards Course' " ;
+$tccrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Tarot Cards Course'" ;
 $tccrev = mysqli_query($conn, $tccrevenue);
 $tccrows = mysqli_fetch_all($tccrev, MYSQLI_ASSOC);
 $tcccnt = "";
