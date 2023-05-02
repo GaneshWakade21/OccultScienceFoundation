@@ -84,7 +84,7 @@ if (mysqli_connect_errno()) {
                         <select onchange="courseNameClick()" name="course_name" id="coursenames"
                             placeholder="Select Course Name">
                             <?php
-                        $sql = "SELECT DISTINCT course_name FROM coursemaster;";
+                        $sql = "SELECT DISTINCT course_name FROM batchmaster;";
                         $result = mysqli_query($con, $sql);
                         $num = mysqli_num_rows($result);
                         if ($num > 0) {
@@ -101,14 +101,19 @@ if (mysqli_connect_errno()) {
                         <span class="details">Course Type</span>
                         <select onchange="courseTypeClick()" name="course_type" id="coursetypes"
                             placeholder="Select Course Name">
-                           
+
                         </select>
                     </div>
 
                     <div class="input-box">
                         <span class="details">Batch</span>
-                        <select name="batch" id="batches" placeholder="Please Course First">
+                        <select onchange="autoBatchClick()" name="batch" id="batches" placeholder="Please Course First">
                         </select>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Batch Time</span>
+                        <input readonly type="text" id="time" name="time" value="" placeholder="" required>
                     </div>
 
                     <div class="input-box">
@@ -121,8 +126,7 @@ if (mysqli_connect_errno()) {
 
                 <div class="input-box">
                     <span class="details">Course Duration</span>
-                    <input readonly type="text" id="duration" name="duration" value="" placeholder=""
-                        required>
+                    <input readonly type="text" id="duration" name="duration" value="" placeholder="" required>
                 </div>
 
 
@@ -200,22 +204,29 @@ if (mysqli_connect_errno()) {
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.js"
         integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script>
 
-        function courseTypeClick(){
+        function courseTypeClick() {
             autoBatch();
+            autoBatchTime();
             autoCourseDuration();
             autoFee();
         }
 
-        function courseNameClick(){
+        function courseNameClick() {
             autoCourseType();
-            autoBatch();
-            autoCourseDuration();
-            autoFee();
+            // autoBatch();
+            // autoBatchTime();
+            // autoCourseDuration();
+            // autoFee();
+        }
+
+        function autoBatchClick() {
+            // autoBatch()
+            autoBatchTime()
         }
 
         function autoCourseType() {
@@ -241,10 +252,12 @@ if (mysqli_connect_errno()) {
                         option.setAttribute("value", ctypeArr[i]);
                         coursetypes.appendChild(option);
                     }
+                    autoBatch();
+                    autoBatchTime();
                     autoCourseDuration();
                     autoFee()
                 }
-                
+
             });
         }
 
@@ -271,6 +284,30 @@ if (mysqli_connect_errno()) {
                         option.setAttribute("value", ctypeArr[i]);
                         batches.appendChild(option);
                     }
+                    autoBatchTime()
+                }
+            });
+        }
+
+        function autoBatchTime() {
+            time = document.querySelector("#time");
+            cnames = document.querySelector("#coursenames").value;
+            ctypes = document.querySelector("#coursetypes").value;
+            batch = document.querySelector("#batches").value;
+            dataString = {
+                "cname": cnames,
+                "ctype": ctypes,
+                "batch": batch
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'batch_auto_time.php',
+                data: {
+                    data: dataString,
+                },
+                success: function (response) {
+                    // console.log(response)
+                    time.value = response;
                 }
             });
         }

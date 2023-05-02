@@ -4,7 +4,7 @@ $con = mysqli_connect("localhost", "root", "", "astrology");
 //connect
 // var_dump($_POST);
 $cname =$_POST["data"]['cname'];
-$ctype =$_POST["data"]['ctype'];  
+  
 
 $sql = "SELECT course_type FROM coursemaster WHERE `course_name`= '$cname'";
 $result = mysqli_query($con, $sql);

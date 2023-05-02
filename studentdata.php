@@ -178,6 +178,9 @@ $result = mysqli_query($mysqli, $sql);
                     <th>Course Name</th>
                     <th>Course Type</th>
                     <th>Batch</th>
+                    <th>Batch Time</th>
+                    <th>Fee</th>
+                    <th>Duration</th>
                     <th>Payment Type</th>
                     <th>UPI</th>
                     <th>UPI No.</th>
@@ -209,6 +212,9 @@ $result = mysqli_query($mysqli, $sql);
                     <td>' . $row["course_name"] . '</td>
                     <td>' . $row["course_type"] . '</td>
                     <td>' . $row["batch"] . '</td>
+                    <td>' . $row["batch_time"] . '</td>
+                    <td>' . $row["fee"] . '</td>
+                    <td>' . $row["duration"] . '</td>
                     <td>' . $row["pay_type"] . '</td>
                     <td>' . $row["upi"] . '</td>
                     <td>' . $row["upi_no"] . '</td>

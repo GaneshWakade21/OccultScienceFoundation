@@ -8,9 +8,9 @@ if (mysqli_connect_errno()) {
 <?php
 // session_start();
 error_reporting(0);
-
+echo $_SERVER['REQUEST_METHOD'];
 if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
-    $batch_id = '1';
+    // $batch_id = '1';
     $course_name = $_POST['coursenames'];
     $course_type = $_POST['coursetypes'];
     $batch_start_date = $_POST['start_date'];
@@ -22,7 +22,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
     $batch_weekdays_string = implode(',', $batch_weekdays);
     $batch_remark = $_POST['remark'];
 
-    $sql = "INSERT INTO `batchmaster` (`batch_id`, `course_name`, `course_type`,`batch_start_date`, `batch_end_date`, `batch_timefrom`, `batch_timeto`, `batch_mode`, `batch_weekdays`, `batch_remark`) VALUES ('$batch_id', '$course_name', '$course_type', '$batch_start_date', '$batch_end_date', '$batch_timefrom', '$batch_timeto', '$batch_mode', '$batch_weekdays_string', '$batch_remark');";
+    $sql = "INSERT INTO `batchmaster` (`course_name`, `course_type`,`batch_start_date`, `batch_end_date`, `batch_timefrom`, `batch_timeto`, `batch_mode`, `batch_weekdays`, `batch_remark`) VALUES ('$course_name', '$course_type', '$batch_start_date', '$batch_end_date', '$batch_timefrom', '$batch_timeto', '$batch_mode', '$batch_weekdays_string', '$batch_remark');";
     $result = mysqli_query($con, $sql);
     header("Location: batchmaster.php");
     // mysqli_close($con);
@@ -70,7 +70,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     </select>
                     <span id="coursename" class="text-danger font-weight-bold"> </span>
                 </div>
-            </form>
+   
 
             <div class="form-group">
                 <label for="coursetypes" class="font-weight-bold"> Course type: </label>
@@ -340,10 +340,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
         coursetypes = document.querySelector("#coursetypes");
         coursetypes.innerHTML = '';
         cnames = document.querySelector("#coursenames").value;
-        ctypes = document.querySelector("#coursetypes").value;
+  
         dataString = {
-            "cname": cnames,
-            "ctype": ctypes
+            "cname": cnames
         };
         $.ajax({
             type: 'POST',
