@@ -845,7 +845,7 @@ if (mysqli_num_rows($naresult) > 0) {
         </p>
     </section>
     <!-- footer section -->
-
+<script src="js/main.js"></script>
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
