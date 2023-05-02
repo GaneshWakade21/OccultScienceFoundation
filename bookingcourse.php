@@ -10,6 +10,7 @@ $pin_code = $_POST['pin_code'];
 $course_name = $_POST['course_name'];
 $course_type = $_POST['course_type'];
 $batch = $_POST['batch'];
+$batchend = $_POST['batchend'];
 $batch_time = $_POST['time'];
 $batch_fee = $_POST['fee'];
 $batch_duration = $_POST['duration'];
@@ -70,7 +71,7 @@ if ($mysqli->connect_error) {
   die("Connection failed: " . $mysqli->connect_error);
 }
 
-$sql = "INSERT INTO `coursebooking` (`id`, `first_name`, `middle_name`, `last_name`, `fathers_name`, `mob_no`, `email_id`, `address`, `pin_code`, `course_name`, `course_type`, `batch`, `batch_time`,  `fee`, `duration`, `pay_type`, `upi`, `upi_no`, `amount_paid`, `trans_date`, `trans_time`, `trans_slip`, `remark`) VALUES ('$id', '$first_name', '$middle_name', '$last_name', '$fathers_name', '$mob_no', '$email_id', '$address', '$pin_code', '$course_name', '$course_type', '$batch', '$batch_time', '$batch_fee' , '$batch_duration',  '$pay_type', '$upi', '$upi_no', '$amount_paid', '$trans_date', '$trans_time', '$translip', '$remark');";
+$sql = "INSERT INTO `coursebooking` (`id`, `first_name`, `middle_name`, `last_name`, `fathers_name`, `mob_no`, `email_id`, `address`, `pin_code`, `course_name`, `course_type`, `batch`,`batch_end`, `batch_time`,  `fee`, `duration`, `pay_type`, `upi`, `upi_no`, `amount_paid`, `trans_date`, `trans_time`, `trans_slip`, `remark`) VALUES ('$id', '$first_name', '$middle_name', '$last_name', '$fathers_name', '$mob_no', '$email_id', '$address', '$pin_code', '$course_name', '$course_type', '$batch', '$batchend', '$batch_time', '$batch_fee' , '$batch_duration',  '$pay_type', '$upi', '$upi_no', '$amount_paid', '$trans_date', '$trans_time', '$translip', '$remark');";
 $result = mysqli_query($mysqli, $sql);
 header("Location: bookcourse.php");
 

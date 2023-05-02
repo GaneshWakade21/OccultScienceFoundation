@@ -380,7 +380,7 @@ mysqli_query($conn, $updateappintrev);
 
 //Updation Tarot Cards Course Revenue
 
-$tccrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Tarot Cards Course'" ;
+$tccrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Tarot Cards Course' AND `batch_end` >= '$datefrom' AND `batch_end` <= '$dateto'" ;
 $tccrev = mysqli_query($conn, $tccrevenue);
 $tccrows = mysqli_fetch_all($tccrev, MYSQLI_ASSOC);
 $tcccnt = "";
@@ -393,7 +393,7 @@ mysqli_query($conn, $updatetccrev);
 
 //Updation Chaledean Numerology Course Revenue
 
-$cncrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Chaledean Numerology Course' " ;
+$cncrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Chaledean Numerology Course' AND `batch_end` >= '$datefrom' AND `batch_end` <= '$dateto'" ;
 $cncrev = mysqli_query($conn, $cncrevenue);
 $cncrows = mysqli_fetch_all($cncrev, MYSQLI_ASSOC);
 $cnccnt = "";
@@ -408,7 +408,7 @@ mysqli_query($conn, $updatecncrev);
 
 //Updation Lal Kitaab Course Revenue
 
-$lkcrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Lal Kitaab Course' " ;
+$lkcrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Lal Kitaab Course' AND `batch_end` >= '$datefrom' AND `batch_end` <= '$dateto'" ;
 $lkcrev = mysqli_query($conn, $lkcrevenue);
 $lkcrows = mysqli_fetch_all($lkcrev, MYSQLI_ASSOC);
 $lkccnt = "";
@@ -423,7 +423,7 @@ mysqli_query($conn, $updatelkcrev);
 
 //Updation Vastu Shastra Course Revenue
 
-$vscrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Vastu Shastra Course' " ;
+$vscrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Vastu Shastra Course' AND `batch_end` >= '$datefrom' AND `batch_end` <= '$dateto'" ;
 $vscrev = mysqli_query($conn, $vscrevenue);
 $vscrows = mysqli_fetch_all($vscrev, MYSQLI_ASSOC);
 $vsccnt = "";
@@ -438,7 +438,7 @@ mysqli_query($conn, $updatevscrev);
 
 //Updation Vastu Shastra Course Revenue
 
-$vacrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Vedic Astrology Course' " ;
+$vacrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Vedic Astrology Course' AND `batch_end` >= '$datefrom' AND `batch_end` <= '$dateto'" ;
 $vacrev = mysqli_query($conn, $vacrevenue);
 $vacrows = mysqli_fetch_all($vacrev, MYSQLI_ASSOC);
 $vaccnt = "";
@@ -453,7 +453,7 @@ mysqli_query($conn, $updatevacrev);
 
 //Updation Vastu Shastra Course Revenue
 
-$mncrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Mobile Numerology Course' " ;
+$mncrevenue = "SELECT SUM(fee) FROM coursebooking WHERE `course_name`='Mobile Numerology Course' AND `batch_end` >= '$datefrom' AND `batch_end` <= '$dateto'" ;
 $mncrev = mysqli_query($conn, $mncrevenue);
 $mncrows = mysqli_fetch_all($mncrev, MYSQLI_ASSOC);
 $mnccnt = "";

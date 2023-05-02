@@ -185,9 +185,10 @@ $result = mysqli_query($mysqli, $sql);
                     <th>UPI</th>
                     <th>UPI No.</th>
                     <th>Amount Paid</th>
-                    <th>Transction Date</th>
-                    <th>Transction Time</th>
-                    <th>Transction Slip</th>
+                    <th>Transaction Date</th>
+                    <th>Transaction Time</th>
+                    <th>Transaction Slip</th>
+                    <th>Certificate</th>
                     <th>Remark</th>
                     <th>Action</th>
                 </tr>
@@ -211,7 +212,7 @@ $result = mysqli_query($mysqli, $sql);
                     <td>' . $row["pin_code"] . '</td>
                     <td>' . $row["course_name"] . '</td>
                     <td>' . $row["course_type"] . '</td>
-                    <td>' . $row["batch"] . '</td>
+                    <td>' . $row["batch"] . ' to ' . $row["batch_end"] . '</td>
                     <td>' . $row["batch_time"] . '</td>
                     <td>' . $row["fee"] . '</td>
                     <td>' . $row["duration"] . '</td>
@@ -222,6 +223,7 @@ $result = mysqli_query($mysqli, $sql);
                     <td>' . $row["trans_date"] . '</td>
                     <td>' . $row["trans_time"] . '</td>
                     <td><img class="uploadedImage" src="course_translip/'. $row["trans_slip"] .'" width="30" height="30"> '. $row["trans_slip"] .'</td>  
+                    <td>' . $row["certificate"] . '</td>
                     <td>' . $row["remark"] . '</td>
                     <td><a href="update_degin.php?id=' . $row["id"] . '">Edit</a></td>
                     </tr>';

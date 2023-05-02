@@ -108,7 +108,8 @@ if (mysqli_connect_errno()) {
                     <div class="input-box">
                         <span class="details">Batch</span>
                         <select onchange="autoBatchClick()" name="batch" id="batches" placeholder="Please Course First">
-                        </select>
+                        </select> to 
+                        <input readonly type="text" id="batchend" name="batchend" value="" placeholder="" required>
                     </div>
 
                     <div class="input-box">
@@ -285,6 +286,7 @@ if (mysqli_connect_errno()) {
                         batches.appendChild(option);
                     }
                     autoBatchTime()
+                    autoBatchEndDate();
                 }
             });
         }
@@ -308,6 +310,29 @@ if (mysqli_connect_errno()) {
                 success: function (response) {
                     // console.log(response)
                     time.value = response;
+                }
+            });
+        }
+
+        function autoBatchEndDate(){
+            batchend = document.querySelector("#batchend");
+            cnames = document.querySelector("#coursenames").value;
+            ctypes = document.querySelector("#coursetypes").value;
+            batch = document.querySelector("#batches").value;
+            dataString = {
+                "cname": cnames,
+                "ctype": ctypes,
+                "batch": batch
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'batch_auto_enddate.php',
+                data: {
+                    data: dataString,
+                },
+                success: function (response) {
+                    // console.log(response)
+                    batchend.value = response;
                 }
             });
         }
