@@ -367,7 +367,7 @@ $courseresult1 = mysqli_query($conn, $coursequery1);
 
 //Updation Appointment Revenue
 
-$appointrevenue = "SELECT SUM(fee) FROM appointment";
+$appointrevenue = "SELECT SUM(fee) FROM appointment WHERE doappoint >= '$datefrom' AND doappoint <= '$dateto'";
 $appointrev = mysqli_query($conn, $appointrevenue);
 $approws = mysqli_fetch_all($appointrev, MYSQLI_ASSOC);
 $appcnt = "";
@@ -485,7 +485,7 @@ $currentDate = date('Y-m-d');
 
 //Proposed Course Updation
 
-$proposedcnt = "SELECT COUNT(*) FROM coursemaster WHERE start_date > CURDATE()" ;
+$proposedcnt = "SELECT COUNT(*) FROM batchmaster WHERE batch_start_date > CURDATE()" ;
 
 $prop = mysqli_query($conn, $proposedcnt);
 $proprows = mysqli_fetch_all($prop, MYSQLI_ASSOC);
@@ -500,7 +500,8 @@ mysqli_query($conn, $updatepropcnt);
 
 //Completed Course Updation
 
-$completedcnt = "SELECT COUNT(*) FROM coursemaster WHERE end_date < CURDATE()" ;
+// $completedcnt = "SELECT COUNT(*) FROM coursemaster WHERE end_date < CURDATE()" ;
+$completedcnt = "SELECT COUNT(*) FROM batchmaster WHERE batch_end_date < CURDATE()" ;
 
 $comp = mysqli_query($conn, $completedcnt);
 $comprows = mysqli_fetch_all($comp, MYSQLI_ASSOC);
@@ -515,7 +516,7 @@ mysqli_query($conn, $updatecompcnt);
 
 //Onging Course Updation
 
-$ongoingcount = "SELECT COUNT(*) FROM coursemaster WHERE end_date >= CURDATE() AND start_date <= CURDATE()" ;
+$ongoingcount = "SELECT COUNT(*) FROM batchmaster WHERE batch_end_date >= CURDATE() AND batch_start_date <= CURDATE()" ;
 
 $ongoing = mysqli_query($conn, $ongoingcount);
 $ongoingrows = mysqli_fetch_all($ongoing, MYSQLI_ASSOC);
@@ -740,7 +741,7 @@ while ($row = mysqli_fetch_array($certistat)) {
         animationEnabled: true,
         theme: "light1",
         title: {
-          text: "Course Status Reports",
+          text: "Batch Status Reports ",
           fontFamily: "Arial"
         },
         axisY: {
