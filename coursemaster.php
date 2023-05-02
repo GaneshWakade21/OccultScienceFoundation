@@ -218,7 +218,7 @@ $result = mysqli_query($mysqli , $sql);
                     <td>'. $row["mode"] .'</td>
                     <td>'. $row["no_classes_per_week"] .'</td>
                     <td>'. $row["remark"] .'</td>
-                    <td><button>Edit</button></td>
+                    <td><a href="update_course.php?id=' . $row["id"] . '">Edit</a></td>
                     </tr>';
                 $no++;
                       }
