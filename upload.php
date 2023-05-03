@@ -31,7 +31,7 @@ if (isset($_POST['submit']) && isset($_FILES['my_image'])){
                 //Insert into Database
                 $sql = "INSERT INTO images(image_url) VALUES('$new_img_name')";
                 mysqli_query($conn, $sql);
-                header("Location: view.php");
+                header("Location: home.php");
             }else{
                 $em = "You can't upload files of this type";
                 header("Location: product_add.php?error=$em");

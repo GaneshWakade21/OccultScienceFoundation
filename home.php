@@ -34,8 +34,6 @@
  
     <link href="images/osf.png" rel="icon">
     <link rel="stylesheet" href="ploader.css">
-    
-
     <style>
         .alb{
             width: 250px;
@@ -53,7 +51,7 @@
             text-decoration: none;
             color: black;
         }
-        .uploadimg{
+          .uploadimg{
             display: flex;
             justify-content: center;
             align-items: center;
@@ -223,28 +221,6 @@
                         <span style="font-size: 23px; font-weight: bold; margin:auto">Ms. Usha Vasundhrra</span>
                     </div>
                 </div>
-                <div class="-my-8 divide-y-2 divide-gray-100">
-                    <div class="md:py-8 flex flex-wrap md:flex-nowrap">
-                      <div class="md:w-96 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                        <h2 class="my-2 md:my-4 text-lg  md:text-2xl font-semibold title-font text-red-700">MISSION</h2>
-                      </div>
-                      <div class="md:flex-grow  md:mx-4 text-xl text-justify text-dark">
-                        <p class="leading-relaxed flex flex-wrap" style="font-family: geogira">
-                          Our mission is crisp and clear in respect to provide True & Best  Astrological, Numerological & Vastu Shastra based solutions to the individuals in order to assist them to try achieve their desired professional & personal desires with a pinch of economical costs. 
-                          The idea behind is to help society preferably the weaker sections who would like to learn or get cosmic remedies but can not afford to do so due to any logical or ethical reasons, which we will consider and assist them gracefully within predefined limits as per our Organization rules and regulations.
-                    </div>
-                    <div class="py-8 flex flex-col md:flex-nowrap">
-                      <div class="md:w-96 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                        <h2 class=" my-2 md:my-4 text-lg  md:text-2xl font-semibold title-font text-red-700">VISION</h2>
-                      </div>
-                      <div class="md:flex-grow" style="font-family: geogira">
-                        <div class="leading-relaxed text-xl text-justify text-dark md:py-5">
-                           <P>The prima facia vision for setting up this Cosmic Science Training Institute is to make people learn and earn the precious knowledge bytes which can help them and Society in having guidance regarding basic queries of respective lives. 
-                              This also helps the motive to make people have indepth knowledge of Astrology, Numerology, Vastu Science etc. as this will not only have an earning perspective but also helps in attaining respect and earn with dignity among various social parameters.          
-                              The basic facts of these sciences if learnt and practiced gracefully can lead for a lifetime solutions and success for various queries which have been troubling one's life since long. These wisdom bytes will also help individuals to setup a path towards religious mindset and inculcate the habit of assisting the society on a bigger perspective. The solutions derived out of practice and learnings can help in making a society which could be beneficial not for individual but also for nation. Knowledge will help all to lead a successful & satisfied life with a return to assist others to the maximum one could do gracefully.</P>
-                        </div>
-                       </div>
-                    </div>
             </div>
         </div>
     </section>
@@ -260,24 +236,24 @@
     <div class="flex flex-wrap md:-m-2 -m-1">
       <div class="flex flex-wrap w-1/2">
         <div class="md:p-2 p-1 w-1/2 ">
-          <img alt="gallery" class="w-full object h-full object-center block" src="assets/alljwelleries/<?php echo $row7['photo']; ?>">
+          <img alt="gallery" class="w-full object h-full object-center block" src="assets/alljwelleries/">
         </div>
         <div class="md:p-2 p-1 w-1/2">
-          <img alt="gallery" class="w-full object-cover h-full object-center block" src="assets/alljwelleries/<?php echo $row8['photo']; ?>">
+          <img alt="gallery" class="w-full object-cover h-full object-center block" src="assets/alljwelleries/">
         </div>
         <div class="md:p-2 p-1 w-full">
-          <img alt="gallery" class="w-full h-full object-cover object-center block" src="assets/alljwelleries/<?php echo $row9['photo']; ?>">
+          <img alt="gallery" class="w-full h-full object-cover object-center block" src="assets/alljwelleries/">
         </div>
       </div>
       <div class="flex flex-wrap w-1/2">
         <div class="md:p-2 p-1 w-full">
-          <img alt="gallery" class="w-full h-full object-cover object-center block" src="assets/alljwelleries/<?php echo $row10['photo']; ?>">
+          <img alt="gallery" class="w-full h-full object-cover object-center block" src="assets/alljwelleries/>">
         </div>
         <div class="md:p-2 p-1 w-1/2">
-          <img alt="gallery" class="w-full object-cover h-full object-center block" src="assets/alljwelleries/<?php echo $row11['photo']; ?>">
+          <img alt="gallery" class="w-full object-cover h-full object-center block" src="assets/alljwelleries/">
         </div>
         <div class="md:p-2 p-1 w-1/2">
-          <img alt="gallery" class="w-full object-cover h-full object-center block bg-wite" src="assets/alljwelleries/<?php echo $row12['photo']; ?>">
+          <img alt="gallery" class="w-full object-cover h-full object-center block bg-wite" src="assets/alljwelleries/">
         </div>
       </div>
     </div>
@@ -302,40 +278,7 @@
           </h2>
         </div>
         <div class="price_container">
-<?php require('db.php');
-           $conn = new mysqli($servername, $username, $password,$database);
-           $sql = "SELECT * FROM ( SELECT * FROM jwelleries ORDER BY id DESC LIMIT 12)Var1;";
-           $naresult  = mysqli_query($conn, $sql);        
-if (mysqli_num_rows($naresult) > 0) {
-  // output data of each row
-  while($row = mysqli_fetch_assoc($naresult)) {
-    $img = $row['photo'];
-     $jname = $row['name'];
-     $jtype = $row['type'];
-     $link = $jtype."page.php";
-     
-    echo "<div class='box'>
-    <div class='name'>
-      <h6>
-        $jname
-      </h6>
-    </div>
-    <a href = 'assets/alljwelleries/$img'>
-    <div class='img-box'>
-      <img src='assets/alljwelleries/$img' alt=''>
-    </div>
-    </a>
-    <div class='detail-box'>
-   
-      <a href='$link'>
-        $jtype
-      </a>
-    </div>
-  </div>";
-  }
-} else {
-  echo "0 results";
-}?>
+
         </div>
         <div class="d-flex justify-content-center">
           <a href="" class="price_btn">
@@ -678,8 +621,7 @@ if (mysqli_num_rows($naresult) > 0) {
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="<?php echo $_SERVER['PHP_SELF'];
-                                ?>" method="post">
+                    <form action="" method="post">
                         <div>
                             <input type="text" placeholder="Name" name="name" required />
                         </div>
@@ -693,9 +635,7 @@ if (mysqli_num_rows($naresult) > 0) {
                             <input type="text" class="message-box" placeholder="Message" name="message" required />
                         </div>
                         <div>
-                            <?php
-                                        echo $msg;
-                                        ?>
+                            
                         </div>
                         <div class="d-flex" style="margin">
                             <button type="submit">
@@ -723,10 +663,10 @@ if (mysqli_num_rows($naresult) > 0) {
 
     <!-- end contact section -->
 
-    <!-- Upload Images Section -->
-
+    <!-- info section -->
     <div class="uploadimg">
         <?php 
+       
         $sql = "SELECT * FROM images ORDER BY id DESC";
         $res = mysqli_query($conn, $sql);
 
@@ -742,9 +682,6 @@ if (mysqli_num_rows($naresult) > 0) {
                 </div>
     <?php } }?>
     </div>
-
-
-    <!-- info section -->
     <section class="info_section ">
         <div class="container h-90">
             <div class="info_container">
